@@ -1,0 +1,62 @@
+<p-dialog #dialog header="Ajouter Une région" [(visible)]="show" [modal]="true" [style]="{width: '636px'}"
+  [baseZIndex]="10000" [draggable]="false" [resizable]="true" (onHide)="cancel()">
+  <div class="create-client-content clien-area">
+    <div class="form-area">
+      <form *ngIf="createRegionForm" [formGroup]="createRegionForm">
+        <div class="form-area">
+          <div *ngIf="path" class="form-style-1">
+            <div class="gallerie">
+              <div class="gallerie__item">
+                <img class="img-thumbnail" src="{{path}}" alt="image">
+                <i class="pi pi-times" (click)="removeThumbnail()"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-style-1 file-input">
+            <input #fileInput type="file" class="input-file image" #imageInput accept="image/*" id="img-category"
+              (change)="uploadImage($event)" />
+            <label for="img-category">
+              <span *ngIf="!f['image']?.value">Image *</span>
+              <span *ngIf="f['image']?.value">{{f['image'].value.name}}</span>
+            </label>
+            <span class="error" *ngIf=" submitted && f['image'].hasError('required')">
+              Image obligatoire
+            </span>
+          </div>
+          <div class="form-style-1">
+            <label class="form-label">
+              Nom de la région :
+            </label>
+            <input type="text" formControlName="name" (input)="nameExisted=false" placeholder="Nom de la région *" />
+            <span class="error" *ngIf="submitted && f['name'].hasError('required')">
+              Nom de la région obligatoire.
+            </span>
+            <span class="error" *ngIf="nameExisted">
+              Nom exist.
+            </span>
+          </div>
+          <div class="form-style-1">
+            <label class="form-label">
+              Coordonnées géographiques de la zone :
+            </label>
+            <textarea readonly class="form-control" cols="30" rows="10"
+              placeholder="Nom de la région *">{{f['point'].value}}</textarea>
+          </div>
+          <div class="required-field">
+            {{'COMMON.REQUIRED' | translate }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)">
+      </p-button>
+      <p-button [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.ADD' | translate }}" styleClass="btn btn-primary" (click)="regionSubmit()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

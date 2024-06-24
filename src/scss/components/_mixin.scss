@@ -1,0 +1,57 @@
+/* # Mixin ::
+------------------------------------*/
+
+/* -- Truncate -- */
+@mixin truncate-global {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@mixin truncate($l: 2) {
+  @include truncate-global;
+  -webkit-line-clamp: $l;
+}
+
+/* -- Flex -- */
+
+@mixin flex($flex: flex, $ai: center, $jc: center) {
+  display: $flex;
+  align-items: $ai;
+  justify-content: $jc;
+}
+
+/* -- Dimensions -- */
+
+@mixin dimensions($w: 25px, $h: 25px) {
+  width: $w;
+  height: $h;
+}
+
+/* -- Fonts -- */
+
+@mixin fonts($fs: 16px, $lh: 16px, $cl: $color-black) {
+  font-size: $fs;
+  line-height: $lh;
+  color: $cl;
+}
+@mixin fontSize($fs: 16px, $lh: 16px) {
+  font-size: $fs;
+  line-height: $lh;
+}
+
+/* -- Background Image -- */
+
+@mixin backgroundImage($image, $x: 50%, $y: 50%, $s: 25px) {
+  background: {
+    image: $image;
+    repeat: no-repeat;
+    position: $x $y;
+    size: $s auto;
+  }
+}
+
+@mixin formsBoxShadow($color : $color-primary){
+  box-shadow: 0 0 0 0.2rem rgba($color, 0.2) !important;
+}
+
+

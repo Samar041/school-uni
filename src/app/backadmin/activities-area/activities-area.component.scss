@@ -1,0 +1,176 @@
+@import "./../../../scss/components/extend";
+/* # Admins ::
+------------------------------------*/
+.page-link {
+  background-color: #00f !important;
+}
+.table-filter {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.btn-blue{
+  // height: 31px;
+}
+.recherche-bloc{
+  width:100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  .form-style-1{
+    width: 20%;
+    input{
+      width:100% !important;
+      border-radius: 30px;
+    }
+    p-dropdown{
+      width: 100%;
+    }
+    ::ng-deep{
+      .p-dropdown {
+        border-radius: 30px;
+      }
+    }
+  }
+  >span{
+    margin-bottom: 1rem
+  }
+}
+.bulle{
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+/**
+dropdown
+ */
+::ng-deep .list-dropdown {
+  .p-dropdown {
+    width: 119px;
+    height: 29px;
+    .p-dropdown-trigger {
+      background: transparent;
+      color: #6c757d;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      position: relative;
+      left: -12px;
+      width: 10px;
+      background-size: 10px;
+      background-position: center;
+      background-repeat: no-repeat;
+      .p-icon-wrapper{
+        display: none;
+      }
+    }
+    .p-dropdown-label {
+      background: transparent;
+      border: 0 none;
+      width: 101px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
+  }
+  span {
+    &.p-dropdown-trigger-icon {
+      &.pi {
+        &.pi-chevron-down {
+          &::before {
+            font-size: 11px;
+            position: relative;
+            left: 6px;
+          }
+        }
+      }
+    }
+  }
+  .status-ACTIVE {
+    .p-dropdown {
+      border: 1px solid $color-java-green;
+      .p-dropdown-label {
+        color: $color-java-green;
+        font-size: 12px;
+      }
+    }
+  }
+  .status-PENDING {
+    .p-dropdown {
+      border: 1px solid $color-texas-yellow;
+      .p-dropdown-label {
+        color: $color-texas-yellow ;
+        font-size: 12px;
+      }
+    }
+  }
+  .status-DISABLED {
+    .p-dropdown {
+      border: 1px solid #3d5b82;
+      .p-dropdown-label {
+        color: #3d5b82;
+        font-size: 12px;
+      }
+    }
+  }
+  .status-BLOCKED {
+    .p-dropdown {
+      border: 1px solid #fe5050;
+      .p-dropdown-label {
+        color: #fe5050;
+        font-size: 12px;
+      }
+    }
+  }
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 767px) {
+  .list-orders-item-area {
+    &.users-area {
+      .introduction-area {
+        position: static;
+        margin: 0 0 20px;
+        height: initial;
+        .p-jc-between {
+          display: block;
+        }
+        .btns-group {
+          @include flex;
+          margin: 10px 0 0;
+        }
+      }
+      .recherche-bloc {
+        width: 100%;
+        .p-input-icon-left {
+          >input {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}
+.img-thumbnail{
+  height:80px;
+  width:80px;
+  object-fit:cover;
+}
+::ng-deep{
+  .without-search .p-multiselect-panel .p-multiselect-header{
+    display: none;
+  }
+  .iti.iti--allow-dropdown{
+    width: 100%;
+    input{
+      padding-left: 50px !important;
+    }
+  }
+  .country-dropdown input{
+    border-radius: 0 !important;
+  }
+}

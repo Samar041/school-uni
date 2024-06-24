@@ -1,0 +1,148 @@
+<p-dialog #dialog header="{{ 'PROMO.EDIT_PROMO' | translate }}" [(visible)]="show" (onHide)="dialog.close($event)" [modal]="true"
+  [style]="{width: '636px'}">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="editPromoForm">
+      <div class="form-area">
+        <div class="form-style-1 position-title-bloc">
+          <input type="text"  max="2060-12-31" formControlName="titre" placeholder="Titre *" />
+          <div class="error" *ngIf="submitted && f['titre']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+        </div>
+        <div class="generate-code-row">
+          <div class="form-style-1 position-title-bloc">
+            <input type="text" [value]="newCode" class="time-input"
+              formControlName="code" placeholder="code *" />
+          </div>
+          <div class="form-style-1">
+            <button
+              type="button"
+              (click)="generateCode()"
+              class="btn btn-primary"
+            >
+              Génerer un code
+            </button>
+          </div>
+        </div>
+        <div class="dates-row">
+          <div class="form-style-1 position-title-bloc">
+            <h1 class="font-text text-left ">
+              Date début :
+            </h1>
+            <input type="date" max="3000-06-30T16:30" max="2060-12-31" [min]="getCurrentDate()" class="time-input" formControlName="date_debut" />
+            <div class="error" *ngIf="submitted && f['date_debut']?.errors?.['required']">
+              {{ 'NOTIFICATION.REQUIRED' | translate }}
+            </div>
+            <div class="error" *ngIf="dateCompare">
+              {{ 'NOTIFICATION.DATE_COMPARE' | translate }}
+            </div>
+          </div>
+          <div class="form-style-1">
+            <h1 class="font-text text-left ">
+              Date fin:
+            </h1>
+            <input type="date" class="time-input" max="2060-12-31" [min]="getCurrentDate()" formControlName="date_fin"/>
+            <div class="error " *ngIf="submitted && f['date_fin']?.errors?.['required']">
+              {{ 'NOTIFICATION.REQUIRED' | translate }}
+            </div>
+            <div class="error" *ngIf="dateCompare">
+              {{ 'NOTIFICATISON.DATE_COMPARE' | translate }}
+            </div>
+          </div>
+          <div  class="error error-date"  *ngIf="submitted &&  (f['date_debut'].hasError('yearRange') || f['date_fin'].hasError('yearRange'))">
+            {{dateMessage}}
+          </div>
+        </div>
+        <div class="menu-select" [ngClass]="{'b-row': showList}">
+          <div>
+            <p-dropdown
+            [options]="apply_on"
+            formControlName="event_type"
+            placeholder="Applicable sur *"
+            optionLabel="name"
+            optionValue="id"
+            (onChange)="eventTypeSelected($event)"
+          >
+          </p-dropdown>
+          <span
+            class="error"
+            *ngIf="submitted && f['event_type']?.errors?.['required']"
+          >
+            {{ "COMMON_REQUIRED.REQUIRED" | translate }}
+          </span>
+          </div>
+          <div class="form-list form-list-dropdown">
+          <p-dropdown *ngIf="showList" formControlName="client_id"  [options]="listFiltred" optionLabel="first_name" optionValue="id" [filter]="true" filterBy="first_name" (completeMethod)="searchClient($event)"
+                                [dropdown]="true"  [minLength]="1">
+                  <ng-template let-listFiltred pTemplate="item" style="padding: 2px;">
+                    <label style="color: black; font-size: 10pt;">{{listFiltred.first_name}}</label>
+                  </ng-template>
+                </p-dropdown>
+                </div>
+        </div>
+        <div class="dates-row">
+          <div class="menu-select">
+            <p-dropdown
+              [options]="typeReduction"
+              formControlName="discount_type"
+              (onChange)="triggerChange($event)"
+              placeholder="Type de réduction"
+              optionLabel="name"
+              optionValue="id"
+            >
+            </p-dropdown>
+            <span
+              class="error"
+              *ngIf="submitted && f['event_type']?.errors?.['required']"
+            >
+              {{ "COMMON_REQUIRED.REQUIRED" | translate }}
+            </span>
+          </div>
+         
+            <div class="form-style-1 position-title-bloc" *ngIf="isPercent">
+              <input type="number"  min="0" step="0.1" class="time-input"
+                formControlName="pourcentage" placeholder="Valeur en pourcentage *" />
+            </div>
+            <div class="form-style-1 position-title-bloc" *ngIf="isAmount">
+              <input type="number"  min="0" step="0.1" class="time-input"
+                formControlName="pourcentage" placeholder="Valeur du montant *" />
+            </div>
+            <div class="form-style-1 position-title-bloc" *ngIf="isPromoPrice">
+              <input type="number"  min="0" step="0.1" class="time-input"
+                formControlName="pourcentage" placeholder="Valeur de réduction *" />
+            </div>
+        </div>
+       
+        <div class="form-style-1 position-title-bloc">
+          <input type="number"  min="0" step="0.1" class="time-input"
+            formControlName="max_attempts" placeholder="Nombre de tentatives *" />
+            <span
+            class="error"
+            *ngIf="submitted && f['max_attempts']?.errors?.['required']"
+          >
+          {{ "COMMON_REQUIRED.REQUIRED" | translate }}
+        </span>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+        </div>
+    </form>
+    <div *ngIf="showSuccess" class="success-msg">
+      <div class="inscription-form-title">
+        <h1 class="edit-form-title text-hideform">Promotion ajouté avec succé!</h1>
+      </div>
+      <button type="button" (click)="cancel()" class="btn-primary">{{'COMMON.RETOUR' | translate}}</button>
+    </div>
+  </div>
+    <!--.create-supplier-content-->
+    <ng-template pTemplate="footer">
+      <div class="bouton_footer" *ngIf="!hideForm">
+        <p-button (click)="dialog.close($event)" label="{{ 'NOTIFICATION.CANCEL' | translate }}"
+          styleClass="p-button-text btn btn-cancel">
+        </p-button>
+        <p-button *ngIf="!showSuccess" label="{{ 'NOTIFICATION.PARTAGE' | translate }}" [icon]="isLoader ? 'pi pi-spin pi-spinner' : ''"  (click)="pubSubmit()" styleClass="btn btn-primary">
+        </p-button>
+      </div>
+    </ng-template>
+</p-dialog>

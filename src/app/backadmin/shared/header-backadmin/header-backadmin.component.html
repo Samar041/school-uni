@@ -1,0 +1,29 @@
+<header>
+  <a class="logo">
+    <!-- <img src="./../../../../assets/img/logos/logo.svg" > -->
+    <p>Schoole</p>
+  </a>
+  <div class="row-header">
+    <div class="search-area">
+      <!-- <button class="notif-blc"></button> -->
+      <div class="search-blc">
+        <input type="search" class="form-control" placeholder="Chercher">
+      </div>
+    </div><!--.search-area-->
+    <div class="dropdown-blc">
+      <div class="connected-status-area">
+        <span>Connecté</span>
+      </div>
+      <div class="dropdown">
+        <button [style]="admin?.image ? 'background-image: url('+admin.image+')' : ''" class="user-icon" (click)="toggleDropdownList()"></button>
+        <div class="dropdown-list" [ngClass]="statusToggleDropdownList ? 'active' : ''">
+          <button class="logout-btn" (click)="logout()">
+            <span class="logout-text">
+              {{'COMMON.LOGOUT' | translate }}
+            </span>
+          </button>
+        </div>
+      </div><!--.dropdown-->
+    </div><!--.dropdown-blc-->
+  </div><!--.row-header-->
+</header>

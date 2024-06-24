@@ -1,0 +1,66 @@
+<div class="login-container duerp_bg_page">
+  <form class="form-signin" [formGroup]="resetPasswordForm">
+    <div class="img-login">
+      <p>Schoole</p>
+    </div>
+    <div class="success-message" *ngIf="f['token'].hasError('auth') && f['email'].hasError('auth')">
+      <div class="alert alert-danger" role="alert">
+        Vérifier votre email et ou code
+      </div>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.EMAIL' | translate }}</label>
+      <input type="text" matInput mat-autosize formControlName="email" placeholder="{{ 'COMMON.EMAIL' | translate }}"
+        autocomplete="email" autofocus class="login-form-input" />
+      <span class="error" *ngIf="submitted  && f['email'].hasError('pattern')  ">
+        <p>{{ 'LOGIN.EMAIL_VALID' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['email']?.errors?.['required'] && submitted">
+        <p> {{ 'LOGIN.EMAIL_REQUIRED' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'RESET.CODE' | translate }}</label>
+      <input type="text" matInput mat-autosize formControlName="token" placeholder="xxxx-xxxx-xxxx" autofocus
+        class="login-form-input" />
+      <span class="error" *ngIf="submitted  && f['token'].hasError('pattern')  ">
+        <p>{{ 'RESET.TOKENVALIDATION' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['token']?.errors?.['required']  && submitted">
+        <p>code requis. </p>
+      </span>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.PASSWORD' | translate }}</label>
+      <input type="password" matInput mat-autosize formControlName="password"
+        placeholder="{{ 'COMMON.PASSWORD' | translate }}" autocomplete="current-password" autofocus
+        class="login-form-input" />
+      <span class="error" *ngIf="f['password']?.errors?.['minlength'] && submitted">
+        <p>{{ 'LOGIN.PASSWORD_MIN' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['password']?.errors?.['required']  && submitted">
+        <p>{{ 'LOGIN.PASSWORD_REQUIRED' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.PASSWORD_CONFIRM' | translate }}</label>
+      <input type="password" matInput mat-autosize formControlName="password_confirmation"
+        placeholder="{{ 'COMMON.PASSWORD_CONFIRM' | translate }}" autocomplete="current-password" autofocus
+        class="login-form-input" />
+      <span class="error" *ngIf="f['password_confirmation']?.errors?.['minlength'] && submitted">
+        <p>{{ 'LOGIN.PASSWORD_MIN' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="(resetPasswordForm.hasError('notSame') ||  f['password_confirmation']?.errors?.['required']) && submitted">
+        <p>{{ 'COMMON_INVALID.PASSWORD_CONFIRM' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-bloc">
+      <a (click)="forget()">Email non reçus ?</a>
+    </div>
+    <div class="form-buttons">
+      <button class="connect-btn" (click)="resetPassword()">
+        {{ 'FORGET.SEND' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

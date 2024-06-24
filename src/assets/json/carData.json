@@ -1,0 +1,456 @@
+{
+    "fuel" : [
+      {
+        "value": "GASOLINE",
+        "label": "Essence"
+      },
+      {
+        "value": "DIESEL",
+        "label": "Diesel"
+      },
+      {
+        "value": "CNG",
+        "label": "CNG"
+      },
+      {
+        "value": "ELECTRIC",
+        "label": "Eléctrique"
+      },
+      {
+        "value": "HYBRID",
+        "label": "HYBRIDE"
+      },
+      {
+        "value": "GPL",
+        "label": "GPL"
+      },
+      {
+        "value": "HYDROGEN",
+        "label": "Hydrogéne"
+      }
+    ],
+  "kilometrages"  :[
+      { "value": "0", "label": "Tous" },
+      { "value": "50", "label": "50" },
+      { "value": "5000", "label": "5 000" },
+      { "value": "10000", "label": "10 000" },
+      { "value": "20000", "label": "20 000" },
+      { "value": "30000", "label": "30 000" },
+      { "value": "40000", "label": "40 000" },
+      { "value": "50000", "label": "50 000" },
+      { "value": "60000", "label": "60 000" },
+      { "value": "70000", "label": "70 000" },
+      { "value": "80000", "label": "80 000" },
+      { "value": "90000", "label": "90 000" },
+      { "value": "100000", "label": "100 000" },
+      { "value": "125000", "label": "125 000" },
+      { "value": "140000", "label": "140 000" },
+      { "value": "150000", "label": "150 000" },
+      { "value": "175000", "label": "175 000" },
+      { "value": "200000", "label": "200 000" }
+    ],
+  "cylinder" : [
+      { "value": "0", "label": "0" },
+      { "value": "500", "label": "500 cc" },
+      { "value": "1000", "label": "1 000 cc" },
+      { "value": "1500", "label": "1 500 cc" },
+      { "value": "2000", "label": "2 000 cc" },
+      { "value": "2500", "label": "2 500 cc" },
+      { "value": "3000", "label": "3 000 cc" },
+      { "value": "3500", "label": "3 500 cc" },
+      { "value": "4000", "label": "4 000 cc" }
+    ],
+  "body_type" : [
+      "Berline",
+      "Familiale",
+      "Cabriolet",
+      "Compact",
+      "Coupé",
+      "5 portes avec hayon",
+      "Véhicule utilitaire léger",
+      "Minibus",
+      "Moto",
+      "Monospace (MPV)",
+      "Camionnette",
+      "SUV",
+      "Remorque",
+      "Camion"
+    ],
+  "equipement" :[
+      "Régulateur de vitesse et de distance",
+      "Climatisation",
+      "Suspension à air",
+      "Climatisation automatique",
+      "Chauffage d'appoint",
+      "Avertisseur d'angles morts",
+      "Quatre roues motrices",
+      "Affichage tête haute",
+      "Assistant de changement de file",
+      "Garnissage en cuir",
+      "Phares LED",
+      "Contrôle de distance de stationnement",
+      "Caméra de recul",
+      "Système de navigation",
+      "Barre de remorquage",
+      "Phares Xenon"
+    ],
+  "nbr_places" :[
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "> 10"
+    ],
+  "damages" :[
+      "Pas de dégâts",
+      "Dégâts techniques et de carrosserie",
+      "Dégâts de carrosserie",
+      "Dégâts techniques"
+    ],
+  "first_registration" :[
+      "Tous",
+      "2023",
+      "2022",
+      "2021",
+      "2020",
+      "2019",
+      "2018",
+      "2017",
+      "2016",
+      "2015",
+      "2014"
+    ],
+  "power_ch" :[
+      { "value": "0", "label": "0" },
+      { "value": "50", "label": "50 CH" },
+      { "value": "60", "label": "60 CH" },
+      { "value": "70", "label": "70 CH" },
+      { "value": "80", "label": "80 CH" },
+      { "value": "90", "label": "90 CH" },
+      { "value": "100", "label": "100 CH" },
+      { "value": "110", "label": "110 CH" },
+      { "value": "120", "label": "120 CH" },
+      { "value": "130", "label": "130 CH" },
+      { "value": "140", "label": "140 CH" },
+      { "value": "150", "label": "150 CH" },
+      { "value": "175", "label": "175 CH" },
+      { "value": "200", "label": "200 CH" },
+      { "value": "225", "label": "225 CH" },
+      { "value": "250", "label": "250 CH" }
+    ],
+  "power_kh" :[
+      { "value": "0", "label": "0" },
+      { "value": "25", "label": "25 kW" },
+      { "value": "37", "label": "37 kW" },
+      { "value": "44", "label": "44 kW" },
+      { "value": "55", "label": "55 kW" },
+      { "value": "66", "label": "66 kW" },
+      { "value": "74", "label": "74 kW" },
+      { "value": "87", "label": "87 kW" },
+      { "value": "96", "label": "96 kW" },
+      { "value": "110", "label": "110 kW" },
+      { "value": "147", "label": "147 kW" },
+      { "value": "185", "label": "185 kW" },
+      { "value": "223", "label": "223 kW" },
+      { "value": "263", "label": "263 kW" },
+      { "value": "296", "label": "296 kW" }
+    ]  ,
+  "transmissions" :[
+      {
+        "label": "Automatique",
+        "value": "AUTO"
+      },
+      {
+        "label": "Manuelle",
+        "value": "MANUAL"
+      }
+    ],
+    "min_price" : [
+      { "value": "0", "label": "Tous" },
+      { "value": "1000", "label": "1 000" },
+      { "value": "2000", "label": "2 000" },
+      { "value": "3000", "label": "3 000" },
+      { "value": "4000", "label": "4 000" },
+      { "value": "5000", "label": "5 000" },
+      { "value": "6000", "label": "6 000" },
+      { "value": "7000", "label": "7 000" }
+    ],
+  "max_price" :[
+      { "value": "0", "label": "Tous" },
+      { "value": "1000", "label": "1 000" },
+      { "value": "2000", "label": "2 000" },
+      { "value": "3000", "label": "3 000" },
+      { "value": "4000", "label": "4 000" },
+      { "value": "5000", "label": "5 000" },
+      { "value": "6000", "label": "6 000" },
+      { "value": "7000", "label": "7 000" },
+      { "value": "8000", "label": "8 000" },
+      { "value": "9000", "label": "9 000" },
+      { "value": "10000", "label": "10 000" },
+      { "value": "11000", "label": "11 000" },
+      { "value": "12000", "label": "12 000" },
+      { "value": "13000", "label": "13 000" },
+      { "value": "14000", "label": "14 000" },
+      { "value": "15000", "label": "15 000" },
+      { "value": "16000", "label": "16 000" },
+      { "value": "17000", "label": "17 000" },
+      { "value": "18000", "label": "18 000" },
+      { "value": "19000", "label": "19 000" },
+      { "value": "20000", "label": "20 000" },
+      { "value": "25000", "label": "25 000" },
+      { "value": "30000", "label": "30 000" },
+      { "value": "35000", "label": "35 000" },
+      { "value": "40000", "label": "40 000" },
+      { "value": "45000", "label": "45 000" },
+      { "value": "50000", "label": "50 000" }
+    ],
+  "body_color" :[
+      { "value": "Beige", "label": "Beige" },
+      { "value": "Black", "label": "Noir" },
+      { "value": "Blue", "label": "Bleu" },
+      { "value": "Brown", "label": "Brun" },
+      { "value": "Burgundy", "label": "Bordeaux" },
+      { "value": "Gray", "label": "Gris" },
+      { "value": "Green", "label": "Vert" },
+      { "value": "Orange", "label": "Orange" },
+      { "value": "Purple", "label": "Violet" },
+      { "value": "Red", "label": "Rouge" },
+      { "value": "White", "label": "Blanc" },
+      { "value": "Yellow", "label": "Jaune" }
+    ],
+  "countries" :[
+      {
+        "label": "Autriche",
+        "value": "at"
+      },
+      {
+        "label": "Belgique",
+        "value": "be"
+      },
+      {
+        "label": "Bulgarie",
+        "value": "bg"
+      },
+      {
+        "label": "République tchèque",
+        "value": "cz"
+      },
+      {
+        "label": "Allemagne",
+        "value": "de"
+      },
+      {
+        "label": "Estonie",
+        "value": "ee"
+      },
+      {
+        "label": "Espagne",
+        "value": "es"
+      },
+      {
+        "label": "Finlande",
+        "value": "fi"
+      },
+      {
+        "label": "France",
+        "value": "fr"
+      },
+      {
+        "label": "Croatie",
+        "value": "hr"
+      },
+      {
+        "label": "Hongrie",
+        "value": "hu"
+      },
+      {
+        "label": "Italie",
+        "value": "it"
+      },
+      {
+        "label": "Lituanie",
+        "value": "lt"
+      },
+      {
+        "label": "Luxembourg",
+        "value": "lu"
+      },
+      {
+        "label": "Lettonie",
+        "value": "lv"
+      },
+      {
+        "label": "Pays-Bas",
+        "value": "nl"
+      },
+      {
+        "label": "Pologne",
+        "value": "pl"
+      },
+      {
+        "label": "Portugal",
+        "value": "pt"
+      },
+      {
+        "label": "Roumanie",
+        "value": "ro"
+      },
+      {
+        "label": "Suède",
+        "value": "se"
+      },
+      {
+        "label": "Slovénie",
+        "value": "si"
+      },
+      {
+        "label": "Slovaquie",
+        "value": "sk"
+      },
+      {
+        "label": "Grèce",
+        "value": "gr"
+      },
+      {
+        "label": "Malte",
+        "value": "mt"
+      },
+      {
+        "label": "Chypre",
+        "value": "cy"
+      }
+    ],
+    "vendeurs" :[
+      "Adesa Select",
+      "Alphabet",
+      "Athlon",
+      "AVIS",
+      "Easidrive",
+      "EUROPCAR",
+      "Leaseplan",
+      "Mercedes LUEG",
+      "Pentagon",
+      "Schönauen Autohaus",
+      "Sixt Rent a Car Limited",
+      "Van Mossel Automotive Groep",
+      "Yo Auto",
+      "AHAG",
+      "Anglia Vehicle Leasing",
+      "Autoexpo",
+      "BOB Automobile",
+      "Emil Frey Group",
+      "Hertz",
+      "Leasys Ltd",
+      "Multi Vendor",
+      "Riverside Motor Group",
+      "Sema Lease",
+      "South Staffs Hire",
+      "Von der Weppen Gruppe",
+      "ALD AUTOMOTIVE",
+      "Arval",
+      "Autohaus Bleker Gruppe",
+      "Days Fleet",
+      "Euler Group",
+      "John Clark Motor Group",
+      "Levy",
+      "Penske Automotive",
+      "Schmidt+Koch Gruppe",
+      "Sixt Leasing",
+      "Tuskerdirect",
+      "WeBuyUrCar.co.uk"
+    ],
+    "versionOptions" : [
+    { "value": "0: 2.0 (110 kW / 150 PS)", "text": "2.0 (110 kW / 150 PS)" },
+    { "value": "1: 3.0 V6 (160 kW / 218 PS)", "text": "3.0 V6 (160 kW / 218 PS)" },
+    { "value": "2: electric drive 33 kW:33.00", "text": "electric drive 33 kW:33.00" },
+    { "value": "3: 1.6 (77 kW / 105 PS)", "text": "1.6 (77 kW / 105 PS)" },
+    { "value": "4: 1.2 TCe (92 kW / 125 PS)", "text": "1.2 TCe (92 kW / 125 PS)" },
+    { "value": "5: 1.5 dCi (63 kW / 85 PS)", "text": "1.5 dCi (63 kW / 85 PS)" },
+    { "value": "6: 1.5 dCi (66 kW / 90 PS)", "text": "1.5 dCi (66 kW / 90 PS)" },
+    { "value": "7: 1.5 dCi (79 kW / 107 PS)", "text": "1.5 dCi (79 kW / 107 PS)" },
+    { "value": "8: 1.5 dCi (80 kW / 110 PS)", "text": "1.5 dCi (80 kW / 110 PS)" },
+    { "value": "9: 1.6 (77 kW / 105 PS)", "text": "1.6 (77 kW / 105 PS)" },
+    { "value": "10: 1.6 SCe (84 kW / 115 PS)", "text": "1.6 SCe (84 kW / 115 PS)" }
+    ],
+    "typeOptions" : [
+    { "value": "0: V6 Boite de vitesse manuelle 2 Portes", "text": "V6 Boite de vitesse manuelle 2 Portes" },
+    { "value": "1: L Boite de vitesse manuelle 2 Portes", "text": "L Boite de vitesse manuelle 2 Portes" },
+    { "value": "2: Comfort Boite de vitesse automatique 5 Portes", "text": "Comfort Boite de vitesse automatique 5 Portes" },
+    { "value": "3: Comfort Plus Boite de vitesse automatique 5 Portes", "text": "Comfort Plus Boite de vitesse automatique 5 Portes" },
+    { "value": "4: Ambiance 4x2 Boite de vitesse manuelle 5 Portes", "text": "Ambiance 4x2 Boite de vitesse manuelle 5 Portes" },
+    { "value": "5: Ambiance 4x4 Boite de vitesse manuelle 5 Portes", "text": "Ambiance 4x4 Boite de vitesse manuelle 5 Portes" },
+    { "value": "6: Base 4x2 Boite de vitesse manuelle 5 Portes", "text": "Base 4x2 Boite de vitesse manuelle 5 Portes" },
+    { "value": "7: Basis 4x2 Boite de vitesse manuelle 5 Portes", "text": "Basis 4x2 Boite de vitesse manuelle 5 Portes" },
+    { "value": "8: Laureate 4x2 Boite de vitesse manuelle 5 Portes", "text": "Laureate 4x2 Boite de vitesse manuelle 5 Portes" },
+    { "value": "9: Laureate 4x4 Boite de vitesse manuelle 5 Portes", "text": "Laureate 4x4 Boite de vitesse manuelle 5 Portes" },
+    { "value": "10: Prestige 4x2 Boite de vitesse manuelle 5 Portes", "text": "Prestige 4x2 Boite de vitesse manuelle 5 Portes" }
+    ],
+    "typeHabillageOptions" : [
+    { "value": "CLOTH", "text": "Tissu" },
+    { "value": "LEATHER", "text": "Cuir" },
+    { "value": "PART_LEATHER", "text": "Similicuir" },
+    { "value": "SYNTHETIC_LEATHER", "text": "Similicuir" },
+    { "value": "PLASTIC", "text": "Plastique" },
+    { "value": "VELOUR", "text": "Velours" },
+    { "value": "OTHER", "text": "Autres" }
+  ],
+  "vendorTypes" : [
+    { "value": "0: particulier", "text": "Particulier" },
+    { "value": "1: company", "text": "Société (TVA à déclarer)" }
+  ],
+  "controlTypes" : [
+    { "value": "0: null", "text": "Expiré" },
+    { "value": "1: 0", "text": "Non" },
+    { "value": "2: 1", "text": "Oui" }
+  ],
+  "dommagesDescriptions" : [
+    {
+      "label": "Bosse",
+      "value": "Bosse"
+    },
+    {
+      "label": "Rayure",
+      "value": "Rayure"
+    },
+    {
+      "label": "Usure des sièges et des garnitures",
+      "value": "Usure des sièges et des garnitures"
+    },
+    {
+      "label": "Impact de gravier",
+      "value": "Impact de gravier"
+    },
+    {
+      "label": "Peinture ternie",
+      "value": "Peinture ternie"
+    },
+    {
+      "label": "Accroc",
+      "value": "Accroc"
+    },
+    {
+      "label": "Rouille",
+      "value": "Rouille"
+    },
+    {
+      "label": "Éclat de grêle",
+      "value": "Éclat de grêle"
+    }
+  ],
+  "salesManTypes" : [
+    {
+      "value": "0: particulier",
+      "label": "Particulier"
+    },
+    {
+      "value": "1: company",
+      "label": "Société (TVA à déclarer)"
+    }
+  ]
+  }

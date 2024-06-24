@@ -1,0 +1,42 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area">
+    <div class="p-d-flex p-jc-between">
+      <div class="big-title-blc">
+        <h1 class="big-title">
+          Configurations
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <p-tabView>
+          <p-tabPanel header="Demandes">
+            <form class="form-area">
+              <div class="form-style-1">
+                <label class="form-label">Durée nécessaire pour transmettre la demande à l'administration</label>
+                <p-inputMask mask="99:99:99" name="time_for_acceptation" [(ngModel)]="time_for_acceptation"
+                  placeholder="00:00:00"
+                  [styleClass]="submitted && !time_for_acceptation ? 'invalid' : ''"></p-inputMask>
+              </div>
+              <div class="form-style-1">
+                <label class="form-label">Délai d'acceptation de la demande par un prestataire</label>
+                <p-inputMask mask="99:99:99" name="time_waiting" [(ngModel)]="time_waiting" placeholder="00:00:00"
+                  [styleClass]="submitted && !time_for_acceptation ? 'invalid' : ''"></p-inputMask>
+              </div>
+              <div class="form-style-1 d-flex align-items-center">
+                <p-checkbox [(ngModel)]="active" name="active" [binary]="true"
+                  (onChange)="onChangeStatus($event)"></p-checkbox>
+                <label class="form-label mb-0 ms-2">Automatisation des processus d'acceptation</label>
+              </div>
+              <p-button [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''" label="Enregistrer"
+                styleClass="btn btn-primary" (onClick)="submit()">
+              </p-button>
+            </form>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,301 @@
+/* # Forms Inscription ::
+------------------------------------*/
+
+/* -- inscription-area -- */
+
+.inscription-area {
+   background-image: url('../../assets/img/register-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 200px 50px 0;
+
+    .inscription-desc {
+        margin: 100px 0 0;
+
+        p {
+            @include fonts(30px, 38px, $color-white);
+            font-family: 'Istok Web', sans-serif;
+            font-weight: bold;
+            margin: 0;
+
+            &:not(:last-child) {
+                margin: 0 0 50px;
+            }
+        }
+    }
+    .inscription-form-area {
+        background-color: $color-white;
+        border-radius: 20px;
+        padding: 34px 54px;
+        max-height: 1200px;
+        max-width: 663px;
+        margin: 0 auto;
+
+        .inscription-form-title-blc {
+            margin: 0 0 15px;
+
+            .inscription-form-title {
+                @include fonts(25px, 25px, $color-black);
+                font-family: 'Poppins-Medium', serif;
+                text-transform: uppercase;
+                margin: 0;
+            }
+        }
+        .inscription-form-description {
+            @include fonts(16px, 16px, $color-black);
+            font-family: 'Poppins-Light', serif;
+            margin: 0 0 20px;
+        }
+        .menu-select {
+            margin: 0 0 43px;
+        }
+    }
+    .form-area {
+        .form-style-1 {
+            &:not(:last-child) {
+                margin: 0 0 24px;
+            }
+        }
+        .grid {
+            margin: 0 0 24px;
+        }
+        .form-content-blc {
+            overflow-y: auto;
+            max-height: 450px;
+            margin: 0 0 25px;
+            padding: 0 10px 70px 0;
+
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: $color-wild-sand;
+            }
+            &::-webkit-scrollbar {
+                width: 6px;
+                background-color: $color-wild-sand;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                background-color: $color-silver-chalice-2;
+            }
+        }
+    }
+}
+
+/**/
+.form-style_password-item {
+    position: relative;
+
+    .btn-showhide-password {
+        position: absolute;
+        top: 14px;
+        right: 10px;
+    }
+}
+.p-treeselect .p-treeselect-label{
+  padding: 9px 10px;
+}
+.p-treeselect .p-treeselect-label.p-placeholder {
+  color: #495057;
+  font-size: 12px;
+  font-family: "Poppins-Medium", serif;
+  font-weight: 400;
+}
+.p-treeselect{
+  height: 38px;
+}
+p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon{
+  width: 12px;
+}
+.p-treeselect .p-treeselect-label, .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-label{
+  font-size: 12px;
+  font-family: "Poppins-Medium", serif;
+  font-weight: 400;
+  color:black;
+}
+.p-treeselect .p-treeselect-trigger .p-icon-wrapper{
+  width: 12px;
+}
+.p-tree{
+  padding: 9px;
+}
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler{
+  width: 15px;
+  height: 15px;
+  .p-icon{
+    width: 12px;
+    height: 12px;
+  }
+}
+.p-treeselect-filter-icon{
+  width: 12px;  
+}
+.p-tree-empty-message{
+  color: #495057;
+  font-size: 12px;
+  font-size: 12px;
+  font-family: "Poppins-Medium", serif;
+  font-weight: 400;
+  text-align: center;
+}
+.p-treeselect:not(.p-disabled):hover{
+  border-color: $color-primary
+}
+.p-treeselect:not(.p-disabled).p-focus{
+  @include formsBoxShadow ;
+}
+p-treeselect.ng-invalid.ng-dirty > .p-treeselect{
+  border-color: #ced4da;
+}
+.p-treeselect-panel .p-treeselect-header .p-treeselect-close .p-treeselect-filter-icon{
+  left: 10px;
+}
+.p-treeselect-panel .p-treeselect-header .p-treeselect-filter-container{
+  input{
+    height: 34px;
+  }
+}
+/* # $Mobile ::
+------------------------------------*/
+
+@media (max-width: 1440px) {
+    .inscription-area {
+        padding: 160px 40px 50px;
+
+        .inscription-desc {
+            margin: 80px 0 0;
+
+            p {
+                @include fontSize(24px, 30px);
+
+                &:not(:last-child) {
+                    margin: 0 0 40px;
+                }
+            }
+        }
+        .inscription-form-area {
+            border-radius: 16px;
+            padding: 28px 44px;
+
+            .inscription-form-title-blc {
+                margin: 0 0 12px;
+
+                .inscription-form-title {
+                    @include fontSize(20px, 20px);
+                }
+            }
+            .inscription-form-description {
+                @include fontSize(13px, 13px);
+                margin: 0 0 16px;
+            }
+            .menu-select {
+                margin: 0 0 35px;
+            }
+        }
+        .form-area {
+            .form-style-1 {
+                &:not(:last-child) {
+                    margin: 0 0 20px;
+                }
+                input {
+                    border-radius: 14px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .inscription-area {
+        .form-area {
+            .form-content-blc {
+                overflow-y: initial;
+                max-height: initial;
+                margin: 0;
+                padding: 0 ;
+            }
+        }
+    }
+}
+@media (max-width: 992px) {
+    .inscription-area {
+        .inscription-form-area {
+            padding: 25px;
+        }
+        .inscription-desc {
+            margin: 60px 0 0;
+            p {
+                @include fontSize(20px, 26px);
+
+                &:not(:last-child) {
+                    margin: 0 0 30px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .inscription-area {
+        display: block;
+        padding: 100px 20px 50px;
+
+        .inscription-desc {
+            margin: 0 0 30px;
+
+            p {
+                @include fontSize(16px, 18px);
+
+                &:not(:last-child) {
+                    margin: 0 0 15px;
+                }
+            }
+        }
+        .inscription-form-area {
+            padding: 20px;
+        }
+    }
+}
+@media (max-width: 570px) {
+    .inscription-area {
+        .form-area {
+            .grid {
+                &.gtc-3 {
+                    grid-template-columns: 1fr 140px;
+                }
+                &.gcg-3 {
+                    grid-column-gap: 10px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 375px) {
+    .inscription-area {
+        .form-area {
+            .grid {
+                &.gtc-3 {
+                    grid-template-columns: 1fr 115px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 320px) {
+    .inscription-area {
+        .form-area {
+            .grid {
+                &.gtc-3 {
+                    grid-template-columns: 1fr 100px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+

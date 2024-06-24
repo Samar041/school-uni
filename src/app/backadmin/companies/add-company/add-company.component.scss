@@ -1,0 +1,70 @@
+@import "./../../../../scss/components/extend";
+.required-field {
+  font-size: 11px;
+  line-height: 10px;
+  color: #000;
+  font-family: 'Istok Web', sans-serif;
+  font-weight: 300;
+  text-align: left;
+  margin: 15px 0 0;
+  display: block;
+}
+.gallerie{
+  &__item{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    .pi{
+      position: absolute;
+      font-size: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 50%;
+      padding: 3px;
+      right: -5px;
+      top: -5px;
+      background: $color-white;
+      z-index: 9;
+      color: #ced4da;
+      &:hover{
+          cursor: pointer;
+          border-color: $color-primary;
+          color:  $color-primary;
+      }
+    }
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.form-style-1 {
+  margin-bottom: 1rem;
+}
+.required-field {
+  font-size: 11px;
+  line-height: 10px;
+  color: #000;
+  font-family: 'Istok Web', sans-serif;
+  font-weight: 300;
+  text-align: left;
+  margin: 15px 0 0;
+  display: block;
+}
+::ng-deep{
+  .p-overlay,.p-treeselect{
+    width: 100%;
+  }
+  .without-search .p-multiselect-panel .p-multiselect-header{
+    display: none;
+  }
+  .iti.iti--allow-dropdown{
+    width: 100%;
+    input{
+      padding-left: 50px !important;
+    }
+  }
+  .country-dropdown input{
+    border-radius: 0 !important;
+  }
+}

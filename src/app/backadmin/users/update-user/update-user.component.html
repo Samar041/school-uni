@@ -1,0 +1,109 @@
+<p-dialog #dialog header="{{'USERS.EDIT_USER' | translate }}" (onHide)="cancel()" [(visible)]="show" [modal]="true"
+  [style]="{width: '636px'}" (onShow)="setUser()">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="updateClientForm">
+      <div class="form-area">
+        <div class="form-area">
+          <div class="">
+            <div class="input-required-group">
+              <div *ngIf="imageUrl" class="form-style-1">
+                <div class="gallerie">
+                  <div class="gallerie__item">
+                    <img class="img-thumbnail" src="{{imageUrl}}" alt="image">
+                    <i class="pi pi-times" (click)="removeThumbnail()"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-style-1 file-input">
+                <input #fileInput type="file" class="input-file image" #imageInput accept="image/*" id="img-category"
+                  (change)="uploadImage($event)" />
+                <label for="img-category">
+                  <span *ngIf="!f['image']?.value && ! imageName">Image *</span>
+                  <span *ngIf="imageName">{{imageName}}</span>
+                  <span *ngIf="f['image']?.value">{{f['image'].value.name}}</span>
+                </label>
+                <span class="error"
+                  *ngIf="(attemptSubmission && f['image'].hasError('required')) || (attemptSubmission && !imageUrl)">
+                  image obligatoire
+                </span>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="first_name" placeholder="{{'COMMON.NAME' | translate}} *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && updateClientForm.controls['first_name'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.NAME' | translate }}
+                </span>
+                <span class="error"
+                  *ngIf="attemptSubmission && updateClientForm?.get('first_name')?.dirty && updateClientForm.controls['first_name'].hasError('pattern')">
+                  {{ 'COMMON_INVALID.NAME_ONLY_LETTERS' | translate }}
+                </span>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="last_name" placeholder="{{'COMMON.LASTNAME' | translate}} *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && updateClientForm.controls['last_name'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.LASTNAME' | translate }}
+                </span>
+                <span class="error"
+                  *ngIf=" attemptSubmission && updateClientForm?.get('last_name')?.dirty && updateClientForm.controls['last_name'].hasError('pattern')">
+                  {{ 'COMMON_INVALID.LASTNAME_ONLY_LETTERS' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-style-1">
+            <p-dropdown [options]="genres" formControlName="gender" optionLabel="name" optionValue="value"
+              [showClear]="true" placeholder="Genre"></p-dropdown>
+            <span class="error" *ngIf=" attemptSubmission && updateClientForm.controls['gender'].hasError('required')">
+              {{'COMMON_REQUIRED.REQUIRED' | translate }}
+            </span>
+          </div>
+          <div class="form-style-1">
+            <ngx-intl-tel-input #phoneInput [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+              [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[
+                              SearchCountryField.Iso2,
+                              SearchCountryField.Name
+                              ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.France"
+              [phoneValidation]="true" [separateDialCode]="separateDialCode"
+              [numberFormat]="PhoneNumberFormat.International" name="phone" formControlName="phone"
+              [searchCountryPlaceholder]="'Rechercher un pays'">
+            </ngx-intl-tel-input>
+            <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('required')">
+              Le télephonne est obligatoire
+            </span>
+            <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('validatePhoneNumber')">
+              Champ invalid
+            </span>
+          </div>
+          <div class="form-style-1">
+            <input type="email" formControlName="email" placeholder="{{'COMMON.EMAIL' | translate}} *"
+              (input)="emailExists=false;emailInalid=false" />
+            <span class="error" *ngIf=" attemptSubmission && updateClientForm.controls['email'].hasError('required')">
+              {{ 'COMMON_REQUIRED.EMAIL' | translate }}
+            </span>
+            <span class="error"
+              *ngIf="(attemptSubmission && updateClientForm?.get('email')?.dirty && updateClientForm.controls['email'].hasError('pattern')) || emailInalid ">
+              {{ 'COMMON_INVALID.EMAIL' | translate }}
+            </span>
+            <span class="error" *ngIf="emailExists">
+              {{ 'COMMON_REQUIRED.EMAIL_ALREADY' | translate }}
+            </span>
+          </div>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.EDIT' | translate }}" styleClass="btn-primary" (click)="attemptUpdateClient($event)">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,75 @@
+<p-dialog #dialog [(visible)]="show" [modal]="true" (onHide)="cancel()" [draggable]="false" [style]="{width: '636px'}"
+  [position]="'topright'" [closeIcon]="'pi pi-arrow-right'">
+  <div class="create-client-content clien-area">
+    <div class="card">
+      <strong class="list-item-title" *ngIf="item?.client">Client</strong>
+      <ul *ngIf="item?.client" class="list-group mb-3">
+        <li class="list-group-item">
+          <div class="flex-item">
+            <p><strong>Nom:</strong></p>
+            <p>{{item.client.first_name}} {{item.client.last_name}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Télephonne:</strong></p>
+            <p>{{item.client.phone | phoneNumber}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Adresse:</strong></p>
+            <p>{{item.client.adresse[0]?.pays}} {{item.client.adresse[0]?.ville}}</p>
+          </div>
+        </li>
+      </ul>
+      <strong class="list-item-title" *ngIf="item?.prestataire">Prestataire</strong>
+      <ul *ngIf="item?.prestataire" class="list-group mb-3">
+        <li class="list-group-item">
+          <div class="flex-item">
+            <p><strong>Nom:</strong></p>
+            <p>{{item.prestataire.first_name}} {{item.prestataire.last_name}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Tel:</strong></p>
+            <p>{{item.prestataire.phone | phoneNumber}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Adresse:</strong></p>
+            <p *ngIf="item.prestataire.adresse?.length">{{item.prestataire.adresse[0]?.pays}} {{item.prestataire.adresse[0]?.ville}}</p>
+          </div>
+        </li>
+      </ul>
+      <strong class="list-item-title" *ngIf="item">Demande</strong>
+      <ul *ngIf="item" class="list-group">
+        <li class="list-group-item">
+          <div class="flex-item">
+            <p>
+              <strong *ngIf="item.client.adresse?.length">
+                <i class="pi pi-map"></i>
+                {{item.client.adresse[0]?.pays}} {{item.client.adresse[0]?.ville}}
+              </strong>
+            </p>
+            <p>
+              <strong>
+                {{item.created_at | fromNow}}
+              </strong>
+            </p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Spécialité:</strong></p>
+            <p>{{item.specialitie.nom}} </p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Domaine:</strong></p>
+            <p>{{item.specialitie.domaine.nom}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Description:</strong></p>
+            <p>{{item.description}}</p>
+          </div>
+          <div class="flex-item">
+            <p><strong>Statut: </strong></p>
+            <p>{{item.statut | DataToName : allStatus}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</p-dialog>

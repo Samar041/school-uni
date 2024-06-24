@@ -1,0 +1,163 @@
+@import "./../../../../scss/components/extend";
+/* # Login Page ::
+------------------------------------*/
+.login-container {
+  font-family: 'Istok Web', sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-link-water;
+  bottom: 0;
+  .form-signin {
+    max-width: 609px;
+    margin: 0 auto;
+    background-color: $color-white;
+    padding: 28px;
+    border-radius: 10px;
+    position: relative;
+    top: 18%;
+    .img-login {
+      // background-image: url("./../../../../assets/img/logos/logo.svg");
+      background-size: 180px auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      // height: 100px;
+      margin-bottom: 20px;
+      p{
+        color: $color-black;
+        font-weight: 700;
+        font-size: 30px;
+        margin-bottom: 0;
+        line-height: 54px;
+        margin-left: 15px;
+        text-align: center;
+      }
+    }
+    .form-bloc {
+      // border: 1px solid #211b1b57;
+      padding: 17px 10px;
+      margin-bottom: 0px;
+      position: relative;
+      border-radius: 5px;
+      label {
+        position: absolute;
+        top: -11px;
+        background: $color-white;
+        padding: 0;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      a{
+        font-size: 13px;
+        font-weight: 500;
+        color: #75C2F6;      }
+      .login-form-input {
+        margin-bottom: 11px;
+        background: transparent;
+        padding: 5px;
+        border-radius: 8px;
+        font-size: 15px;
+        @include dimensions(100%, 38px);
+        border: 1px solid $color-ghost-gray;
+        &:focus {
+          outline: 0;
+          border-color: $color-primary;
+        }
+        &::placeholder{
+          font-size: 15px;
+        }
+      }
+      .error {
+        display: block;
+        font-family: 'Istok Web', sans-serif;
+        color: red;
+        font-size: 13px;
+        margin-bottom: 0;
+        &::first-letter {
+          text-transform: capitalize;
+        }
+      }
+    }
+    .form-buttons {
+      text-align: right;
+      .connect-btn {
+        background-color: $color-primary;
+        padding: 5px;
+        border: none;
+        min-width: 150px;
+        height: 40px;
+        border-radius: 25px;
+        font-family: Poppins-Medium, serif;
+        cursor: pointer;
+        letter-spacing: 0.42px;
+        @include fonts(14px, 14px, $color-white);
+        font-weight: 500;
+      }
+    }
+  }
+  .link-reset-password {
+    font-size: 12px;
+    text-decoration: none;
+    color: $color-blue-havelock;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .flex-bloc {
+    @include flex(flex, center, space-between);
+    margin-bottom: 10px;
+    button {
+      padding: 5px;
+      &.btn-visibility {
+        border: 1px solid #A6B8C052;
+        border-left: none;
+        display: flex;
+        align-self: center;
+        background-repeat: no-repeat;
+        background-image: url('../../../../assets/img/visibility.png');
+        background-position: 7px 2px;
+        background-size: 13px auto;
+        background-color: transparent;
+        padding: 5px;
+        @include dimensions(30px, 22px);
+        cursor: pointer;
+      }
+      &.confirm-btn-visibility {
+        border: 1px solid #A6B8C052;
+        border-left: none;
+        display: flex;
+        align-self: center;
+        background-image: url('../../../../assets/img/visibility.png');
+        background-repeat: no-repeat;
+        background-position: 8px 3px;
+        background-size: 13px auto;
+        background-color: transparent;
+        @include dimensions(30px, 22px);
+      }
+    }
+    .password-input-group {
+      display: flex;
+      height: 22px;
+    }
+  }
+  .comments-area {
+    &.ng-tns-c55-1 {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    label {
+      margin-right: 23px;
+    }
+  }
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 767px) {
+  .login-container {
+    .form-signin {
+      top: 12%;
+    }
+  }
+}

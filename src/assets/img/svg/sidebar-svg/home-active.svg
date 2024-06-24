@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 17" style="enable-background:new 0 0 20 17;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:#0D65F8;}
+	.st2{clip-path:url(#SVGID_6_);}
+</style>
+<path class="st0" d="M8,17v-6h4v6h5V9h3L10,0L0,9h3v8H8z"/>
+<g>
+	<g>
+		<polygon id="SVGID_1_" class="st1" points="8,17 8,11 12,11 12,17 17,17 17,9 20,9 10,0 0,9 3,9 3,17 		"/>
+	</g>
+	<g>
+		<g>
+			<polygon id="SVGID_2_" class="st1" points="8,17 8,11 12,11 12,17 17,17 17,9 20,9 10,0 0,9 3,9 3,17 			"/>
+		</g>
+		<g>
+			<g>
+				<polygon id="SVGID_3_" class="st1" points="8,17 8,11 12,11 12,17 17,17 17,9 20,9 10,0 0,9 3,9 3,17 				"/>
+			</g>
+			<g>
+				<g>
+					<polygon id="SVGID_4_" class="st1" points="8,17 8,11 12,11 12,17 17,17 17,9 20,9 10,0 0,9 3,9 3,17 					"/>
+				</g>
+				<g>
+					<defs>
+						<polygon id="SVGID_5_" points="8,17 8,11 12,11 12,17 17,17 17,9 20,9 10,0 0,9 3,9 3,17 						"/>
+					</defs>
+					<use xlink:href="#SVGID_5_"  style="overflow:visible;fill:#F9B86A;"/>
+					<clipPath id="SVGID_6_">
+						<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+					</clipPath>
+					<g class="st2">
+						<g transform="translate(-2 -3)">
+							<rect y="0" class="st1" width="24" height="24"/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

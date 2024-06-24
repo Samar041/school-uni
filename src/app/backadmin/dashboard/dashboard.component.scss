@@ -1,0 +1,500 @@
+@import "./../../../scss/components/extend";
+/* # Dachboard BackAdmin ::
+------------------------------------*/
+/* -- best-costumers-list -- */
+.best-costumers-list {
+  .best-costumers-list-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    .btn-option {
+      background-image: url('../../../assets/img/icon/option.png');
+      background-repeat: no-repeat;
+      background-size: 20px auto;
+      background-position: center;
+      background-color: transparent;
+      @include dimensions(27px, 22px);
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+    }
+    &:not(:last-child) {
+      margin: 0 0 8px;
+    }
+    .best-costumers-img {
+      @include dimensions(33px, 33px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 5px;
+      margin: 0 10px 0 0;
+      img {
+        @include dimensions(100%, 100%);
+        border-radius: 5px;
+      }
+    }
+    .best-costumers-desc {
+      .best-costumers-desc_name {
+        margin: 0 0 5px;
+        @include fonts(12px, 12px, $color-primary);
+        font-family: 'Istok Web', sans-serif;
+      }
+      .best-costumers-desc_score {
+        @include fonts(11px, 11px, $color-black);
+      }
+    }
+  }
+}
+/* -- dashboard-header -- */
+.dashboard-header {
+  margin: 0 0 27px;
+  @include flex(flex, center, space-between);
+  .dashboard-header_title-blc {
+    .dashboard-header_title {
+      font-family: 'Istok Web', sans-serif;
+      font-weight: bold;
+      @include fonts(25px, 25px, $color-black);
+      margin: 0 0 10px;
+    }
+    .dashboard-header_title-desc {
+      font-family: 'Istok Web', sans-serif;
+      @include fonts(16px, 16px, $color-gray-1);
+      margin: 0;
+    }
+  }
+  .income-area {
+    .income-item {
+      background-color: $color-primary;
+      box-shadow: 0 3px 16px #0000000f;
+      border-radius: 15px;
+      padding: 14px;
+      height: 83px;
+      min-width: 180px;
+      .income-item_title {
+        font-family: 'Istok Web', sans-serif;
+        @include fonts(14px, 14px, $color-white);
+        margin: 0 0 17px;
+      }
+      .income-item_value {
+        padding: 0 24px 0 0;
+        background-image: url('../../../assets/img/increase.png');
+        background-repeat: no-repeat;
+        background-size: 18px auto;
+        background-position: right center;
+        font-family: 'Istok Web', sans-serif;
+        @include fonts(16px, 16px, $color-white);
+        margin: 0;
+        display: inline-block;
+        .income-item_value-percent {
+          display: inline-block;
+          font-family: 'Istok Web', sans-serif;
+          @include fonts(12px, 12px, $color-black);
+          background-color: $color-white;
+          border-radius: 35px;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+/* -- help-center-area -- */
+.help-center-area {
+  position: relative;
+  background-color: $color-primary;
+  padding: 35px 20px 20px;
+  margin: 45px 0 0;
+  border-radius: 20px;
+  &::before {
+    content: '';
+    display: block;
+    @include dimensions(45px, 45px);
+    border: 5px solid $color-white;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: $color-primary;
+    background-image: url('../../../assets/img/icon/question.png');
+    background-repeat: no-repeat;
+    background-size: 20px auto;
+    background-position: center;
+  }
+  .help-center_title {
+    text-align: center;
+    font-family: 'Istok Web', sans-serif;
+    @include fonts(16px, 16px, $color-white);
+    margin: 0 0 17px;
+  }
+  .help-center_desc {
+    margin: 0;
+    p {
+      font-family: 'Istok Web', sans-serif;
+      @include fonts(14px, 14px, $color-white);
+      &:not(:last-child) {
+        margin: 0 0 10px;
+      }
+    }
+  }
+}
+/* -- help-center-area -- */
+.question-area {
+  background-color: $color-gray-wild-sand-2;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 3px 16px rgb(0 0 0 / 11%);
+  .question-title {
+    font-family: 'Istok Web', sans-serif;
+    @include fonts(16px, 16px, $color-black);
+    margin: 0 0 10px;
+  }
+  .question-item {
+    font-family: 'Istok Web', sans-serif;
+    @include fonts(14px, 20px, $color-black);
+    margin: 0 0 10px;
+  }
+}
+/* -- radio-check -- */
+.radio-check-area {
+  @include flex(flex, center, space-between);
+  max-width: 230px;
+  margin: 0 auto 20px;
+  position: relative;
+  .radio-check_text {
+    position: absolute;
+    bottom: -25px;
+    font-family: 'Istok Web', sans-serif;
+    @include fonts(14px, 14px, $color-black);
+    &.left {
+      left: -25px;
+    }
+    &.right {
+      right: -25px;
+    }
+  }
+  .radio-check {
+    @include flex;
+  }
+  .radiobutton-label {
+    @include dimensions(32px, 32px);
+    border-radius: 3px;
+    color: $color-white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: $color-secondary;
+  }
+  .radiobutton {
+    @include dimensions(32px, 32px);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: absolute;
+    border-radius: 3px;
+    outline: none;
+    &:checked {
+      +.radiobutton-label {
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+/* -- general-statistics-area -- */
+.general-statistics-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  max-width: 450px;
+  margin: 0 auto 15px;
+  .general-statistics-item {
+    background-color: $color-primary;
+    @include dimensions(100px, 63px);
+    border-radius: 10px;
+    padding: 8px;
+    display: grid;
+    align-content: space-between;
+    .general-statistics_title {
+      font-family: 'Istok Web', sans-serif;
+      @include fonts(12px, 12px, $color-white);
+    }
+    .general-statistics_value {
+      font-family: 'Istok Web', sans-serif;
+      @include fonts(12px, 12px, $color-white);
+    }
+  }
+}
+/* -- chart-area -- */
+.chart-area {
+  background-color: $color-white;
+  box-shadow: 0 3px 16px #0000000f;
+  padding: 15px;
+  border-radius: 20px;
+  canvas {
+    width: 100% !important;
+  }
+}
+/* -- reclamation-area -- */
+.reclamation-area {
+  padding: 5px;
+  .reclamation-item {
+    background-image: url('../../../assets/img/icon/arrow-next.png');
+    background-repeat: no-repeat;
+    background-size: 12px auto;
+    background-position: left center;
+    @include flex(flex, center, space-between);
+    padding: 0 0 0 20px;
+    &:not(:last-child) {
+      margin: 0 0 28px;
+    }
+    .reclamation-item_title {
+      margin: 0;
+      @include fonts(12px, 12px, $color-black);
+      font-family: 'Istok Web', sans-serif;
+      display: flex;
+      align-items: center;
+    }
+    .products-number {
+      @include fonts(10px, 10px, $color-black);
+      font-family: 'Istok Web', sans-serif;
+      display: inline-block;
+    }
+  }
+}
+/* -- gauge-are -- */
+.gauge-area {
+  .gauge-area_title-blc {
+    margin: 0 0 10px;
+    .gauge-area_title {
+      margin: 0;
+      @include fonts(13px, 13px, $color-black);
+    }
+  }
+  .gauge-area_desc-blc {
+    padding: 0 20px;
+    .gauge-area_desc {
+      margin: 0;
+      @include fonts(13px, 13px, $color-gray-1);
+    }
+  }
+}
+mwl-gauge {
+  @include dimensions(170px, 110px);
+  margin: 0 auto;
+  display: block;
+  padding: 10px;
+}
+::ng-deep {
+  mwl-gauge>.gauge>.dial {
+    stroke: $color-bluewood-pickled;
+    stroke-width: 10;
+  }
+  mwl-gauge>.gauge>.value {
+    stroke: $color-primary;
+    stroke-dasharray: none;
+    stroke-width: 13;
+  }
+  mwl-gauge>.gauge>.value-text {
+    fill: orange;
+  }
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 1440px) {
+  .dashboard-page {
+    .grid.gtc-4 {
+      grid-template-columns: 1fr 280px;
+    }
+  }
+  .dashboard-header {
+    margin: 0 0 22px;
+    .dashboard-header_title-blc {
+      .dashboard-header_title {
+        @include fontSize(20px, 20px);
+        margin: 0 0 8px;
+      }
+      .dashboard-header_title-desc {
+        @include fontSize(13px, 13px);
+      }
+    }
+    .income-area {
+      .income-item {
+        border-radius: 12px;
+        height: 70px;
+        min-width: 144px;
+        .income-item_title {
+          @include fontSize(12px, 12px);
+          margin: 0 0 14px;
+        }
+        .income-item_value {
+          padding: 0 20px 0 0;
+          background-size: 15px auto;
+          @include fontSize(13px, 13px);
+          .income-item_value-percent {
+            @include fontSize(10px, 10px);
+            border-radius: 10px;
+            padding: 3px;
+          }
+        }
+      }
+    }
+  }
+  .question-area {
+    .question-title {
+      @include fontSize(14px, 14px);
+      margin: 0 0 8px;
+    }
+    .question-item {
+      @include fontSize(12px, 16px);
+      margin: 0 0 8px;
+    }
+  }
+  .radio-check-area {
+    .radio-check_text {
+      @include fontSize(12px, 12px);
+    }
+  }
+  .help-center-area {
+    padding: 28px 16px 16px;
+    margin: 36px 0 0;
+    border-radius: 16px;
+    &::before {
+      @include dimensions(36px, 36px);
+      border: 3px solid $color-white;
+      top: -20px;
+      background-size: 18px auto;
+    }
+    .help-center_title {
+      @include fontSize(13px, 13px);
+      margin: 0 0 15px;
+      color: $color-white;
+    }
+    .help-center_desc {
+      p {
+        @include fontSize(12px, 14px);
+        color: $color-white;
+      }
+    }
+  }
+}
+@media (max-width: 1250px) {
+  .dashboard-page {
+    .grid {
+      &.gtc-5 {
+        grid-template-columns: 300px 1fr;
+      }
+      &.gtc-4 {
+        grid-template-columns: 1fr 230px;
+      }
+      &.gcg-3 {
+        grid-column-gap: 15px;
+      }
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .dashboard-page {
+    .grid {
+      &.gtc-5 {
+        grid-template-columns: 240px 1fr;
+      }
+      &.gtc-4 {
+        grid-template-columns: 1fr 180px;
+      }
+      &.gcg-3 {
+        grid-column-gap: 15px;
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .dashboard-page {
+    .grid {
+      &.gtc-4 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        >.grid-blc {
+          &:nth-child(2) {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 800px) {
+  .general-statistics-area {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    .general-statistics-item {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .dashboard-page {
+    .grid {
+      &.gtc-5 {
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+        .grid-blc {
+          &:nth-child(1),
+          &:nth-child(2) {
+            .card {
+              margin: 0 0 15px;
+            }
+          }
+        }
+      }
+    }
+    .gauge-area {
+      margin: 0 0 15px;
+    }
+  }
+}
+@media (max-width: 660px) {
+  .dashboard-header {
+    display: block;
+    .dashboard-header_title-blc {
+      margin: 0 0 15px;
+    }
+  }
+  .dashboard-page {
+    .grid {
+      &.gtc-4 {
+        >.grid-blc {
+          &:nth-child(2) {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+        .card {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 430px) {
+  .dashboard-header {
+    .income-area {
+      &.grid {
+        &.gtc-1 {
+          grid-template-columns: repeat(1, 1fr);
+          grid-gap: 15px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 400px) {
+  .general-statistics-area {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -1,0 +1,71 @@
+<p-dialog #dialog header="{{ 'ANNOUNCES.EDIT_ANNOUNCE' | translate }}" [(visible)]="show" (onHide)="dialog.close($event)" [modal]="true"
+  [style]="{width: '636px'}">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="editAnnounceForm">
+      <div class="form-area">       
+        <div class="form-style-1 position-title-bloc">
+          <input type="text"  max="2060-12-31" formControlName="title" placeholder="Titre" />
+          <div class="error" *ngIf="submitted && f['title']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+        </div>
+        <div class="form-style-1">
+          <p-dropdown [options]="usersList" formControlName="user_id" optionLabel="name" optionValue="id"
+            [showClear]="true" placeholder="users"></p-dropdown>
+          <span class="error" *ngIf=" submitted && editAnnounceForm.controls['statut'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div>
+        <div class="form-style-1 position-title-bloc">
+          <textarea formControlName="description" placeholder="Description"></textarea>
+          <div class="error" *ngIf="submitted && f['description']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+        </div>
+        <h1 class="font-text text-left ">
+          {{ 'NOTIFICATION.DATE' | translate }} *:
+        </h1>
+        <div class="form-style-1 position-title-bloc">
+          <input type="datetime-local" [min]="getCurrentDate()" max="2250-12-20T23:59" class="time-input" formControlName="date_debut" />
+          <div class="error" *ngIf="submitted && f['date_debut']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+          <div class="error" *ngIf="dateCompare">
+            {{ 'NOTIFICATION.DATE_COMPARE' | translate }}
+          </div>
+        </div>
+        <div class="form-style-1">
+          <input type="datetime-local" class="time-input" [min]="getCurrentDate()"  max="2250-12-20T23:59" formControlName="date_fin"/>
+          <div class="error " *ngIf="submitted && f['date_fin']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+          <div class="error" *ngIf="dateCompare">
+            {{ 'NOTIFICATION.DATE_COMPARE' | translate }}
+          </div>
+        </div>
+        <div  class="error error-date"  *ngIf="submitted &&  (f['start_date'].hasError('yearRange') || f['end_date'].hasError('yearRange'))">
+          La date maximale à sélectionner est 2050.
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+        </div>
+    </form>
+      <div *ngIf="showSuccess" class="success-msg">
+        <div class="inscription-form-title">
+          <h1 class="edit-form-title text-hideform">{{ 'ANNOUNCES.SUCCESS_EDIT' | translate }}</h1>
+        </div>
+        <button type="button" (click)="cancel()" class="btn-primary">{{'COMMON.RETOUR' | translate}}</button>
+      </div>
+    </div>
+    <!--.create-supplier-content-->
+    <ng-template pTemplate="footer">
+      <div class="bouton_footer" *ngIf="!hideForm">
+        <p-button (click)="dialog.close($event)" label="{{ 'NOTIFICATION.CANCEL' | translate }}"
+          styleClass="p-button-text btn btn-cancel">
+        </p-button>
+        <p-button *ngIf="!showSuccess" label="{{ 'NOTIFICATION.PARTAGE' | translate }}" [icon]="isLoader ? 'pi pi-spin pi-spinner' : ''"  (click)="pubSubmit()" styleClass="btn btn-primary">
+        </p-button>
+      </div>
+    </ng-template>
+</p-dialog>

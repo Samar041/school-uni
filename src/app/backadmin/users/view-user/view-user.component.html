@@ -1,0 +1,79 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area p-d-flex p-jc-between">
+    <div class="big-title-blc">
+      <h1 class="big-title title-align-center">
+        <a class="btn-back" pButton pRipple icon="pi pi-arrow-left" routerLink="/users"></a>
+        {{ User?.first_name }} {{ User?.last_name }}
+      </h1>
+    </div>
+    <div class="btns-group two-btns" style="text-align: end">
+      <a class="btn-primary" pButton pRipple label="Désactiver le compte"></a>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="table-area">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="user text-center">
+              <img class="img-user mb-2" src="{{User.image}}" alt="">
+              <p>{{ User?.first_name }} {{ User?.last_name }}</p>
+              <span>ID #{{User.id}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="user-info row">
+              <div class="col-6">
+                <p><strong>email:</strong> {{User.email}}</p>
+                <p><strong>Télephonne:</strong> {{User.phone | phoneNumber}}</p>
+                <p><strong>Genre:</strong> {{User.gender}}</p>
+                <p><strong>Date de création:</strong>{{User.created_at | date: 'dd/MM/yyyy'}}</p>
+                <p><strong>statut :</strong> {{User.statut_pro | DataToName : status}}</p>
+              </div>
+              <div class="col-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="card table-area">
+    <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabPanel [header]="'Liste des demandes'">
+        <p-table [value]="[]" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="10" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="12" [showCurrentPageReport]="true"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class="recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.code }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <p-progressSpinner *ngIf="loading" [strokeWidth]="'3'"></p-progressSpinner>
+</div>

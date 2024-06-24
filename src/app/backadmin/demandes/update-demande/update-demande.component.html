@@ -1,0 +1,43 @@
+<p-dialog #dialog header="{{ 'DEMANDE.EDIT_DEMANDE' | translate }}" [(visible)]="show" (onHide)="cancel()"
+[modal]="true"
+  [style]="{width: '636px'}">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="editDemandeForm">
+      <div class="form-area">
+        <div class="form-style-1">
+          <p-dropdown [options]="domainList" formControlName="specialitie" optionLabel="nom" optionValue="id"
+            [showClear]="true" placeholder="Séléctionner une spécialitée *"></p-dropdown>
+          <span class="error" *ngIf=" attemptSubmission && editDemandeForm.controls['specialitie'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div>
+        <div class="form-style-1">
+          <p-dropdown [options]="Clients" formControlName="user_id" optionLabel="first_name" optionValue="id"
+            [showClear]="true" placeholder="Séléctionner un client *"></p-dropdown>
+          <span class="error" *ngIf=" attemptSubmission && editDemandeForm.controls['user_id'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div>
+        <div class="form-style-1 position-title-bloc">
+          <input type="text"  formControlName="description" placeholder="Description" />
+          <div class="error" *ngIf="attemptSubmission && f['description']?.errors?.['required']">
+            {{ 'NOTIFICATION.REQUIRED' | translate }}
+          </div>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.EDIT' | translate }}" styleClass="btn btn-primary" (onClick)="attemptUpdateDemande()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

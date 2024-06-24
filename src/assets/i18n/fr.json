@@ -1,0 +1,303 @@
+{
+    "ADMINS": {
+        "ADMIN_ADDED": "Administrateur ajouté avec succès",
+        "ADMIN_EDITED": "Administrateur modifié avec succès",
+        "ADD_ADMIN": "Ajouter Administrateur",
+        "EDIT_ADMIN": "Modifier Administrateur",
+        "DELETE_ADMIN": "Supprimer Administrateur",
+        "DETAILS": "Détails Administrateur"
+    },
+    "PUB": {
+        "PUB_ADDED": "publicitée ajouté avec succès",
+        "PUB_EDITED": "publicitée modifié avec succès",
+        "ADD_ADMIN": "Ajouter une publicitée",
+        "EDIT_PUB": "Modifier l'affiche publicitaire",
+        "DELETE_PUB": "Supprimer la publicitée",
+        "ADD_PUB": "Ajouter une affiche publicitaire",
+        "SUCCESS_ADD": "Votre publicitée a été ajoutée avec succée !",
+        "SUCCESS_EDIT": "Votre publicitée a été modifiée avec succée !"
+
+    },
+    "PROMO": {
+        "PROMO_ADDED": "Promotion ajouté avec succès",
+        "PROMO_EDITED": "Promotion modifié avec succès",
+        "EDIT_PROMO": "Modifier la promotion",
+        "DELETE_PROMO": "Supprimer la promotion",
+        "ADD_PROMO": "Ajouter un code promo"
+    },
+    "ANNOUNCES": {
+        "ANNOUNCE_ADDED": "annonce ajouté avec succès",
+        "ANNOUNCE_EDITED": "annonce modifié avec succès",
+        "EDIT_ANNOUNCE": "Modifier l'annonce",
+        "DELETE_ANNOUNCE": "Supprimer l'annonce",
+        "ADD_ANNOUNCE": "Ajouter une annonce",
+        "PARTAGE": "Partager",
+        "CANCEL": "Annuler",
+        "TITLE": "Titre d'annonce",
+        "DESCRIPTION":"La description",
+        "NOTIF_NBR": "Nombre notification",
+        "DATE": "Date de lancement",
+        "SUCCESS_ADD":"Votre annonce a été ajoutée avec succée !",
+        "SUCCESS_EDIT": "Votre annonce a été modifiée avec succée !"
+
+    },
+    "COMMON": {
+        "NAME": "Nom",
+        "LASTNAME": "Prénom",
+        "EMAIL": "E-mail",
+        "ADDRESS": "Adresse",
+        "USERNAME": "Nom d'utilisateur",
+        "SUCCESS": "Succés",
+        "PASSWORD_GENERATE": "Générer mot de passe",
+        "EDIT_PASSWORD": "Modifier mot de passe",
+        "OLD_PASSWORD": "Ancien mot de passe",
+        "NEW_PASSWORD": "Nouveau mot de passe",
+        "PASSWORD": "Mot de passe",
+        "PASSWORD_CONFIRM": "Confirmation de Mot de passe",
+        "EDIT_MSG_SUCCES": "Modification effectuée avec succès",
+        "DESCRIPTION": "Description",
+        "ADD": "Ajouter",
+        "EDIT": "Modifier",
+        "DATE_CREATION": "Date de création",
+        "DATE_MODIFICATION": "Date de modification",
+        "ACTIONS": "Actions",
+        "IMAGE": "Image",
+        "DELETE": "Supprimer",
+        "REF": "Référence",
+        "REQUIRED": "Les champs avec (*) sont obligatoires.",
+        "SAVE": "Enregistrer",
+        "CONFIRM": "Confirmer",
+        "LOGOUT": "Déconnexion",
+        "STATUS": "Statut",
+        "SEARCH_WORDS": "Mot-clé de recherche",
+        "CONFIRM_DELETE": "Êtes-vous sûr(e) de vouloir supprimer ?",
+        "CANCEL": "Annuler",
+        "PHONE":"Téléphone",
+        "FILE": "Images",
+        "START_DATE": "Date début",
+        "END_DATE": "Date fin",
+        "RETOUR": "Retour",
+        "TITLE": "Titre",
+        "PRESTATAIRE": "Prestataire",
+        "CLIENT": "Client",
+        "DATE": "Date",
+        "CODE":"Code",
+        "CIBLE": "Cible",
+        "PROVIDER_NAME": "Nom prestataire"
+    },
+    "COMMON_INVALID": {
+        "PASSWORD_CONFIRM": "Les mots de passe doivent etre identiques",
+        "PASSWORD": "Mot de passe doit etre au moins 8 caractères",
+        "LASTNAME_ONLY_LETTERS": "Prénom doit être composé de lettres",
+        "NAME_ONLY_LETTERS": "Nom doit être composé de lettres",
+        "EMAIL": "Veuillez entrer une adresse e-mail valide",
+        "FORMAT": "Format invalide!"
+    },
+    "COMMON_PLACEHOLDERS": {
+        "NAME_PLACEHOLDER": "Insèrer votre Nom",
+        "LASTNAME_PLACEHOLDER": "Insèrer votre Prénom",
+        "PASSWORD_PLACEHOLDER": "Insèrer votre Mot de passe",
+        "PASSWORD_CONFIRM_PLACEHOLDER": "Confirmez votre Mot de passe"
+    },
+    "COMMON_REQUIRED": {
+        "NAME": "Nom est obligatoire",
+        "LASTNAME": "Prénom est obligatoire",
+        "EMAIL": "Email est obligatoire",
+        "EMAIL_ALREADY": "L'email a déjà été pris en compte.",
+        "USERNAME_ALREADY": "Le nom d'utilisateur a déja été pris en compte.",
+        "PASSWORD": "Mot de passe est obligatoire",
+        "PASSWORD_CONFIRM": "Confirmation de Mot de passe est obligatoire",
+        "OLD_PASSWORD": "Ancien mot de passe est obligatoire",
+        "NEW_PASSWORD": "Nouveau mot de passe est obligatoire",
+        "REQUIRED": "ce champ est obligatoire",
+        "NAME_ALREADY": "Nom existe",
+        "USERNAME": "Nom d'utilisateur est obligatoire"
+    },
+    "DIFFICULTIES": {
+        "EASY": "Facile",
+        "MEDIUM": "Moyen",
+        "DIFFICULT": "Difficile"
+    },
+    "FORGET": {
+        "VERIFICATION": "Vérifier votre email",
+        "SEND": "Envoyer"
+    },
+    "LOGIN": {
+        "VERIFICATION": "Vérifier votre email et ou mot de passe",
+        "EMAIL_VALID": "Email doit avoir un format valide.",
+        "EMAIL_REQUIRED": "Email est requis",
+        "PASSWORD_MIN": "Mot de passe doit êtres composé de plus que 6 caractères.",
+        "PASSWORD_REQUIRED": "Mot de passe est requis.",
+        "CONNECT": "Se Connecter"
+    },
+    "MODES": {
+        "DEATH": "Mort Subite",
+        "HAZARD": "Mode Hasard",
+        "STANDARD": "QCM"
+    },
+    "NONE": {
+        "USERS": "Aucun client trouvé",
+        "ADMINS": "Aucun administrateur trouvé",
+        "QCMS": "Aucun qcm trouvé",
+        "VENTES": "Aucune demande de vente trouvé",
+        "DEMANDE": "Aucune demande  trouvé",
+        "ANNONCE": "Aucune annonce  trouvé"
+
+
+    },
+    "PAGINATION": {
+        "SHOWING": "Affichage de",
+        "TO": "vers",
+        "OF": "de",
+        "ENTRIES": "entrées"
+    },
+    "QCMS": {
+        "ADD_ANSWER": "Ajouter un nouveau choix",
+        "ADD_QCM": "Ajout d'un QCM",
+        "CORRECT_CHOICE": "Ce choix est correcte",
+        "CHAPTER": "Chapitre",
+        "DESCRIPTION": "Description",
+        "DIFFICULTY": "Niveau de difficulté",
+        "DIPLOMA": "Diplome",
+        "DURATION": "Durée",
+        "IMAGE": "Image",
+        "POSITION": "Position",
+        "QCM_ADDED": "Qcm ajouté avec succès",
+        "QUESTION": "Libellé de la question",
+        "RESPONSE": "Réponse",
+        "SCORE": "Score",
+        "STATUS": "Statut",
+        "SUBJECT": "Matière",
+        "TITLE": "Titre du qcm",
+        "TYPE": "Type"
+    },
+    "RESET": {
+        "TOKENVALIDATION": "Code est incorrect",
+        "CODE": "Code"
+    },
+    "SIDEBAR": {
+        "ADMINS": "Administrateurs",
+        "USERS": "Utilisateurs",
+        "CLIENTS": "Clients",
+        "SUPPLIERS": "Fournisseurs",
+        "ADMINS_LIST": "Liste administrateurs",
+        "USERS_LIST": "Liste clients",
+        "OPTIONS": "Options",
+        "QCMS": "QCMS",
+        "QCMS_LIST": "Liste QCMS",
+        "DASHBOARD": "Tableau de bord",
+        "COMPANY": "Professionnels",
+        "PUB_LIST": "Liste des affiches publicitaires",
+        "PROMO": "Promotion",
+        "PROMO_LIST": "liste des promotions",
+        "ANNOUNCES": "Annonces",
+        "ANNOUNCE_LIST": "Liste des annonces",
+        "PUB": "Affiches publicitaires",
+        "ANNOUNCE_SIDEBAR": "Annonces",
+        "DEMANDE_LIST": "liste des demandes"
+
+    },
+    "ANNOUNCE": {
+        "ADD_ANNOUNCE": "Ajouter une annonce",
+        "TITLE": "Titre",
+        "EDIT_ANNOUNCE":"Modifier l'annonce",
+        "DESCRIPTION": "Description",
+        "DATE": "Date de lancement"
+    },
+    "STATUS": {
+        "DISABLED": "Non actif",
+        "ACTIVE": "Actif",
+        "PENDING": "En attente",
+        "BLOCKED": "Bloqués",
+        "DELETED": "Supprimés",
+        "ACCEPTED": "Accepté",
+        "VALIDATION": "Validation",
+        "ONROAD": "En cours",
+        "INPROGRESS": "En cours",
+        "FINISHED": "Terminé",
+        "FENCED": "Clôturé",
+        "SCHEDULED": "Planifié",
+        "IN_PROGRESS": "En cours",
+        "AUTOMATIC": "automatic"
+    },
+    "USERS": {
+        "USER_ADDED": "Client ajouté avec succès",
+        "USER_EDITED": "Client modifié avec succès",
+        "ADD_USER": "Ajouter Client",
+        "EDIT_USER": "Modifier Client",
+        "DELETE_USER": "Supprimer Client",
+        "DETAILS": "Détails Client"
+    },
+    "SALES":{
+      "LIST_scooter": "Liste des scooters",
+      "LIST_cars": "Liste des voitures",
+      "LIST_boats": "Liste des bateaux",
+      "scooter" :"scooter",
+      "cars": "voiture",
+      "boats": "bateau"
+    },
+    "NOTIFICATION": {
+        "PROGRAMME": "Programmée",
+        "ENCOURS": "En cours",
+        "CLOTURE": "Cloturée",
+        "ADD_TITLE": "Ajouter une annonce",
+        "ADD_PUB_TITLE": "Ajouter une publicitée",
+        "EDIT_TITLE": "Modifier une annonce",
+        "LIST": "Liste des annonces",
+        "TITLE": "Titre d'annonce",
+        "DESCRIPTION": "La description",
+        "NAME_SUPPLIER": "Nom fournisseur",
+        "Status": "Status",
+        "MENU": "Menu",
+        "EDIT": "Modifier Affiche",
+        "DELETE": "Supprimer Affiche",
+        "PRODUCT": "Produit",
+        "PARTAGE": "Partager",
+        "START_DATE": "Date de debut",
+        "END_DATE": "Date de fin",
+        "CANCEL": "Annuler",
+        "NOTIF_TENTATIVE": "Nombre des notifications",
+        "REQUIRED": "* Ce champ est obligatoire",
+        "ADD_MSG_SUCCES": "Opération réussie",
+        "TITLE_DELETE": "Supprimer l'annonce",
+        "DATE_COMPARE": "Le Date de début doit être inférieur au date de fin",
+        "DETAILS": "Détails de l'annonce",
+        "DATE": "Date de lancement",
+        "PUB": {
+            "LIST": "Liste des affiches publicitaires",
+            "PRICE": "Montant payé",
+            "ZONE": "Zone d'affichage",
+            "TITLE_DELETE": "Supprimer l'affiche",
+            "SUB_TITLE_DELETE": "Voulez-vous vraiment supprimer l'affiche?",
+            "DELETE_MSG_SUCCES": "L'affiche a été supprimée",
+            "DELETE_MSG_FAILED": "L'affiche n'a pas été supprimée",
+            "EDIT_TITLE": "Modifier l'affiche publicitaire",
+            "TITLE_DEL": "Supprimer la promotion",
+            "SUB_TITLE_DEL": "Voulez-vous vraiment supprimer la promotion?",
+            "DEL_MSG_SUCCES": "La promotion a été supprimée",
+            "DEL_MSG_FAILED": "La promotion n'a pas été supprimée",
+            "TITLE_DEL_ANN": "Supprimer l'annonce",
+            "SUB_TITLE_DEL_ANN": "Voulez-vous vraiment supprimer l'annonce?",
+            "DEL_MSG_SUCCES_ANN": "L'annonce a été supprimée",
+            "DEL_MSG_FAILED_ANN": "L'annonce n'a pas été supprimée",
+            "EDIT_POSTERS": "Editer",
+            "DELETE_POSTERS": "Supprimer",
+            "EDIT_PUB":"édier une publicitée"
+
+        },
+        "CLIENT": {
+            "TITLE_DELETE": "Supprimer la notification",
+            "SUB_TITLE_DELETE": "Voulez-vous vraiment supprimer la notification?",
+            "DELETE_MSG_SUCCES": "La notification a été supprimée",
+            "DELETE_MSG_FAILED": "La notification n'a pas été supprimée"
+        },
+        "ADSAREA_TITLE": "Zone d'affichage",
+        "IMAGE": "Image",
+        "CIBLE_ERROR":"Cible est obligatoire",
+        "TARGET_ERROR":"Ajouter votre liste des clients"
+    },
+    "DEMANDE": {
+        "ADD_DEMANDE": "Ajouter une demande",
+        "EDIT_DEMANDE": "Editer la demande"
+    }
+}

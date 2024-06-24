@@ -1,0 +1,192 @@
+<div class="list-pub-item-area">
+  <div class="introduction-area">
+    <div class="p-d-flex p-jc-between">
+      <div class="big-title-blc">
+        <h1 class="big-title">
+          {{ 'SIDEBAR.ANNOUNCE_LIST' | translate }}
+        </h1>
+      </div>
+      <div class="btns-group two-btns" style="text-align: end">
+        <a class="btn-primary" pButton pRipple label="{{ 'COMMON.ADD' | translate }}" icon="pi pi-plus"
+          (click)="displayAddAnnounce()"></a>
+      </div>
+    </div>
+  </div>
+  <div class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <p-table [value]="listeAnnonce" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="per_page" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="total" [showCurrentPageReport]="true"
+          (onLazyLoad)="lazyLoad($event)" [sortField]="'id'" [sortOrder]="1"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class=" recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <p-dropdown (onChange)="filterChange()" [(ngModel)]="filterForm.statut" [options]="allStatus"
+                  optionLabel="name" optionValue="name" [showClear]="true" placeholder="Statut">
+                  <ng-template let-selectedItem pTemplate="selectedItem">
+                    <div class="d-flex align-items-center" *ngIf="selectedItem">
+                      <span class="bulle" [style]="'background-color:'+selectedItem.color"></span>
+                      <div>{{ selectedItem.label }}</div>
+                    </div>
+                  </ng-template>
+                  <ng-template let-item pTemplate="item">
+                    <div class="d-flex align-items-center">
+                      <span class="bulle" [style]="'background-color:'+item.color"></span>
+                      <div>{{ item.label }}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()" [(ngModel)]="filterForm.title" type="text" placeholder="Titre" />
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()"  [(ngModel)]="filterForm.start_date" type="date" max="3000-06-30"  placeholder="Prénom" />
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()" type="date" max="3000-06-30"  [(ngModel)]="filterForm.end_date" placeholder="Télephonne" />
+              </span>
+              <span class="p-input-icon-left">
+                <button [disabled]="emptyFilter" class="btn-primary outline" (click)="resetFilter()" pButton pRipple
+                  label="Effacer" icon="pi pi-filter-slash"></button>
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id">
+                <span class="d-flex align-items-center g-5">{{'COMMON.REF' | translate}}
+                  <p-sortIcon field="id"></p-sortIcon>
+                </span>
+              </th>
+              <th>
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.TITLE' | translate }}
+                </span>
+              </th>
+              <th>
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.DESCRIPTION' | translate }}
+                </span>
+              </th>
+              <th pSortableColumn="statut">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.STATUS' | translate }}
+                  <p-sortIcon field="statut"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="start_date">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.START_DATE' | translate }}
+                  <p-sortIcon field="start_date"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="role">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.END_DATE' | translate }}
+                  <p-sortIcon field="statut_pro"></p-sortIcon>
+                </span>
+              </th>
+              <th class="text-center">{{'COMMON.ACTIONS' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-annonce>
+         
+            <tr *ngIf="!loading">
+              <td><span class="badge-ref">{{annonce.id}}</span></td>
+              <td><span class="">{{annonce.title}}</span></td>
+              <td><span class="">{{annonce.description}}</span></td>
+              <td>
+                <div class="form-list form-list-dropdown col-status">
+                  <li *ngIf="annonce.statut=='CLOTURE'" class="status-item statut-rejected"> {{'NOTIFICATION.CLOTURE' | translate}}</li>
+                  <li *ngIf="annonce.statut=='EN COUR'" class="status-item statut-sucess "> {{'NOTIFICATION.ENCOURS' | translate}}</li>
+                  <li *ngIf="annonce.statut=='PROGRAM'" class="status-item statut-inprogress"> {{'NOTIFICATION.PROGRAMME' | translate}}</li>
+                </div>
+              </td>
+              <td>{{annonce.start_date}}</td>
+              <td>{{annonce.end_date}}</td>
+              <td class="text-center">
+                <ng-container>
+                <button type="button" pTooltip="Modifier annonce" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-pencil" (click)="displayEditAnnounce(annonce.id)"
+                  ></button>
+                <button type="button" pTooltip="Supprimer annonce" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-trash" (click)="deleteAnnounce(annonce.id)"
+                  ></button>
+                  </ng-container>
+            </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-5" width="100%"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-5" width="100%"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="!listeAnnonce?.length">
+              <td colspan="7">
+                <div class="text-center">{{'NONE.ANNONCE' | translate}}</div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MODALS PUB-->
+<app-add-announce *ngIf="showingAddAnnounce" [show]="showingAddAnnounce" (close)="closeAddAnnounce($event)" (success)="refreshList()"></app-add-announce>
+
+<app-edit-annonces *ngIf="showingUpdateAnnounce" [annonceId]="annonceId" [show]="showingUpdateAnnounce" (close)="closeEditAnnounce($event)" (success)="refreshList()"></app-edit-annonces>

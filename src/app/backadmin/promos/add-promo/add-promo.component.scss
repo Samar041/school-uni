@@ -1,0 +1,566 @@
+@import "./../../../../scss/components/extend";
+
+/* # Add Pub ::
+------------------------------------*/
+
+.modal {
+    &.open {
+      display: block;
+    }
+    .image-bloc-couverture label
+{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  span{
+    white-space: nowrap;
+  }
+}
+    &.modal-edit-delivery-area {
+      .create-condition-content {
+        .radio-btns-area {
+          .radio-items_inline-blc {
+            .radio-item {
+              &:nth-child(1) {
+                margin: 0 15px 0 0;
+              }
+            }
+          }
+        }
+      }
+      ::ng-deep {
+        .p-dialog {
+          .p-dialog-content {
+            &::-webkit-scrollbar-track {
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+              border-radius: 10px;
+              background-color: $color-gray-wild-sand;
+            }
+            &::-webkit-scrollbar {
+              width: 6px;
+              background-color: $color-gray-wild-sand;
+            }
+            &::-webkit-scrollbar-thumb {
+              border-radius: 10px;
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+              background-color: $color-silver-chalice-2;
+            }
+          }
+          .p-dialog-footer {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            padding: 1rem 1.5rem;
+          }
+          .btn-cancel {
+            @include fonts(14px, 14px, $color-black-tundora);
+            font-family: "Poppins-Medium", serif;
+            font-weight: 400;
+          }
+        }
+        /* --- */
+        .p-dropdown-panel {
+          .p-dropdown-items-wrapper {
+            max-width: 100%;
+          }
+        }
+      }
+      .error {
+        color: red;
+        @include fontSize(10px, 10px);
+        text-align: left;
+        margin: 8px 0 0;
+        &.error-date{
+          margin: 0;
+          padding: 0 0 13px 0;
+        }
+      }
+    }
+    .edit-delivery-area {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+  
+      .inscription-desc {
+        margin: 100px 0 0;
+  
+        p {
+          @include fonts(30px, 38px, $color-white);
+          font-family: 'Inter-Medium', serif;
+          margin: 0;
+  
+          &:not(:last-child) {
+            margin: 0 0 50px;
+          }
+        }
+      }
+      .inscription-form-area {
+        background-color: white;
+        border-radius: 20px;
+        padding: 34px 54px;
+        max-height: 1200px;
+        max-width: 663px;
+        margin: 0 auto;
+  
+        .inscription-form-title-blc {
+          margin: 0 0 15px;
+  
+          .inscription-form-title {
+            @include fonts(25px, 25px, $color-black);
+            font-family: 'Poppins-Medium', serif;
+            text-transform: uppercase;
+            margin: 0;
+          }
+        }
+        .inscription-form-description {
+          @include fonts(16px, 16px, $color-black);
+          font-family: 'Poppins-Light', serif;
+          margin: 0 0 20px;
+        }
+        .menu-select {
+          margin: 0 0 43px;
+        }
+      }
+      .form-area {
+        .form-style-1 {
+          &:not(:last-child) {
+            margin: 0 0 14px;
+          }
+          &.position-title-bloc {
+            position: relative;
+            h1 {
+              position: absolute;
+              font-size: 14px;
+              font-weight: bold;
+              top: -22px;
+            }
+          }
+    }
+    .grid {
+      margin: 0 0 24px;
+    }
+    .form-content-blc {
+      // overflow-y: auto;
+      // max-height: 450px;
+      margin: 0 0 25px;
+      padding: 0 10px 0px 0;
+  
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: $color-gray-wild-sand;
+      }
+      &::-webkit-scrollbar {
+        width: 6px;
+        background-color: $color-gray-wild-sand;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: $color-silver-chalice-2;
+      }
+    }
+  }
+  }
+  }
+  
+  .select-categories-list {
+    margin: 0 0 50px;
+    ::ng-deep {
+      &.p-dropdown {
+        .p-dropdown-label {
+          &.p-placeholder {
+            @include fonts(12px, 15px, $color-black);
+            font-family: "Poppins-Medium", serif;
+            font-weight: 400;
+          }
+        }
+        ::ng-deep &.p-component {
+          &.p-dropdown-clearable {
+            background-color: $color-gray-mercury;
+            border-radius: 17px;
+            height: 38px;
+            border: 0;
+            padding: -1px 25px;
+            width: 100%;
+            @include fonts(12px, 12px, $color-black);
+            font-family: "Poppins-Medium", serif;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+  
+  .form-style_password-item {
+    position: relative;
+  
+    .btn-showhide-password {
+      position: absolute;
+      top: 14px;
+      right: 10px;
+    }
+  }
+  .menu-select {
+    margin: 0 0 17px;
+  }
+  .bouton_footer {
+    margin-left: 65%;
+    display: inline-flex;
+  }
+  .inscription-form-title-blc {
+    .edit-form-title {
+      font-size: 14px;
+      color: green;
+      text-align: center;
+    }
+  }
+  .ratings-list-area {
+    display: flex;
+    align-items: center;
+  
+    .ratings-list-item {
+      background-image: url('../../../../assets/img/icon/star.png') !important;
+      background-repeat: no-repeat;
+      background-size: 15px auto;
+      background-position: center;
+      @include dimensions(15px, 15px);
+      display: block;
+  
+      &:not(:last-child) {
+        margin: 0 5px 0 0;
+      }
+    }
+    .ratings-list-item-star {
+      background-image: url('../../../../assets/img/icon/star.png') !important;
+      background-repeat: no-repeat;
+      background-size: 15px auto;
+      background-position: center;
+      @include dimensions(15px, 15px);
+    }
+  }
+  
+  .ratings-list-area-null {
+    display: flex;
+    align-items: center;
+  
+    .ratings-list-item {
+      background-image: url('../../../../assets/img/icon/star-null.png');
+      background-repeat: no-repeat;
+      background-size: 15px auto;
+      background-position: center;
+      @include dimensions(24px, 15px);
+      display: block;
+  
+      &:not(:last-child) {
+        margin: 0 5px 0 0;
+      }
+    }
+    &.rating-bloc{
+      display: flex;
+      justify-content: space-around;
+      height: 100%;
+    }
+    .ratings-list-item-star {
+      background-image: url('../../../../assets/img/icon/star.png') !important;
+      background-repeat: no-repeat;
+      background-size: 15px auto;
+      background-position: center;
+      @include dimensions(15px, 15px);
+    }
+    h1 {
+      font-size: 14px;
+      display: flex;
+      margin: 0;
+      font-weight: bold;
+      color: black;
+    }
+  }
+  .time-input::-webkit-calendar-picker-indicator {
+   opacity: 0;
+   position: absolute;
+   width: 100%;
+  }
+  .font-text{
+    @include fonts(12px, 12px, $color-black);
+    font-family: "Poppins-Medium", serif;
+    font-weight: normal !important;
+  }
+  .form-style_password-item {
+    position: relative;
+  
+    .btn-showhide-password {
+      position: absolute;
+      top: 14px;
+      right: 10px;
+    }
+  }
+  .form-content-blc-password {
+    margin: 0 0 25px;
+  
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      background-color: $color-gray-wild-sand;
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: $color-gray-wild-sand;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: $color-silver-chalice-2;
+    }
+  }
+  .file-upload-button {
+    input[type="file"] {
+      font-size: 100px;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      @include dimensions(25px, 25px);
+    }
+  }
+  .row-group {
+    display: grid;
+    grid-template-columns: 206px 1fr;
+  }
+  .image-bloc {
+    position: relative;
+    @include dimensions(180px, 160px);
+    box-shadow: 0.1em 0 0.4em $color-gray-pampas;
+    margin: 0 auto;
+    margin-top: 14px;
+  
+    img {
+      @include dimensions(100%, 100%);
+    }
+    .edit-img-btn {
+      position: absolute;
+      right: 0;
+      top:-8px;
+      border: none;
+      background-image: url("../../../../assets/img/Ouvrir.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 19px;
+      padding: 15px;
+      border-radius: 20px;
+      background-color: $color-white;
+      box-shadow: 0.1em 0 0.4em $color-gray-pampas;
+    }
+  }
+  .margin-top{
+    margin-top: 10px;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .image-couverture{
+    @include dimensions(480px, 271px);
+    margin-top: 27px;
+    margin-bottom: 27px;
+    box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+    border-radius: 6px;
+  }
+  .container-couverture{
+    position: relative;
+    @include dimensions(480px, 271px);
+    margin-top: 27px;
+    margin-bottom: 27px;
+    margin-inline: auto;
+    ::ng-deep{
+      .p-button-secondary{
+        position: absolute;
+        top: -11px;
+        right: -8px;
+        padding: 0;
+        height: 25px;
+        background: $color-white;
+        width: 25px;
+        font-size: 12px;
+        &:hover{
+          background-color: $color-white !important;
+        }
+      }
+    }
+    video{
+      @include dimensions(480px, 271px);
+      box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+      border-radius: 6px;
+    }
+    .image-couverture{
+      margin: 0;
+    }
+  }
+  
+  .file-upload-button {
+    input[type="file"] {
+      font-size: 100px;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      @include dimensions(25px, 25px);
+    }
+  }
+  .text-hideform {
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  .required-field {
+    @include fonts(10px, 10px, $color-black);
+    font-family: "Poppins-Medium", serif;
+    font-weight: 300;
+    text-align: left;
+    display: block;
+  }
+  
+  .success-msg{
+    .inscription-form-title-blc {
+      .edit-form-title {
+        font-size: 14px;
+        color: green;
+        text-align: center;
+      }
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .generate-code-row{
+    display: grid;
+    grid-template-columns: 367px 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    align-content: center;
+    button {
+      border-radius: 6px;
+    }
+  }
+  .dates-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
+
+  .radio-adjust{
+    @include fonts(13px, 13px, $color-black);
+    font-family: "Poppins-Medium", serif;
+    font-weight: 200;
+    margin-left : 3px;
+    padding-right: 30px;
+  }
+  .align-radio{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    input[type="radio"]{
+      accent-color: $color-sunset-orange;
+      @include dimensions(17px, 17px);
+    }
+  }
+  .auto-row{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+    h1{
+      margin: 0;
+      display: flex;
+    align-items: center;
+    }
+  }
+  /* # $Mobile ::
+  ------------------------------------*/
+  /*
+  @media (max-width: 767px) {
+    .required-field {
+      margin: 0;
+      @include fontSize(10px, 10px);
+    }
+  }
+  */
+  .pub-form{
+    ::ng-deep p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
+      border-color: $color-ghost-gray !important;
+    }
+  }
+  svg {
+    width: 2.25em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+   }
+   
+   circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 1;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+   }
+   
+   @keyframes rotate4 {
+    100% {
+     transform: rotate(360deg);
+    }
+   }
+   
+   @keyframes dash4 {
+    0% {
+     stroke-dasharray: 1, 200;
+     stroke-dashoffset: 0;
+    }
+   
+    50% {
+     stroke-dasharray: 90, 200;
+     stroke-dashoffset: -35px;
+    }
+   
+    100% {
+     stroke-dashoffset: -125px;
+    }
+   }
+   .w-load {
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+    font-family: "Poppins-Medium", serif;
+    background-color: #1f94a4;
+    height: 38px;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 105px !important;
+  }
+  ::ng-deep {
+    span.p-autocomplete.p-component.p-autocomplete-dd {
+    width: 100%;
+    margin-top: 12px;
+  }
+  .menu-select .p-dropdown .p-dropdown-panel .p-dropdown-items-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+  svg.p-icon {
+    color: black;
+  }
+}
+.b-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.form-list{
+  &.form-list-dropdown {
+    width: 100%;
+  }
+}

@@ -1,0 +1,44 @@
+<div class="login-container duerp_bg_page">
+  <form class="form-signin" [formGroup]="loginForm">
+    <div class="img-login">
+      <p>Schoole</p>
+    </div>
+    <div class="success-message"
+      *ngIf="(f['password']?.hasError('auth') || f['email']?.hasError('auth')) && dataState ==='notEmpty';">
+      <div class="alert alert-danger" role="alert">
+        {{ 'LOGIN.VERIFICATION' | translate }}
+      </div>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.EMAIL' | translate }}</label>
+      <input type="text" matInput mat-autosize formControlName="email" placeholder="{{ 'COMMON.EMAIL' | translate }}"
+        autocomplete="email" autofocus class="login-form-input" />
+      <span class="error" *ngIf="loginForm?.get('email')?.dirty  && f['email'].hasError('pattern')  ">
+        <p>{{ 'LOGIN.EMAIL_VALID' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['email']?.errors?.['required'] && submitted">
+        <p> {{ 'LOGIN.EMAIL_REQUIRED' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.PASSWORD' | translate }}</label>
+      <input type="password" matInput mat-autosize formControlName="password"
+        placeholder="{{ 'COMMON.PASSWORD' | translate }}" autocomplete="current-password" autofocus
+        class="login-form-input" />
+      <span class="error" *ngIf="  f['password']?.errors?.['minlength']">
+        <p>{{ 'LOGIN.PASSWORD_MIN' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['password']?.errors?.['required'] && submitted ">
+        <p>{{ 'LOGIN.PASSWORD_REQUIRED' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-bloc m-0 py-0">
+      <a (click)="forget()">Mot de passe oublié ?</a>
+    </div>
+    <div class="form-buttons">
+      <button class="connect-btn" (click)="login()">
+        {{ 'LOGIN.CONNECT' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

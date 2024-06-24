@@ -1,0 +1,143 @@
+@import "./../../../../scss/components/extend";
+/* # Admins ::
+------------------------------------*/
+.page-link {
+  background-color: #00f !important;
+}
+.table-filter {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/**
+dropdown
+ */
+::ng-deep .list-dropdown {
+  .p-dropdown {
+    width: 119px;
+    height: 29px;
+    .p-dropdown-trigger {
+      background: transparent;
+      color: #6c757d;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      position: relative;
+      left: -12px;
+      width: 10px;
+      background-size: 10px;
+      background-position: center;
+      background-repeat: no-repeat;
+      .p-icon-wrapper{
+        display: none;
+      }
+    }
+    .p-dropdown-label {
+      background: transparent;
+      border: 0 none;
+      width: 101px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
+  }
+  span {
+    &.p-dropdown-trigger-icon {
+      &.pi {
+        &.pi-chevron-down {
+          &::before {
+            font-size: 11px;
+            position: relative;
+            left: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+.img-user{
+  width: 110px;
+  height: 110px;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: center;
+}
+.user{
+  p{
+    font-size: 15px;
+    font-family: 'Istok Web', sans-serif;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  img{
+    margin-bottom: 8px;
+  }
+  span{
+    font-family: 'Istok Web', sans-serif;
+    font-size: 12px;
+    display: block;
+  }
+}
+.user-info{
+  p{
+    font-size: 15px;
+    font-family: 'Istok Web', sans-serif;    
+    margin-bottom: 8px;
+  }
+}
+::ng-deep{
+  .p-tabview-title {
+    font-size: 15px;
+    font-family: 'Istok Web', sans-serif;
+  }
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus{
+    box-shadow: none;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    border: solid black;
+    border-width: 0 0 2px 0;
+    border-color: transparent transparent #dee2e6 transparent;
+    background: #ffffff;
+    color: black;
+  }
+  .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+    color: black;
+  }
+  .p-progress-spinner{
+    width:60px !important;
+    display: block !important;
+  }
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 767px) {
+  .list-orders-item-area {
+    &.users-area {
+      .introduction-area {
+        position: static;
+        margin: 0 0 20px;
+        height: initial;
+        .p-jc-between {
+          display: block;
+        }
+        .btns-group {
+          @include flex;
+          margin: 10px 0 0;
+        }
+      }
+      .recherche-bloc {
+        width: 100%;
+        .p-input-icon-left {
+          >input {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}

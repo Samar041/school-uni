@@ -1,0 +1,162 @@
+
+<div class="messagerie-component g-2" [ngClass]="{ 'selected-msg': isSelected}" >
+  <div class="list-group">
+    <div class="bloc"><!--info admin-->
+      <img *ngIf="adminInfo?.image === ''" src="../../../assets/img/icon/user.png" alt="Image" class="bloc-image">
+      <img *ngIf="adminInfo?.image !== ''" src="{{adminInfo?.image}}" alt="Image" class="bloc-image">
+
+      <p class="bloc-name">{{adminInfo?.first_name}} {{adminInfo?.last_name}}</p>
+      <select class="bloc-select" [ngClass]="{'active': selected, 'inactive': !selected}" (change)="toggleSelected()">
+        <option value="1">Disponnible</option>
+        <option value="2">Indisponnible</option>
+      </select>
+    </div><!--. info admin-->
+    
+    <div class="search-bloc"><!--search messages bloc-->
+      <div class="group">
+        <input class="input"  type="text"  placeholder="rechercher...">
+          <div class="icon-b">
+            <img class="icon" src="../../../assets/img/icon/blue-search-icon.png" alt="" srcset="">
+          </div>
+      </div> 
+    </div><!-- .search messages bloc-->
+
+    <div class="container"><!--groupe button contacts and messages -->
+      <button class="button" [ngClass]="{ 'active': activeButtonIndex === 0 }" (click)="setActiveButton(0)">Messages</button>
+      <button class="button" [ngClass]="{ 'active': activeButtonIndex === 1  }" (click)="setActiveButton(1)">Cercles</button>
+    </div> <!-- .groupe button messages and contacts-->
+    <div class="checkbox-group" *ngIf="activeButtonIndex === 0">
+      <!--status filter checkbox-->
+      <div class="input-label-row" *ngFor="let item of checkboxItems">
+        <input
+          type="checkbox"
+          class="checkbox-green"
+          id="{{ item.id }}"
+          name="{{ item.name }}"
+          value="{{ item.value }}"
+          [(ngModel)]="item.checked"
+          (change)="handleCheckboxChange(item.id)"
+        />
+        <label for="{{ item.id }}">{{ item.label }}</label>
+      </div>
+    </div>
+    <!--. status filter checkbox-->    
+    <!--active client-->
+    <div *ngIf="activeButtonIndex === 1">
+      <div class="list-group-item table-content" *ngFor="let client of activeClientList">
+        <div class="media table-content-cell">
+            <div class="media-left">
+                <img *ngIf="client.image === ''" class="media-object img-circle" src="../../../assets/img/icon/user.png">
+
+                <img *ngIf="client.image !== ''" class="media-object img-circle" src="{{client.image}}">
+
+            </div>
+            <div class="media-body">
+              <div>
+                <h4 class="media-heading"> {{client?.first_name}} {{client?.last_name}}</h4>
+              </div>
+              <div class="notification-time table-content-cell" *ngIf="false"> 3 min ago </div>
+            </div>
+          </div>
+        </div>
+        <button class="plus-message" *ngIf="checkHeight()">
+
+        </button>
+    </div>
+    <!-- . active client-->
+      <div *ngIf="activeButtonIndex === 0 && !filter" #element>
+        <div class="list-group-item table-content"  *ngFor="let message of messagesList" >
+          <div class="media table-content-cell"   (click)=" selectUser(message.id,message)" [ngClass]="{ 'unread': message.is_read === 0}">
+              <div class="media-left">
+                  <img *ngIf="message.image === ''" class="media-object img-circle" src="../../../assets/img/icon/user.png">
+                  <img *ngIf="message.image !== ''" class="media-object img-circle" src="{{message.image}}">
+
+                </div>
+              <div class="media-body">
+                <div>
+                  <h4 class="media-heading"> {{message?.name}} {{message?.last_name}}</h4>
+                  <span class="notification-location">{{message?.last_message}} </span>
+                </div>
+                <div class="notification-time table-content-cell"> {{message?.created_at}} </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div *ngIf="activeButtonIndex === 0 && filter" #element>
+        <div class="list-group-item table-content"  *ngFor="let message of filterList" >
+          <div class="media table-content-cell"   (click)=" selectUser(message.id,message)" [ngClass]="{ 'unread': message.is_read === 0}">
+              <div class="media-left">
+                  <img *ngIf="message.image === ''" class="media-object img-circle" src="../../../assets/img/icon/user.png">
+                  <img *ngIf="message.image !== ''" class="media-object img-circle" src="{{message.image}}">
+
+                </div>
+              <div class="media-body">
+                <div>
+                  <h4 class="media-heading"> {{message?.name}} {{message?.last_name}}</h4>
+                  <span class="notification-location">{{message?.last_message }} </span>
+                </div>
+                <div class="notification-time table-content-cell"> {{message?.created_at}} </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="message-content-b" *ngIf="isSelected">
+    <div class="search-info-b"><!--search info-->
+      <div class="discussion-bloc">
+        <div class="img-profile">
+          <img *ngIf="clientSelectedInfo?.image === ''" class="media-object img-circle" src="../../../assets/img/avatars/image-profile.png">
+          <img *ngIf="clientSelectedInfo?.image !== ''" class="media-object img-circle" src="{{clientSelectedInfo?.image}}">
+        </div>
+        <div class="info-profile">
+        <h1>
+          {{clientSelectedInfo?.name}} {{clientSelectedInfo?.last_name}}
+        </h1>
+        <p>
+          {{clientSelectedInfo?.role}}
+        </p>
+      </div>
+      </div>
+      <div class="search-bloc">
+        <div class="group">
+          <input class="input"  type="text" [(ngModel)]="query" placeholder="Rechercher dans la discussion..." (input)="onSearch()">
+            <div class="icon-b">
+              <img class="icon" src="../../../assets/img/icon/search-icon.png" alt="" srcset="">
+            </div>
+        </div> 
+        <div class="btns-groups">
+          <button class="carreaux-b"></button>
+          <button class="notif-b"></button>          
+        </div>
+      </div>
+    </div><!-- .search info-->
+    <div class="msger-chat" #scrollContainer>
+      <div class="msg" *ngFor="let message of clientAdminMessage" [ngClass]="{ 'left-msg': message?.role === 'client', 'right-msg': message?.role === 'admin'}">
+        <div
+         class="msg-img"
+         [style.backgroundImage]="'url(' + (adminInfo?.image !== '' && message?.role === 'admin' ? adminInfo.image : clientSelectedInfo.image) + ')'"
+
+        ></div>
+  
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">{{message.name}}</div>
+            <div class="msg-info-time">12:45</div>
+          </div>
+  
+          <div class="msg-text">
+            {{message.message}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-chat-message-user">
+      <div class="message-user-send">
+        <input type="text" (keyup.enter)="sendMessage(messageId)" [(ngModel)]="message" placeholder="Ecrire un message">
+      </div>
+      <button type="button" (click)="sendMessage(messageId)">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>

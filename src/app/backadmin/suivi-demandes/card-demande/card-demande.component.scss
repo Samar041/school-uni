@@ -1,0 +1,186 @@
+@import "./../../../../scss/components/extend";
+
+.demande {
+  font-family: Poppins-Medium, serif;
+  &__item {
+    background: #ebecf0;
+    padding-block: 10px;
+    border: 2px solid #ebecf0;
+    border-radius: 6px;
+
+    &__title {
+      white-space: nowrap;
+      margin-inline: 13px;
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ebecf0;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+
+      strong {
+        font-size: 13px;
+
+        .pi {
+          font-size: 12px;
+          color: $color-primary;
+        }
+      }
+    }
+
+    &__body {
+      border-bottom: 1px solid #ebecf0;
+      padding-bottom: 10px;
+      span {
+        display: block;
+        font-size: 13px;
+      }
+      .client-name {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        a {
+          font-size: 13px;
+          color: black;
+          .pi {
+            font-size: 12px;
+            margin-right: 6px;
+            color: $color-primary;
+          }
+
+          &:hover {
+            color: $color-primary;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      padding-top: 10px;
+
+      &__btns {
+        padding-top: 10px;
+        display: flex;
+        justify-content: end;
+        gap: 20px;
+      }
+
+      span {
+        display: block;
+        font-size: 13px;
+      }
+
+      .demande-name {
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+
+        a {
+          font-size: 13px;
+          color: black;
+
+          .pi {
+            font-size: 12px;
+            margin-right: 6px;
+            color: $color-primary;
+          }
+
+          &:hover {
+            color: $color-primary;
+          }
+        }
+      }
+      .prestataire-name{
+        border-top: 1px solid #ebecf0;
+        padding-top: 10px;
+        margin-top: 10px;
+        font-size: 13px;
+          display: flex;
+          justify-content: space-between;
+          a {
+            font-size: 13px;
+            color: black;
+            .pi {
+              font-size: 12px;
+              margin-right: 6px;
+              color: $color-primary;
+            }
+
+            &:hover {
+              color: $color-primary;
+            }
+          }
+      }
+    }
+
+    &--hide {
+      opacity: 0.5;
+    }
+  }
+  .cards-zone {
+    height: calc(100vh - 40px);
+    border: 2px solid #ebecf0;
+    overflow-y: auto;
+    margin: 10px;
+
+    -webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &--bodrer {
+      border: 1px dashed #c4ceee85;
+      border-radius: 6px;
+      box-shadow: 0.1em 0 0.4em $color-gray-pampas;
+    }
+
+    ::ng-deep {
+      scrollbar-y {
+        opacity: 0;
+      }
+
+      &:hover {
+        scrollbar-y {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  scrollbar-x.scrollbar-control {
+    height: 8px !important;
+
+    .ng-scrollbar-track {
+      height: 6px !important;
+    }
+  }
+
+  .p-progress-spinner {
+    width: 60px !important;
+    display: block !important;
+    text-align: center;
+  }
+}
+
+.table-area {
+  .card {
+    overflow-x: auto;
+
+    -webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

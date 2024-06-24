@@ -1,0 +1,116 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area">
+    <div class="p-d-flex p-jc-between">
+      <div class="big-title-blc">
+        <h1 class="big-title">
+          Liste des régions
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <div [class]="{'hide' : loading&&!map}" id="map">
+        </div>
+        <p-skeleton *ngIf="loading&&!map" height="500px" class="map-loader"></p-skeleton>
+        <p-table class="mt-3" [value]="filtredRegionList" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="caption">
+            <div class=" recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="getRegionsWithFilter()" [(ngModel)]="filter" type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                Réference
+              </th>
+              <th>
+                Image
+              </th>
+              <th>
+                Région
+              </th>
+              <th class="text-center">
+                Actions
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-region let-columns="columns">
+            <tr>
+              <td>
+                <span class="badge-ref">
+                  {{ region.id }}
+                </span>
+              </td>
+              <td>
+                <img src="{{region.image}}" alt="" class="img-thumbnail">
+              </td>
+              <td class="region">
+                {{ region.name }}
+              </td>
+              <td class="text-center">
+                <button type="button" pTooltip="Modifier région" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-pencil"
+                  (click)="displayUpdateRegion(region)"></button>
+                <button type="button" pTooltip="Supprimer région" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-trash"
+                  (click)="deleteRegion(region.id)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <ng-container *ngIf="loading; else actionsSection">
+              <tr>
+                <td>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                </td>
+                <td>
+                  <p-skeleton styleClass="mb-2"></p-skeleton>
+                  <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                </td>
+              </tr>
+            </ng-container>
+            <ng-template #actionsSection>
+             <tr>
+              <td colspan="4">
+                <div class="text-center">Aucune région trouvé</div>
+              </td>
+             </tr>
+            </ng-template>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <app-add-region [show]="addRegion" (success)="refresh()" (close)="closeRegion()"
+    [selectedZone]="selectedZone"></app-add-region>
+  <app-update-region [show]="EditRegion" (success)="refreshUpdate()" (close)="closeUpdateRegion()"
+    [selectedRegion]="selectedRegion"></app-update-region>

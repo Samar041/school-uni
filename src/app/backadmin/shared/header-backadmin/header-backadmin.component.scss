@@ -1,0 +1,234 @@
+@import "./../../../../scss/components/extend";
+/* # Header ::
+------------------------------------*/
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: $color-white;
+    // box-shadow: 0 0 15px 0 rgb(0 0 0 / 5%);
+    // height: 70px;
+    padding: 0px;
+    z-index: 0;
+    .logo {
+        @include dimensions(138px, 70px);
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        float: left;
+        border-bottom: 1px solid #ededf5;
+        box-shadow: 0 7px 26px rgba(154,154,204,.1);
+        img {
+            @include dimensions(100%, 100%);
+            object-fit: contain;
+        }
+        p{
+          color: $color-black;
+          font-weight: 700;
+          font-size: 17px;
+          margin-bottom: 0;
+          line-height: 54px;
+          margin-left: 15px
+        }
+    }
+    .row-header {
+        @include flex(flex, center, space-between);
+        margin: 0 0 0 75px;
+        padding: 10px;
+        height: 70px;
+        border-bottom: 1px solid #ededf5;
+        box-shadow: 0 7px 26px rgba(154,154,204,.1);
+        padding-right: 40px;
+        .logout-btn {
+            box-shadow: 0 3px 16px #0000000f;
+            border: none;
+            @include backgroundImage($smart-tags-associes-icon, 117px, 10px, auto);
+            background-color: $color-white;
+            padding: 0 33px;
+            position: absolute;
+            left: initial;
+            right: 0;
+            top: 36px;
+            height: 43px;
+            &:hover {
+                cursor: pointer;
+            }
+            .logout-text {
+                text-align: left;
+                font-size: 14px;
+                color: #8f8c8c;
+                padding-right: 20px;
+            }
+        }
+        .dropdown {
+            position: relative;
+            .dropdown-list {
+                display: none;
+                &.active {
+                    display: block;
+                }
+            }
+            .user-icon {
+                background-image: url('../../../../assets/img/avatars/avatar.png');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                padding: 17px 18px;
+                background-color: $color-white;
+                border-radius: 24px;
+                border: 1px solid $color-athens-gray;
+                &:hover {
+                  cursor: pointer;
+                }
+            }
+        }
+    }
+    .dropdown-blc {
+        display: flex;
+        align-items: center;
+    }
+    /* -- search-area -- */
+    .search-area {
+        display: flex;
+        align-items: center;
+        .search-blc {
+            margin: 0 0 0 44px;
+            input {
+                height: 30px;
+                @include fontSize(12px, 12px);
+                border: 1px solid $color-light-steel-blue;
+                border-radius: 12px;
+            }
+            &:focus{
+              @include formsBoxShadow($color-primary) ;
+            }
+        }
+    }
+    /* -- notif-blc -- */
+    .notif-blc {
+        position: relative;
+        @include backgroundImage($notif-icn, center, center, 20px);
+        background-color: transparent;
+        @include dimensions(22px, 26px);
+        border: 0;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 2px;
+            display: block;
+            background-color: $color-red-guardsman;
+            border-radius: 50%;
+            @include dimensions(8px, 8px);
+        }
+    }
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 540px) {
+    .row-header {
+        display: flex;
+        justify-content: space-between;
+        .logout-btn {
+            display: block !important;
+            top: 11px !important;
+            height: 0 !important;
+            left: -123px !important;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .dropdown {
+            position: relative;
+            .user-icon {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 414px) {
+    .row-header {
+        display: flex;
+        justify-content: space-between;
+        .logout-btn {
+            display: block !important;
+            top: 11px !important;
+            height: 0 !important;
+            left: -123px !important;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .dropdown {
+            position: relative;
+            .user-icon {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 412px) {
+    .row-header {
+        .dropdown {
+            position: relative;
+            left: -42px;
+            .user-icon {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 375px) {
+    .row-header {
+        display: flex;
+        justify-content: space-between;
+        .logout-btn {
+            display: block !important;
+            top: 11px !important;
+            height: 0 !important;
+            left: -123px !important;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .dropdown {
+            position: relative;
+            .user-icon {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 280px) {
+    .row-header {
+        display: flex;
+        justify-content: space-between;
+        .logout-btn {
+            display: block !important;
+            top: 11px !important;
+            height: 0 !important;
+            left: -123px !important;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .dropdown {
+            position: relative;
+            left: -33px;
+            .user-icon {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

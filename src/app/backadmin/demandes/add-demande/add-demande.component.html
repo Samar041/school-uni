@@ -1,0 +1,46 @@
+<p-dialog #dialog header="{{ 'DEMANDE.ADD_DEMANDE' | translate }}" [(visible)]="show"  (onHide)="cancel()" [modal]="true"
+  [style]="{width: '636px'}">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="addDemandeForm">
+      <div class="form-area">
+        <div class="form-style-1">
+          <p-dropdown [options]="specialityList" formControlName="specialitie" optionLabel="nom" optionValue="id"
+            [showClear]="true" placeholder="Séléctionner une spécialitée *"></p-dropdown>
+          <span class="error" *ngIf=" attemptSubmission && addDemandeForm.controls['specialitie'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div>
+        <div class="form-style-1">
+          <p-dropdown [options]="Clients" formControlName="user_id" optionLabel="first_name" optionValue="id"
+            [showClear]="true" placeholder="Séléctionner un client *"></p-dropdown>
+          <span class="error" *ngIf=" attemptSubmission && addDemandeForm.controls['user_id'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div>
+        <!-- <div class="form-style-1">
+          <p-dropdown [options]="Providers" formControlName="prestataire_id" optionLabel="first_name" optionValue="id"
+            [showClear]="true" placeholder="Séléctionner un préstataire *"></p-dropdown>
+          <span class="error" *ngIf=" attemptSubmission && addDemandeForm.controls['prestataire_id'].hasError('required')">
+            {{'COMMON_REQUIRED.REQUIRED' | translate }}
+          </span>
+        </div> -->
+        <div class="form-style-1 position-title-bloc">
+          <textarea formControlName="description" placeholder="Description"></textarea>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.ADD' | translate }}" styleClass="btn btn-primary" (onClick)="attemptAddDemande()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,28 @@
+<div class="login-container duerp_bg_page">
+  <form class="form-signin" [formGroup]="forgetPasswordForm">
+    <div class="img-login">
+      <p>Schoole</p>
+    </div>
+    <div class="success-message" *ngIf="f['email'].hasError('auth')">
+      <div class="alert alert-danger" role="alert">
+        {{ 'FORGET.VERIFICATION' | translate }}
+      </div>
+    </div>
+    <div class="form-bloc">
+      <label>{{ 'COMMON.EMAIL' | translate }}</label>
+      <input type="text" matInput mat-autosize formControlName="email" placeholder="{{ 'COMMON.EMAIL' | translate }}"
+        autocomplete="email" autofocus class="login-form-input" />
+      <span class="error" *ngIf="forgetPasswordForm?.get('email')?.dirty  && f['email'].hasError('pattern')  ">
+        <p>{{ 'LOGIN.EMAIL_VALID' | translate }} </p>
+      </span>
+      <span class="error" *ngIf="f['email']?.errors?.['required'] && submitted">
+        <p> {{ 'LOGIN.EMAIL_REQUIRED' | translate }} </p>
+      </span>
+    </div>
+    <div class="form-buttons">
+      <button class="connect-btn" (click)="forgetPassword()">
+        {{ 'FORGET.SEND' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

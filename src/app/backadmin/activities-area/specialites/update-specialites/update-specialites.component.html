@@ -1,0 +1,54 @@
+<p-dialog #dialog header="Modifier spécialité" [(visible)]="show" [modal]="true" (onHide)="cancel()" [draggable]="false"
+  [style]="{width: '636px'}" (onShow)="setForm()">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="editSpecialieForm">
+      <div class="form-area">
+        <div class="form-area">
+          <div class="">
+            <div class="input-required-group">
+              <div *ngIf="imageUrl" class="form-style-1">
+                <div class="gallerie">
+                  <div class="gallerie__item">
+                    <img class="img-thumbnail" src="{{imageUrl}}" alt="image">
+                    <i class="pi pi-times" (click)="removeThumbnail()"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-style-1 file-input">
+                <input #fileInput type="file" class="input-file image" #imageInput accept="image/*" id="img-category"
+                  (change)="uploadImage($event)" />
+                <label for="img-category">
+                  <span *ngIf="!f['image']?.value && ! imageName">Image *</span>
+                  <span *ngIf="imageName">{{imageName}}</span>
+                  <span *ngIf="f['image']?.value">{{f['image'].value.name}}</span>
+                </label>
+                <span class="error" *ngIf=" attemptSubmission && f['image'].hasError('required')">
+                  Image obligatoire
+                </span>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="nom" placeholder="{{'COMMON.NAME' | translate}} *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && editSpecialieForm.controls['nom'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.NAME' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="Annuler" styleClass="p-button-text btn btn-cancel" (click)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.EDIT' | translate }}" styleClass="btn btn-primary" (click)="attemptUpdateSpecialities($event)">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,50 @@
+<div class="list-orders-item-area">
+  <div class="table-area">
+    <ng-scrollbar [track]="'horizontal'" [autoHeightDisabled]="false" [autoWidthDisabled]="false">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" style="flex-wrap: nowrap;">
+            <div *ngFor="let col of cols" class="demande">
+              <ng-container *ngIf="!loading ; else loader">
+                <div *ngIf="col.canDrop ; else noDroppable" pDroppable class="demande__item" (onDrop)="drop(col)"
+                  [class]="{'demande__item--hide' : !col.showDropZones && showDropZones}">
+                  <p class="demande__item__title">{{col.name}}</p>
+                  <div class="cards-zone" [class]="{ 'cards-zone--bodrer' : col.showDropZones}">
+                    <ng-scrollbar [track]="'vertical'" [autoHeightDisabled]="false" [autoWidthDisabled]="false">
+                      <app-card-demande *ngFor="let item of col.demandes, let index=index" [index]="index" [col]="col"
+                        [item]="item" (showDetails)="displayDetailsModal(item)" (validate)="activateDemande($event)"
+                        (affecter)="affecterPrestatire($event)"></app-card-demande>
+                    </ng-scrollbar>
+                  </div>
+                </div>
+                <ng-template #noDroppable>
+                  <div class="demande__item" [class]="{'demande__item--hide' : !col.showDropZones && showDropZones}">
+                    <p class="demande__item__title">{{col.name}}</p>
+                    <div class="cards-zone">
+                      <ng-scrollbar [track]="'vertical'" [autoHeightDisabled]="false" [autoWidthDisabled]="false">
+                        <app-card-demande *ngFor="let item of col.demandes, let index=index" [item]="item"
+                          (showDetails)="displayDetailsModal(item)" [canDrag]="col.canDrag" [col]="col"
+                          (dragStart)="dragStart($event)" (dragEnd)="dragEnd($event)"
+                          (validate)="activateDemande($event)"
+                          (affecter)="affecterPrestatire($event)"></app-card-demande>
+                      </ng-scrollbar>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+              <ng-template #loader>
+                <p-skeleton height="100vh"></p-skeleton>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-scrollbar>
+  </div>
+  <!-- <p-progressSpinner *ngIf="loading" [strokeWidth]="'3'"></p-progressSpinner> -->
+</div>
+<app-details-demande *ngIf="showDetails" [show]="showDetails" (close)="showDetails=false"
+  [item]="demandeToDisplay"></app-details-demande>
+<app-assign-provider-modal *ngIf="showAssignModal" [show]="showAssignModal" (close)="closeAssignPrestataire()"
+  [item]="demandeToAssign"></app-assign-provider-modal>
+

@@ -1,0 +1,20 @@
+.tag-container{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pi-times{
+  font-size: 12px;
+  margin-left: 15px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+::ng-deep{
+  .p-dialog .p-dialog-content{
+    padding-top: 0 !important;
+  }
+  .form-area .form-style-1 .p-multiselect.h-150{
+    margin-bottom: 200px;
+  }
+}

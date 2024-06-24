@@ -1,0 +1,279 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area">
+    <div class="p-d-flex p-jc-between">
+      <div class="big-title-blc">
+        <h1 class="big-title">
+          Liste des professionnelles
+        </h1>
+      </div>
+      <div class="btns-group two-btns" style="text-align: end">
+        <a class="btn-primary me-3 outline" pButton pRipple label="Domaines d'activités"
+          routerLink="/companies/activities"></a>
+        <a class="btn-primary" pButton pRipple label="{{ 'COMMON.ADD' | translate }}" icon="pi pi-plus"
+          (click)="displayAddProvider()"></a>
+      </div>
+    </div>
+  </div>
+  <div class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <p-table [value]="providers" responsiveLayout="stack" [sortField]="'id'" [sortOrder]="1" [breakpoint]="'960px'"
+          [paginator]="true" [lazy]="true" [rows]="per_page" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="total"
+          [showCurrentPageReport]="true" (onLazyLoad)="lazyLoad($event)"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class=" recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <p-dropdown (onChange)="filterChange()" [(ngModel)]="filterForm.statut_pro" [options]="allStatus"
+                  optionLabel="name" optionValue="value" [showClear]="true" placeholder="Statut">
+                  <ng-template let-selectedItem pTemplate="selectedItem">
+                    <div class="d-flex align-items-center" *ngIf="selectedItem">
+                      <span class="bulle" [style]="'background-color:'+selectedItem.color"></span>
+                      <div>{{ selectedItem.name }}</div>
+                    </div>
+                  </ng-template>
+                  <ng-template let-item pTemplate="item">
+                    <div class="d-flex align-items-center">
+                      <span class="bulle" [style]="'background-color:'+item.color"></span>
+                      <div>{{ item.name }}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()" [(ngModel)]="filterForm.first_name" type="text" placeholder="Nom" />
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()" [(ngModel)]="filterForm.societe" type="text" placeholder="Sociéte" />
+              </span>
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <p-inputNumber inputId="integeronly" placeholder="Télephonne" [(ngModel)]="filterForm.phone"
+                  (onInput)="filterChange()"> </p-inputNumber>
+              </span>
+              <span class="p-input-icon-left">
+                <button [disabled]="emptyFilter" class="btn-primary outline" (click)="resetFilter()" pButton pRipple
+                  label="Effacer" icon="pi pi-filter-slash"></button>
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id">
+                <span class="d-flex align-items-center g-5">{{'COMMON.REF' | translate}}
+                  <p-sortIcon field="id"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="societe">
+                <span class="d-flex align-items-center g-5">
+                  Nom de la sociéte
+                  <p-sortIcon field="societe"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="first_name">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.NAME' | translate }}
+                  <p-sortIcon field="first_name"></p-sortIcon>
+                </span>
+              </th>
+
+              <th pSortableColumn="email">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.EMAIL' | translate }}
+                  <p-sortIcon field="email"></p-sortIcon>
+                </span>
+              </th>
+              <th *ngIf="!deleted" pSortableColumn="statut_pro">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.STATUS' | translate }}
+                  <p-sortIcon field="statut_pro"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="phone">
+                <span class="d-flex align-items-center g-5">
+                  {{'COMMON.PHONE' | translate }}
+                  <p-sortIcon field="phone"></p-sortIcon>
+                </span>
+              </th>
+              <th *ngIf="!deleted">Documents</th>
+              <th *ngIf="deleted"></th>
+              <th *ngIf="!deleted">Session</th>
+              <th class="text-center">{{'COMMON.ACTIONS' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-Provider>
+            <tr *ngIf="!loading">
+              <td><span class="badge-ref">{{Provider.id}}</span></td>
+              <td>{{Provider.societe}}</td>
+              <td class="nom">
+                <img src="{{Provider.image}}" class="vertical-align-middle" />
+                {{Provider.first_name}} {{Provider.last_name}}
+              </td>
+              <td>{{Provider.email}}</td>
+              <td *ngIf="!deleted" class="list-dropdown">
+                <p-dropdown [options]="status" placeholder="{{ 'COMMON.STATUS' | translate }}"
+                  (onChange)="updateProviderStatus(Provider.id,$event)" [ngModel]="Provider.statut_pro"
+                  [class]="'status-'+Provider.statut_pro" optionLabel="name" optionValue="value"></p-dropdown>
+              </td>
+              <td>{{Provider.phone | phoneNumber}}</td>
+              <td *ngIf="!deleted">
+                <p *ngIf="Provider.file">
+                  <a class="btn btn-primary" href="{{Provider.file}}" download target="_blank" class="ms-1">
+                    <i class="pi pi-download"></i>
+                  </a>
+                </p>
+              </td>
+              <td class="text-center" *ngIf="deleted">
+                <button [disabled]="emptyFilter" class="btn-blue" pButton pRipple label="Restaurer" icon="pi pi-refresh"
+                  (click)="restaurer(Provider.id)"></button>
+              </td>
+              <td *ngIf="!deleted">
+                <p-tag *ngIf="Provider.current_state==1" icon="{{Provider.disableClick ? 'pi pi-spin pi-spinner': ''}}"
+                  (click)="endDay(Provider)" severity="success" value="session ouverte"></p-tag>
+                <p-tag *ngIf="Provider.current_state==0" icon="{{Provider.disableClick ? 'pi pi-spin pi-spinner': ''}}"
+                  (click)="startDay(Provider)" severity="danger" value="session fermé"></p-tag>
+              </td>
+              <td class="text-center">
+                <ng-container *ngIf="deleted; else actionsSection">
+                  <button type="button" pTooltip="Détails prestataire" tooltipPosition="left" pButton
+                    class="btn-icon btn-icon--outlin-primary" icon="pi pi-eye"
+                    (click)="ProviderDetails(Provider.id)"></button>
+                  <button type="button" pTooltip="Supprimer prestataire" tooltipPosition="left" pButton
+                    class="btn-icon btn-icon--outlin-primary" icon="pi pi-trash"
+                    (click)="toggleDeleteProvider(Provider)"></button>
+                </ng-container>
+                <ng-template #actionsSection>
+                  <button type="button" pTooltip="Détails prestataire" tooltipPosition="left" pButton
+                    class="btn-icon btn-icon--outlin-primary" icon="pi pi-eye"
+                    (click)="ProviderDetails(Provider.id)"></button>
+                  <button type="button" pTooltip="Modifier prestataire" tooltipPosition="left" pButton
+                    class="btn-icon btn-icon--outlin-primary" icon="pi pi-pencil"
+                    (click)="displayUpdateProvider(Provider)"></button>
+                  <button type="button" pTooltip="Supprimer prestataire" tooltipPosition="left" pButton
+                    class="btn-icon btn-icon--outlin-primary" icon="pi pi-trash"
+                    (click)="toggleDeleteProvider(Provider)"></button>
+                  <button type="button" pTooltip="{{'COMMON.EDIT_PASSWORD' | translate }}" tooltipPosition="left"
+                    pButton class="btn-icon btn-icon--outlin-primary" icon="pi pi-lock"
+                    (click)="toggleUpdatePassword(Provider)"></button>
+                </ng-template>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-5" width="100%"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-5" width="100%"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-5" width="100%"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+              <td *ngIf="!deleted">
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="!loading && !providers?.length">
+              <td [attr.colspan]="deleted ? 6 : 9">
+                <div class="text-center">Aucun professionnel trouvé</div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <app-add-company [show]="showingAddProvider" [specialites]="specialites" (close)="displayAddProvider()"
+    (success)="refreshList()"></app-add-company>
+  <app-edit-company [show]="showingUpdateProvider" [specialites]="specialites" (close)="displayUpdateProvider()"
+    (success)="refreshList()" [entreprise]="selectedProviderToUpdate"
+    *ngIf="selectedProviderToUpdate"></app-edit-company>
+  <app-update-password [show]="showUpdatePassword" [admin]="ProviderToUpdatePassword"
+    (close)="showUpdatePassword=false"></app-update-password>
+</div>

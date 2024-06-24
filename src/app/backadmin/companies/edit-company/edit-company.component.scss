@@ -1,0 +1,160 @@
+@import "./../../../../scss/components/extend";
+.form-style-1{
+  margin-bottom: 1rem;
+}
+.required-field {
+  font-size: 11px;
+  line-height: 10px;
+  color: $color-black;
+  font-family: "Poppins-Medium", serif;
+  font-weight: 300;
+  text-align: left;
+  margin: 15px 0 0;
+  display: block;
+}
+::ng-deep{
+  .without-search .p-multiselect-panel .p-multiselect-header{
+    display: none;
+  }
+  .iti.iti--allow-dropdown{
+    width: 100%;
+    input{
+      padding-left: 50px !important;
+    }
+  }
+  .country-dropdown input{
+    border-radius: 0 !important;    
+  }
+}
+.img-thumbnail{    
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+.gallerie{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    &__item{
+        position: relative;
+        .pi{
+            position: absolute;
+            font-size: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 50%;
+            padding: 3px;
+            right: -5px;
+            top: -5px;
+            background: $color-white;
+            z-index: 9;
+            color: #ced4da;
+            &:hover{
+                cursor: pointer;
+                border-color: $fire-engine-red-color;
+                color:  $fire-engine-red-color;
+            }
+        }
+    }
+}
+.required-field {
+  font-size: 11px;
+  line-height: 10px;
+  color: #000;
+  font-family: "Poppins-Medium", serif;
+  font-weight: 300;
+  text-align: left;
+  margin: 15px 0 0;
+  display: block;
+}
+.img-center{
+  justify-content: center;
+}
+.input-file-with-drag{
+    font-family: "Poppins-Medium", serif;
+    height: 200px;
+    width: 100%;
+    border-style: dashed;
+    border-width: 3px;
+    border-radius: 0.5rem;
+    padding: 32px;
+    transition-duration: .3s;
+    transition-property: color,background-color,border-color,text-decoration-color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    border-color: #E2E8F0;
+    h4{
+        font-size: .875rem;
+        line-height: 1.25rem;
+        color: #495057;
+    }
+    label{
+        transition-duration: .3s;
+        text-underline-offset: 4px;
+        text-underline-offset: 4px;
+        text-decoration-line: underline;
+        color: #495057;
+        font-size: 12px;
+    }
+    ::ng-deep{
+        .icon{
+            transition-duration: .3s;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+    }
+    span{
+        font-size: 13px;
+    }
+    &:hover{
+        // border-color: #495057;
+        label{
+            color: #59BAA1;
+        }
+       ::ng-deep{
+        .icon{
+            color: #59BAA1;
+        }
+       }
+    }
+}
+.img-thumbnail{
+    @include dimensions(100px, 100px);
+    object-fit: cover;
+}
+.gallerie{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    &__item{
+        position: relative;
+        .pi{
+            position: absolute;
+            font-size: 10px;
+            border: 1px solid $color-ghost-gray;
+            border-radius: 50%;
+            padding: 3px;
+            right: -5px;
+            top: -5px;
+            background: white;
+            z-index: 9;
+            color: $color-ghost-gray;
+
+            &:hover{
+                cursor: pointer;
+                border-color: $fire-engine-red-color;
+                color: $fire-engine-red-color;
+            }
+        }
+    }
+}
+::ng-deep{
+    .submit{
+       float: right;
+       width: fit-content;
+    }
+}
+.w-200{
+  width: 200px;
+}

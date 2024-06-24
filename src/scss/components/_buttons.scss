@@ -1,0 +1,462 @@
+/* # Buttons ::
+------------------------------------*/
+
+.btn {
+    width: 100%;
+
+    &.btn-gold {
+        @include fonts(16px, 16px, $color-white);
+        font-family: 'Poppins-Medium', serif;
+        background-color: $color-golden-dream;
+        border-radius: 17px;
+        height: 38px;
+        border: 0;
+        cursor: pointer;
+
+        &.generatePassword {
+            @include fontSize(12px, 14px);
+        }
+    }
+    &.btn-white {
+      @include fonts(16px, 16px, $color-golden-dream);
+      font-family: 'Poppins-Medium', serif;
+      font-weight: 600;
+      background-color: $color-white;
+      border-radius: 20px;
+      height: 48px;
+      border: 0;
+      cursor: pointer;
+    }
+    // &.btn-blue {
+    //     @include fonts(16px, 16px, $color-white);
+    //     font-family: 'Poppins-Medium', serif;
+    //     background-color: blue;
+    //     height: 38px;
+    //     border: 0;
+    //     cursor: pointer;
+    // }
+    &.btn-green {
+        @include fonts(16px, 16px, $color-white);
+        font-family: 'Poppins-Medium', serif;
+        background-color: green;
+        border-radius: 17px;
+        height: 38px;
+        border: 0;
+        cursor: pointer;
+    }
+    &.btn-google {
+        height: 54px;
+        min-width: 170px;
+        background-image: url('./../../assets/img/logos/google-play-blc-2.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+    }
+    &.btn-apple {
+        height: 54px;
+        min-width: 170px;
+        background-image: url('../../assets/img/logos/apple-blc-2.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+    }
+    &.btn-app-store-icn {
+      height: 50px;
+      min-width: 188px;
+      background-image: url('./../../assets/img/svg/app-store-icn.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto;
+
+      &.icon-2 {
+        background-image: url('./../../assets/img/svg/google-play-icn-2.svg');
+      }
+    }
+    &.btn-google-play-icn {
+      height: 50px;
+      min-width: 188px;
+      background-image: url('./../../assets/img/svg/google-play-icn.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto;
+
+      &.icon-2 {
+        background-image: url('./../../assets/img/svg/google-play-icn-2.svg');
+      }
+    }
+    &.btn-gray {
+      @include fontSize(12px, 16px);
+      font-family: Poppins-Medium, serif;
+      height: 38px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+      background: #ebecf0;
+      cursor: pointer;
+      width: 100px;
+      color: $color-secondary
+    }
+    &.btn-valid {
+      @include fontSize(12px, 16px);
+      font-family: Poppins-Medium, serif;
+      height: 38px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+      background: $color-secondary;
+      color: $color-white;
+      cursor: pointer;
+      width: 100px;
+      min-width: fit-content;
+      &:hover {
+        background: #ebecf0;
+        color: $color-secondary;
+      }
+    }
+}
+
+.btn-showhide-password {
+    background-image: url('../../assets/img/icon/show.png');
+    background-repeat: no-repeat;
+    background-size: 15px auto;
+    background-position: center;
+    background-color: transparent;
+    @include dimensions(15px, 10px);
+    border: 0;
+
+    &.hidden {
+        background-image: url('../../assets/img/icon/hidden.png');
+    }
+}
+
+.btn-primary {
+  @include fontSize(12px, 16px);
+  font-family: Poppins-Medium, serif;
+  height: 38px;
+  border: 1px solid $color-primary;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: all 0.3s;
+  font-weight: 500;
+  &.outline {
+    color: $color-primary;
+    background-color: white;
+    &:not(:disabled):hover{
+      background-color: $color-primary;
+      color: $color-white-linen;
+      border-color: $color-primary;
+    }
+  }
+  &:not(.outline){
+    color: $color-white;
+    background-color: $color-primary;
+  }
+  &.style-2 {
+    background-image: url('../../assets/img/upload.png');
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+    background-position: 15px center;
+    border-radius: 2px;
+    padding: 0 25px 0 45px;
+    transition: all 0.3s;
+  }
+  &:not(.outline):hover {
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  &:disabled {
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  &:not(.outline):enabled:hover {
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  &:focus-visible{
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  &:focus{
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+    @include formsBoxShadow;
+  }
+  &:active{
+    background-color: $color-white-linen;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  .p-button-label{
+    font-weight: 500;
+  }
+  .p-button-icon-left {
+    margin-right: 13px;
+    font-size: 13px;
+  }
+}
+.btn-red{
+  @include fontSize(12px, 16px);
+  font-family: Poppins-Medium, serif;
+  height: 38px;
+  border: 1px solid #FC7456;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s;
+  font-weight: 500;
+  &.outline {
+    color: #FC7456;
+    background-color: white;
+    &:hover{
+      background-color: #FC7456;
+      color: $color-white-linen;
+      border-color: #FC7456;
+    }
+    &:focus{
+      background-color: #FC7456;
+      color: $color-white-linen;
+      border-color: #FC7456;
+      @include formsBoxShadow(#FC7456);
+    }
+  }
+  &:not(.outline){
+    color: $color-white;
+    background-color: #FC7456;
+    border: 1px solid #FC7456;
+    &:hover{
+      color: #FC7456;
+      background-color: white;
+      border: 1px solid #FC7456;
+    }
+    &:focus{
+      color: #FC7456;
+      border: 1px solid #FC7456;
+      background-color: white;
+      @include formsBoxShadow(#FC7456);
+    }
+  }
+
+}
+.btn-back{
+  color: $color-black-shark;
+  background-color: transparent;
+  border-color: transparent;
+  &:hover{
+    color: $color-primary;
+  }
+  &:focus{
+    box-shadow: none;
+    color: $color-primary;
+  }
+}
+.btn-cancel{
+  @include fontSize(12px, 16px);
+  font-family: Poppins-Medium, serif;
+  font-weight: 400;
+  color: $color-black-tundora !important;
+  height: 38px;
+  &:hover{
+    color: $color-primary;
+  }
+}
+.btn-blue{
+  @include fontSize(12px, 16px);
+  font-family: Poppins-Medium, serif;
+  height: 38px;
+  border: 1px solid $color-secondary;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: all 0.3s;
+  font-weight: 500;
+  &.outline {
+    color: $color-secondary;
+    background-color: white;
+    &:hover{
+      background-color: $color-secondary;
+      color: $color-white;
+      border-color: $color-secondary;
+    }
+  }
+  &:not(.outline){
+    color: $color-white;
+    background-color: $color-secondary;
+  }
+  &.style-2 {
+    background-image: url('../../assets/img/upload.png');
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+    background-position: 15px center;
+    border-radius: 2px;
+    padding: 0 25px 0 45px;
+    transition: all 0.3s;
+  }
+  &:not(.outline):hover {
+    background-color: $color-white;
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  &:disabled {
+    background-color: $color-white-linen;
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  &:not(.outline):enabled:hover {
+    background-color: $color-white;
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  &:focus-visible{
+    background-color: $color-white;
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  &:focus{
+    background-color: $color-white;
+    border-color: $color-secondary;
+    color: $color-secondary;
+    @include formsBoxShadow($color-secondary);
+  }
+  &:active{
+    background-color: $color-white;
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+  .p-button-label{
+    font-weight: 500;
+  }
+  .p-button-icon-left {
+    margin-right: 13px;
+    font-size: 13px;
+  }
+}
+.p-radiobutton .p-radiobutton-box.p-highlight, .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover{
+  border-color: $color-primary;
+  background: $color-primary;
+}
+.p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+  border-color: $color-primary;
+}
+.p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.2);
+  border-color: $color-primary;
+}
+/* # $Mobile ::
+------------------------------------*/
+@media (max-width: 1440px) {
+  .btn {
+    &.btn-google-play-icn,
+    &.btn-app-store-icn {
+      height: 40px;
+      min-width: 150px;
+      background-size: 150px auto;
+    }
+    &.btn-white {
+      @include fontSize(14px, 14px);
+    }
+  }
+}
+@media (max-width: 570px) {
+    .btn {
+        &.btn-gold {
+            &.generatePassword {
+                @include fontSize(11px, 11px);
+            }
+        }
+    }
+}
+@media (max-width: 320px) {
+    .btn {
+        &.btn-gold {
+            &.generatePassword {
+                @include fontSize(10px, 10px);
+            }
+        }
+    }
+}
+.btn-icon{
+  color: $color-bluewood;
+  width: 40px !important;
+  background: transparent;
+  border-color: transparent;
+  margin-left: 5px;
+  &--outlin-primary{
+    &:hover{
+      background: $color-primary;
+      color: $color-white;
+      border-color: $color-primary;
+    }
+    &:enabled:hover{
+      background: $color-white-linen;
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+    &:enabled:focus{
+      background: $color-white-linen;
+      color: $color-primary;
+      border-color: $color-primary;
+      @include formsBoxShadow ;
+    }
+    &:disabled{
+      pointer-events: none;
+    }
+  }
+  &--outlin-red{
+    color: #FC7456;
+    &:enabled:hover{
+      background: #fc745603;
+      color: #FC7456;
+      border-color: #FC7456;
+    }
+    &:enabled:focus{
+      background: #fc745603;
+      color: #FC7456;
+      border-color: #FC7456;
+      @include formsBoxShadow(#FC7456) ;
+    }
+  }
+  &--outlin-black{
+    color: black;
+    padding: 0 !important;
+    border: none !important;
+    &:enabled:hover{
+      background: white;
+      color: #FFAB49;
+      border: none !important;
+    }
+    &:enabled:focus{
+      border: none !important;
+      box-shadow: none;
+    }
+  }
+}
+.btn-primary.submit {
+  min-width: 123px;
+}
+.btn-label-primary{
+  color: #f7941e;
+  padding: 0;
+  background-color: transparent;
+  font-size: 12px;
+  font-family: 'Poppins-Medium', serif;
+  border: none;
+  margin-left: 5px;
+  display: block;
+  width: fit-content;
+  &::first-letter{
+    text-transform: capitalize;
+  }
+  &:hover{
+    color: $color-secondary;
+  }
+}
+.p-button.p-button-icon-only{
+  width: 40px;
+}

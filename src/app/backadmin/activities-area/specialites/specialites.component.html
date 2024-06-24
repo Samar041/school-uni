@@ -1,0 +1,119 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area">
+    <div class="p-d-flex p-jc-between">
+      <div class="big-title-blc">
+        <h1 class="big-title title-align-center">
+          <a class="btn-back" pButton pRipple icon="pi pi-arrow-left" routerLink="/companies/activities"></a>
+          Liste des spécialités
+        </h1>
+      </div>
+      <div class="btns-group two-btns" style="text-align: end">
+        <a class="btn-primary" pButton pRipple label="{{ 'COMMON.ADD' | translate }}" icon="pi pi-plus"
+          (click)="displayAddSpecialitie()"></a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="id" class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <p-table [value]="list" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="per_page" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="total" [showCurrentPageReport]="true"
+          (onLazyLoad)="lazyLoad($event)"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class="recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input (input)="filterChange()" [(ngModel)]="filter" type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{'COMMON.REF' | translate}}</th>
+              <th>Image</th>
+              <th>Nom</th>
+              <th class="text-center">{{'COMMON.ACTIONS' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-specialite>
+            <tr *ngIf="!loading">
+              <td><span class="badge-ref">{{specialite.id}}</span></td>
+              <td><img [src]="specialite.image" class="img-thumbnail"></td>
+              <td>{{specialite.nom}}</td>
+              <td class="text-center">
+                <button type="button" pTooltip="Modifier" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-pencil"
+                  (click)="displayUpdate(specialite)"></button>
+                <button type="button" pTooltip="Supprimer" tooltipPosition="left" pButton
+                  class="btn-icon btn-icon--outlin-primary" icon="pi pi-trash"
+                  (click)="toggleDeleteClient(specialite.id)"></button>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton size="3rem" styleClass="mr-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="50%" styleClass="mb-2"></p-skeleton>
+              </td>
+              <td>
+                <p-skeleton styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              </td>
+            </tr>
+            <tr *ngIf="!loading && !list?.length">
+              <td colspan="4">
+                <div class="text-center">Aucune spécialité trouvé</div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-specialites [show]="showAddSpecialites" (close)="showAddSpecialites=false"
+  (success)="refresh()" [id]="id"></app-add-specialites>
+<app-update-specialites [show]="showUpdateSpecialites" (close)="showUpdateSpecialites=false"
+  (success)="getSpecialitesList()" [item]="Specialites"></app-update-specialites>

@@ -1,0 +1,160 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area p-d-flex p-jc-between">
+    <div class="big-title-blc">
+      <h1 class="big-title title-align-center">
+        <a class="btn-back" pButton pRipple icon="pi pi-arrow-left" routerLink="/companies"></a>
+        {{ Company?.first_name }} {{ Company?.last_name }}
+      </h1>
+    </div>
+    <div class="btns-group two-btns" style="text-align: end">
+      <a class="btn-primary" pButton pRipple label="Désactiver le compte"></a>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="table-area">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="user text-center">
+              <img class="img-user mb-2" src="{{Company.image}}" alt="">
+              <p>{{ Company?.first_name }} {{ Company?.last_name }}</p>
+              <span>ID #{{Company.id}}</span>
+              <span>Description: {{Company.description}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="user-info row">
+              <div class="col-6">
+                <p><strong>email:</strong> {{Company.email}}</p>
+                <p><strong>Télephonne:</strong> {{Company.phone | phoneNumber}}</p>
+                <p><strong>Genre:</strong> {{Company.gender}}</p>
+                <p><strong>Date de création:</strong> {{Company.created_at | date: 'dd/MM/yyyy'}}</p>
+                <p><strong>statut :</strong> {{Company.statut_pro | DataToName : status}}</p>
+                <p><strong class="me-2">session actuelle</strong>
+                  <p-tag [severity]="Company.current_state == 0 ? 'danger' : 'success'"
+                    [value]="Company.current_state == 0 ? 'session fermé' : 'session ouverte'"></p-tag>
+                </p>
+              </div>
+              <div class="col-6">
+                <p>
+                  <strong>Domaines d'activités:</strong>
+                  <span *ngFor="let item of Company.domaines; let i=index">
+                    {{item.nom}}<ng-container *ngIf="i!= Company.domaines.length - 1">,</ng-container>
+                  </span>
+                </p>
+                <p><strong>Spécialités:</strong>
+                  <span *ngFor="let item of Company.specialities; let i=index">
+                    {{item.nom}}<ng-container *ngIf="i!= Company.specialities.length - 1">,</ng-container>
+                  </span>
+                <p><strong>Type professionnel:</strong> {{Company.type_pro | DataToName : types}}</p>
+                <p><strong>Certification:</strong> {{Company.certification}}</p>
+                <p><strong>Expérience :</strong> {{Company.experience}}</p>
+                <p *ngIf="Company.file"><strong>Document:</strong>
+                  <a class="btn btn-primary" href="{{Company.file}}" download target="_blank" class="ms-1">
+                    <i class="pi pi-download"></i>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="card table-area">
+    <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabPanel [header]="'Feedback'">
+        <p-table [value]="[]" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="10" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="12" [showCurrentPageReport]="true"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class="recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.code }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+      <p-tabPanel [header]="'Liste des demandes'">
+        <p-table [value]="[]" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="10" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="12" [showCurrentPageReport]="true"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class="recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.code }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+      <p-tabPanel [header]="'Les revenus'">
+        <p-table [value]="[]" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [lazy]="true"
+          [rows]="10" [rowsPerPageOptions]="[1,5,10,20]" [totalRecords]="12" [showCurrentPageReport]="true"
+          currentPageReportTemplate="{{ 'PAGINATION.SHOWING' | translate }} {first} {{ 'PAGINATION.TO' | translate }} {last} {{ 'PAGINATION.OF' | translate }} {totalRecords} {{ 'PAGINATION.ENTRIES' | translate }}">
+          <ng-template pTemplate="caption">
+            <div class="recherche-bloc form-area">
+              <span class="p-input-icon-left ml-auto form-style-1">
+                <input type="text" placeholder="Recherche" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.code }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <p-progressSpinner *ngIf="loading" [strokeWidth]="'3'"></p-progressSpinner>
+</div>

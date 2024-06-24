@@ -1,0 +1,31 @@
+<p-dialog #dialog header="{{showSuccess ? '' : 'Assigner région' }}" [(visible)]="show" [modal]="true"
+  [style]="{width: '636px'}" (onHide)="cancel()" (onShow)="setForm()">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" class="form-area" [formGroup]="assignRegionForm">
+      <div class="form-style-1">
+        <label class="form-label">Régions</label>
+        <p-multiSelect [styleClass]="panelOpen ?'h-150' : ''" [options]="list" formControlName="areas"
+          optionLabel="name" placeholder="sélectionnez région" (onPanelHide)="panelOpen=false"
+          (onPanelShow)="panelOpen=true"></p-multiSelect>
+      </div>
+      <div class="tag-container">
+        <p-tag *ngFor="let item of f['areas'].value ; let index=index" [style]="{ 'background': '#F2C525'}">
+          <div class="flex align-items-center gap-2">
+            <span class="text-base">{{item.name}}</span>
+            <i class="pi pi-times text-xs" (click)="removeItem(index)"></i>
+          </div>
+        </p-tag>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button *ngIf="!showSuccess" label="Annuler" styleClass="p-button-text btn btn-cancel"
+        (onClick)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" label="{{'COMMON.EDIT' | translate }}" [disabled]="loading"
+        [icon]="loading ? 'pi pi-spin pi-spinner' : ''" styleClass="btn-primary" (onClick)="submitForm()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

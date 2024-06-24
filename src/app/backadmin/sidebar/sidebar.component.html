@@ -1,0 +1,127 @@
+<div class="sidebar-wrapper">
+  <div class="sidebar-area" [ngClass]="status ?  'active' : ''">
+    <div class="sidebar-area_top">
+      <nav>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/" [routerLinkActiveOptions]="{exact: true}"
+          (click)="closeFilters()">
+          <app-icons [icon]="'home'"></app-icons>
+          <span class="nav-link-txt">{{ 'SIDEBAR.DASHBOARD' | translate }}</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/admins"
+          [class]="{'nav-link-child-active' : currentFilter=='users'}" [routerLinkActiveOptions]="{exact:true}"
+          (click)="openFilter('users')">
+          <app-icons [icon]="'users'"></app-icons>
+          <span class="nav-link-txt">{{ 'SIDEBAR.USERS' | translate }}</span>
+          <span class="hover-list users">{{ 'SIDEBAR.USERS' | translate }}</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/demandes"
+          [routerLinkActiveOptions]="{exact:true}" [class]="{'nav-link-child-active' : currentFilter=='demande'}"
+          (click)="openFilter('demande')">
+          <app-icons [icon]="'stock'"></app-icons>
+          <span class="nav-link-txt">Demandes</span>
+          <span class="hover-list users">Demandes</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/affiche-publicitaire"
+          (click)="openFilter('pub')" [routerLinkActiveOptions]="{exact:true}">
+          <i class="pi pi-megaphone" style="font-size: 16px"></i>
+          <span class="nav-link-txt">Affiches publicitaires</span>
+          <span class="hover-list users">Affiches publicitaires</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{exact:true}"
+          routerLink="/regions" (click)="closeFilters()">
+          <app-icons [icon]="'maps'"></app-icons>
+          <span class="nav-link-txt">Régions</span>
+          <span class="hover-list users">Régions</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/promos"
+          [routerLinkActiveOptions]="{exact:true}" (click)="closeFilters()">
+          <app-icons [icon]="'promo'"></app-icons>
+          <span class="nav-link-txt">Promotions</span>
+          <span class="hover-list users">Promotions</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/messagerie"
+          [routerLinkActiveOptions]="{exact:true}" (click)="closeFilters()">
+          <app-icons [icon]="'request'"></app-icons>
+          <span class="nav-link-txt">Messagerie</span>
+          <span class="hover-list recherche">Messagerie</span>
+        </a>
+        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/configurations"
+          [routerLinkActiveOptions]="{exact: true}" (click)="closeFilters()">
+          <i class="pi pi-cog" style="font-size: 18px"></i>
+          <span class="nav-link-txt">Paramètres</span>
+        </a>
+      </nav>
+    </div>
+    <div class="sidebar-area_bottom open-sidebar" (click)="clickEvent()">
+      <em class="pi pi-angle-right"></em>
+    </div>
+    <div class="sidebar-area_bottom ms-4 filter" (click)="openFilter(currentFilter)" *ngIf="!isFilterActive()">
+      <i class="pi pi-align-justify"></i>
+    </div>
+    <div *ngIf="isFilterActive()" class="sidebar-area_bottom filter ms-4" (click)="closeFilters()">
+      <i class="pi pi-align-justify"></i>
+    </div>
+  </div>
+  <div class="sidebar-filter" *ngIf="isFilterActive() === 'users'"
+    [ngClass]="isFilterActive() === 'users' ? 'active' : ''">
+    <div class="sidebar-filter-style gestion-des-modeles-filter">
+      <nav *ngIf="state['users']">
+        <h3 class="sidebar-filter_title">Utililsateurs</h3>
+        <ul class="nav-list filtres-nav-list">
+          <li>
+            <a class="icon admin-icon" routerLinkActive="nav-link-active" routerLink="/admins">
+              {{'SIDEBAR.ADMINS' | translate }}</a>
+          </li>
+          <li>
+            <a class="icon client-icon" routerLinkActive="nav-link-active" routerLink="/users">
+              {{'SIDEBAR.CLIENTS' | translate }}</a>
+          </li>
+          <li>
+            <a class="icon client-icon" routerLinkActive="nav-link-active" routerLink="/companies">
+              {{'SIDEBAR.COMPANY' | translate }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="sidebar-filter" *ngIf="isFilterActive() === 'demande'"
+    [ngClass]="isFilterActive() === 'demande' ? 'active' : ''">
+    <div class="sidebar-filter-style gestion-des-modeles-filter">
+      <nav *ngIf="state['demande']">
+        <h3 class="sidebar-filter_title">Demandes</h3>
+        <ul class="nav-list filtres-nav-list">
+          <li>
+            <a class="icon admin-icon" routerLinkActive="nav-link-active" routerLink="/demandes">
+              Demandes</a>
+          </li>
+          <li>
+            <a class="icon client-icon" routerLinkActive="nav-link-active" routerLink="/suivi-demandes">
+              Suivi Demandes</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!--promo et affiche publicitaire-->
+  <div class="sidebar-filter" *ngIf="isFilterActive() === 'pub'" [ngClass]="isFilterActive() === 'pub' ? 'active' : ''">
+    <div class="sidebar-filter-style gestion-des-modeles-filter">
+      <nav>
+        <h3 class="sidebar-filter_title">Publicité</h3>
+        <ul class="nav-list filtres-nav-list">
+          <li>
+            <a class="icon admin-icon" routerLinkActive="nav-link-active"
+              routerLink="/affiche-publicitaire">{{'SIDEBAR.PUB' | translate }}</a>
+          </li>
+          <li>
+            <a class="icon client-icon" routerLinkActive="nav-link-active"
+              routerLink="/annonces">{{'SIDEBAR.ANNOUNCE_SIDEBAR' | translate }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="overlay" [ngClass]="overlayStatus ? 'active' : ''" (click)="overlayStatusFct()">
+  <a class="overlay-close"></a>
+</div>

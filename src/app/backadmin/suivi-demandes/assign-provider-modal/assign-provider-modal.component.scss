@@ -1,0 +1,55 @@
+@import "./../../../../scss/components/extend";
+
+.flex-item {
+  display: flex;
+  align-items: center;
+  p {
+    width: 50%;
+    margin-bottom: 0;
+    font-size: 13px;
+    strong {
+      font-size: 13px;
+      .pi {
+        font-size: 12px;
+        color: $color-primary;
+      }
+    }
+    .img-thumbnail{
+      vertical-align: middle;
+      border-radius: 50px;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+    }
+  }
+  .btn-valid.rounded {
+    height: 30px;
+  }
+  .alert.alert-danger{
+    padding: 5px 15px;
+    white-space: nowrap;
+    margin-bottom: 0;
+    margin-inline: 76px;
+    border-color: #FFB74C;
+    background-color: rgba(#FFB74C, 0.5);
+  }
+}
+
+.list-item-title {
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
+::ng-deep {
+  .p-dialog .p-dialog-header {
+    padding-bottom: 0 !important;
+  }
+  .p-dialog .p-dialog-content {
+    padding-top: 1.5rem !important;
+  }
+}
+.list-group-item{
+  p{
+    font-size: 13px;
+  }
+}

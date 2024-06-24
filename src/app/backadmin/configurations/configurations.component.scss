@@ -1,0 +1,17 @@
+@import "./../../../scss/components/extend";
+::ng-deep{
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus{
+    box-shadow: none;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link{
+    font-family: "Istok Web", sans-serif;
+  }
+  .btn-primary:not(.outline){
+    width: 150px;
+    float: right;
+  }
+}

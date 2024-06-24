@@ -1,0 +1,86 @@
+<div *ngIf="canDrag; else noDraggable" class="card" pDraggable class="card" (onDragStart)="dragStarthandler()"
+  (onDragEnd)="dragEndhandler()">
+  <div class="card-body">
+    <div class="demande__item__header">
+      <strong *ngIf="item.client.adresse?.length">
+        <i class="pi pi-map"></i>
+        {{item.client.adresse[0]?.pays}} {{item.client.adresse[0]?.ville}}
+      </strong>
+      <p-tag [value]="item.created_at | fromNow" [severity]="getSeverity(item.created_at)"></p-tag>
+    </div>
+    <div class="demande__item__body">
+      <div class="client-name"><strong>Client </strong>
+        <a [routerLink]="'/users/details/'+item.client?.id+'?deleted=false'">
+          <i class="pi pi-link"></i>
+          voir details
+        </a>
+      </div>
+      <span>{{item.client.first_name}} {{item.client.last_name}}</span>
+      <span>{{item.client.phone | phoneNumber}}</span>
+    </div>
+    <div class="demande__item__footer">
+      <div class="demande-name">
+        <strong>Demande </strong><a><i class="pi pi-link"></i>voir
+          details</a>
+      </div>
+      <div *ngIf="col.id>3" class="prestataire-name">
+        <strong>Prestataire</strong>
+        <a [routerLink]="'/companies/details/'+item.prestataire?.id+'?deleted=false'">
+          <i class="pi pi-link"></i>voir details
+        </a>
+      </div>
+      <span *ngIf="col.id>3">{{item.prestataire?.first_name}} {{item.prestataire?.last_name}}</span>
+      <span *ngIf="col.id>3">{{item.prestataire?.phone | phoneNumber}}</span>
+      <span>{{item.specialitie.nom}}</span>
+      <div class="demande__item__footer__btns">
+        <button class="btn btn-gray" (click)="displayDetailsModal()">Details</button>
+        <button *ngIf="col.id==1" class="btn btn-valid" (click)="validateDemande()">Valider</button>
+        <button *ngIf="col.id==3" class="btn btn-valid" (click)="affecterDemande()">Affecter à un prestataire</button>
+        <button *ngIf="col.id==5" class="btn btn-valid">Suivre en temps réel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noDraggable>
+  <div class="card">
+    <div class="card-body">
+      <div class="demande__item__header">
+        <strong *ngIf="item.client.adresse?.length">
+          <i class="pi pi-map"></i>
+          {{item.client.adresse[0]?.pays}} {{item.client.adresse[0]?.ville}}
+        </strong>
+        <p-tag [value]="item.created_at | fromNow" [severity]="getSeverity(item.created_at)"></p-tag>
+      </div>
+      <div class="demande__item__body">
+        <div class="client-name">
+          <strong>Client </strong>
+          <a [routerLink]="'/users/details/'+item.client?.id+'?deleted=false'">
+            <i class="pi pi-link"></i>
+            voir details
+          </a>
+        </div>
+        <span>{{item.client.first_name}} {{item.client.last_name}}</span>
+        <span>{{item.client.phone | phoneNumber}}</span>
+      </div>
+      <div class="demande__item__footer">
+        <div class="demande-name"><strong>Demande </strong><a><i class="pi pi-link"></i>voir
+            details</a></div>
+        <span>{{item.specialitie.nom}}</span>
+        <div *ngIf="col.id>3" class="prestataire-name">
+          <strong>Prestataire</strong>
+          <a [routerLink]="'/companies/details/'+item.prestataire?.id+'?deleted=false'">
+            <i class="pi pi-link"></i>voir details
+          </a>
+        </div>
+        <span *ngIf="col.id>3">{{item.prestataire?.first_name}} {{item.prestataire?.last_name}}</span>
+        <span *ngIf="col.id>3">{{item.prestataire?.phone | phoneNumber}}</span>
+        <div class="demande__item__footer__btns">
+          <button class="btn btn-gray" (click)="displayDetailsModal()">Details</button>
+          <button *ngIf="col.id==1" class="btn btn-valid" (click)="validateDemande()">Valider</button>
+          <button *ngIf="col.id==3" class="btn btn-valid" (click)="affecterDemande()">Affecter à un prestataire</button>
+          <button *ngIf="col.id==5" class="btn btn-valid">Suivre en temps réel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

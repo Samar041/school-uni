@@ -1,0 +1,50 @@
+<div class="list-orders-item-area">
+  <div class="introduction-area p-d-flex p-jc-between">
+    <div class="big-title-blc">
+      <h1 class="big-title title-align-center">
+        <a class="btn-back" pButton pRipple icon="pi pi-arrow-left" routerLink="/admins"></a>
+        {{ admin?.firstname + ' ' +admin?.lastname }}
+      </h1>
+    </div>
+  </div>
+  <div class="table-area">
+    <div class="card">
+      <div class="card-body">
+        <div class="row form-area">
+          <div class="col-md-6">
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.NAME' | translate }}</label>
+              <input disabled type="text" [value]="admin?.firstname" />
+            </div>
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.LASTNAME' | translate }}</label>
+              <input disabled type="text" [value]="admin?.lastname" />
+            </div>
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.DATE_CREATION' | translate }}</label>
+              <input disabled type="text" [value]="admin?.created_at | date : 'dd/MM/yyyy'" />
+            </div>
+            <div class="form-style-1">
+              <label class="form-label">Télephonne</label>
+              <input disabled type="text" [value]="admin?.phone" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.EMAIL' | translate }}</label>
+              <input disabled type="text" [value]="admin?.email" />
+            </div>
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.STATUS' | translate }}</label>
+              <input disabled type="text" [value]="showStatusName(admin?.status)" />
+            </div>
+            <div class="form-style-1">
+              <label class="form-label">{{'COMMON.DATE_MODIFICATION' | translate }}</label>
+              <input disabled type="text" [value]="admin?.updated_at | date : 'dd/MM/yyyy'" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

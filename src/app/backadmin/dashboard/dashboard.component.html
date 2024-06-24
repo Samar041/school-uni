@@ -1,0 +1,229 @@
+<div class="dashboard-page">
+  <div class="grid gtc-4 gcg-3">
+    <div class="grid-blc">
+      <div class="dashboard-header">
+        <div class="dashboard-header_title-blc">
+          <h2 class="dashboard-header_title">Bienvenue à Schoole</h2>
+          <p class="dashboard-header_title-desc">
+            Bonjour {{indexInfo?.admin?.firstname}} {{indexInfo?.admin?.lastname}}, Bon retour!
+          </p>
+        </div><!--.dashboard-header_title-blc-->
+        <div class="income-area grid gtc-1 gcg-1">
+          <div class="income-item">
+            <h3 class="income-item_title">Revenus mensuels</h3>
+            <div class="income-item_value">
+              {{indexInfo?.benefice_mounthly}} DT
+              <span class="income-item_value-percent">
+                +321%
+              </span>
+            </div><!--.income-item_value-->
+          </div><!--.income-item-->
+          <div class="income-item">
+            <h3 class="income-item_title">Revenus quotidiens</h3>
+            <div class="income-item_value">
+              {{indexInfo?.benefice_daily}} DT
+              <span class="income-item_value-percent">
+                +140%
+              </span>
+            </div><!--.income-item_value-->
+          </div><!--.income-item-->
+        </div><!--.income-area-->
+      </div><!--.dashboard-header-->
+
+      <div class="grid gtc-5 gcg-3">
+        <div class="grid-blc">
+
+          <div class="card">
+            <div class="card_body">
+              <div class="gauge-area">
+                <div class="gauge-area_title-blc">
+                  <h3 class="gauge-area_title">Vos performances ce mois-ci</h3>
+                </div>
+                <mwl-gauge [max]="100" [dialStartAngle]="180" [dialEndAngle]="0" [value]="87" [animated]="true"
+                  [animationDuration]="2">
+                </mwl-gauge>
+                <div class="gauge-area_desc-blc">
+                  <h3 class="gauge-area_desc">Vos revenus ont augmenté de 87% par rapport au mois précédent</h3>
+                </div>
+              </div><!--.gauge-area-->
+            </div><!--.card_body-->
+          </div><!--.card-->
+
+
+
+          <div class="card">
+            <div class="card_header">
+              <h2 class="card_header-title">Reclamation</h2>
+            </div>
+            <div class="card_body">
+              <div class="reclamation-area">
+                <div class="reclamation-item">
+                  <p class="reclamation-item_title">Produits en repture de stock</p>
+                  <span class="products-number">{{indexInfo?.product_out_stock}} Produits</span>
+                </div><!--.reclamation-item-->
+                <div class="reclamation-item">
+                  <p class="reclamation-item_title">Commande retournée</p>
+                  <span class="products-number">9 commandes</span>
+                </div><!--.reclamation-item-->
+                <div class="reclamation-item">
+                  <p class="reclamation-item_title">Commande annulée</p>
+                  <span class="products-number">{{indexInfo?.nbr_rejected_commands}} commandes</span>
+                </div><!--.reclamation-item-->
+                <div class="reclamation-item">
+                  <p class="reclamation-item_title">Panier abondonnés</p>
+                  <span class="products-number">13 paniers</span>
+                </div><!--.reclamation-item-->
+              </div><!--.reclamation-area-->
+            </div><!--.card_body-->
+          </div><!--.card-->
+
+          <div class="help-center-area">
+            <h4 class="help-center_title">Centre d'aide</h4>
+            <div class="help-center_desc">
+              <p>
+                Vous avez des problèmes dans Schoole ?
+              </p>
+              <p>
+                Veuillez nous contacter pour plus de questions.
+              </p>
+            </div>
+          </div><!--.help-center-area-->
+        </div><!--.grid-blc-->
+        <div class="grid-blc">
+          <div class="card">
+            <div class="card_header">
+              <h2 class="card_header-title">Tableau de bord</h2>
+            </div>
+            <div class="card_body">
+              <div class="general-statistics-area">
+                <div class="general-statistics-item">
+                  <div class="general-statistics_title">
+                    Ventes
+                  </div>
+                  <div class="general-statistics_value">
+                    {{indexInfo?.total_sales}} dt
+                  </div>
+                </div><!--.general-statistics-item-->
+                <div class="general-statistics-item">
+                  <div class="general-statistics_title">
+                    Commandes
+                  </div>
+                  <div class="general-statistics_value">
+                    {{indexInfo?.nbr_success_commands}}
+                  </div>
+                </div><!--.general-statistics-item-->
+                <div class="general-statistics-item">
+                  <div class="general-statistics_title">
+                    Nbr de clients
+                  </div>
+                  <div class="general-statistics_value">
+                    {{indexInfo?.nbr_clients}}
+                  </div>
+                </div><!--.general-statistics-item-->
+                <div class="general-statistics-item">
+                  <div class="general-statistics_title">
+                    Bénéfice (%)
+                  </div>
+                  <div class="general-statistics_value">
+                    {{indexInfo?.benefice_total | number : '1.2-2'}} dt (80%)
+                  </div>
+                </div><!--.general-statistics-item-->
+              </div><!--.general-statistics-area-->
+
+              <!-- Chart ------------------------------------- -->
+              <div class="chart-area">
+                <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                  [legend]="lineChartLegend">
+                </canvas>
+              </div><!--.chart-area-->
+              <!-- Chart ------------------------------------- -->
+
+            </div><!--.card_body-->
+          </div><!--.card-->
+          <div class="question-area">
+            <h4 class="question-title">Question 1</h4>
+            <p class="question-item">Quel est votre degré de satisfaction après avoir utilisé le service Schoole ?
+            </p>
+
+            <div class="radio-check-area">
+              <span class="radio-check_text left">Non satisfait</span>
+              <div class="radio-check">
+                <input checked class="radiobutton" type="radio" name="radio5" id="radio1" value="2">
+                <label class="radiobutton-label" for="radio1">1</label>
+              </div>
+              <div class="radio-check">
+                <input checked class="radiobutton" type="radio" name="radio5" id="radio2" value="2">
+                <label class="radiobutton-label" for="radio2">2</label>
+              </div>
+              <div class="radio-check">
+                <input checked class="radiobutton" type="radio" name="radio5" id="radio3" value="3">
+                <label class="radiobutton-label" for="radio3">3</label>
+              </div>
+              <div class="radio-check">
+                <input class="radiobutton" type="radio" name="radio5" id="radio4" value="4">
+                <label class="radiobutton-label" for="radio4">4</label>
+              </div>
+              <div class="radio-check">
+                <input class="radiobutton" type="radio" name="radio5" id="radio5" value="5">
+                <label class="radiobutton-label" for="radio5">5</label>
+              </div>
+              <span class="radio-check_text right">satisfait</span>
+            </div><!--.radio-check-area-->
+
+          </div><!--.question-area-->
+        </div><!--.grid-blc-->
+      </div><!--.grid-->
+    </div><!--.grid-blc-->
+    <div class="grid-blc">
+      <div class="card">
+        <div class="card_header">
+          <h2 class="card_header-title">Meilleurs clients</h2>
+        </div>
+        <div class="card_body">
+          <div class="best-costumers-list">
+            <div class="best-costumers-list-item" *ngFor="let bestCostumer of arrayClients">
+              <button type="button" class="btn-option"></button>
+              <div class="best-costumers-img">
+                <img *ngIf="bestCostumer?.client?.image" src="{{ bestCostumer?.client?.image?.path}}"
+                  alt="{{ bestCostumer?.client?.firstname }}">
+                <img *ngIf="!bestCostumer?.client?.image" src="../../../assets/img/delivery-male.png" alt="">
+
+              </div>
+              <div class="best-costumers-desc">
+                <div class="best-costumers-desc_name">
+                  {{ bestCostumer?.client?.firstname }} {{ bestCostumer?.client?.lastname }}
+                </div>
+                <div class="best-costumers-desc_score">
+                  <strong>Nb Commandes:</strong> {{ bestCostumer?.total }} Commandes
+                </div>
+              </div><!--.best-costumers-desc-->
+            </div><!--.best-costumers-list-item-->
+          </div><!--.best-costumers-list-->
+        </div><!--.card_body-->
+      </div><!--.card-->
+      <div class="card">
+        <div class="card_header">
+          <h2 class="card_header-title">Le plus vendu</h2>
+        </div>
+        <div class="card_body">
+          <div class="best-costumers-list">
+            <div class="best-costumers-list-item" *ngFor="let mostSoldItem of listProducts">
+              <div class="best-costumers-img">
+                <img src="{{ mostSoldItem?.product?.files[0].path }}" alt="{{ mostSoldItem?.product?.name }}">
+              </div>
+              <div class="best-costumers-desc">
+                <button type="button" class="btn-option"></button>
+                <div class="best-costumers-desc_name">
+                  {{ mostSoldItem?.product?.name }}
+                </div>
+                <div class="best-costumers-desc_score">
+                  <strong>Vendu:</strong> {{ mostSoldItem.total }} fois
+                </div>
+              </div><!--.best-costumers-desc-->
+            </div><!--.best-costumers-list-item-->
+          </div><!--.best-costumers-list-->
+        </div><!--.card_body-->
+      </div><!--.card-->
+    </div><!--.grid-blc-->
+  </div><!--.grid-->
+</div><!--.dashboard-page-->

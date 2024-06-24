@@ -1,0 +1,23 @@
+@import "./../../../scss/components/extend";
+#map {
+  height: 500px;
+  margin-bottom: 40px;
+  &.hide{
+    display: none;
+  }
+}
+.map-loader{
+  margin-bottom: 40px;
+  display: block;
+}
+.img-thumbnail{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.region{
+  color: $color-secondary;
+  font-weight:500;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+}

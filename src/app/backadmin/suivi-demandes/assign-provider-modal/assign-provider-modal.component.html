@@ -1,0 +1,62 @@
+<p-dialog #dialog [(visible)]="show" [modal]="true" (onHide)="cancel()" [draggable]="false" [style]="{width: '636px'}"
+  [position]="'topright'" [closeIcon]="'pi pi-arrow-right'">
+  <div class="create-client-content clien-area">
+    <div class="card-prestataire">
+      <ul class="list-group mb-3">
+        <li class="list-group-item">
+          <div class="flex-item">
+            <p>
+              <strong>
+                Nom
+              </strong>
+            </p>
+            <p>
+              <strong>
+                Télephonne
+              </strong>
+            </p>
+            <p class="text-center">
+              <strong>
+                Distance
+              </strong>
+            </p>
+            <p class="text-center">
+              <strong>
+                Action
+              </strong>
+            </p>
+          </div>
+        </li>
+        <li *ngFor="let prestataire of listPrestataires" class="list-group-item">
+          <div class="flex-item">
+            <p>
+              <img src="{{prestataire.image}}" class="img-thumbnail">
+              <strong>
+                {{prestataire.name}}
+              </strong>
+            </p>
+            <p>{{prestataire.phone}}</p>
+            <div class="alert alert-danger" role="alert">
+              {{prestataire.distance}} Km
+            </div>
+            <button class="btn btn-valid rounded" [disabled]="prestataire.loading" (click)="submit(prestataire)">
+              <i *ngIf="prestataire.loading" class="pi pi-spin pi-spinner"></i>
+              Assigner
+            </button>
+          </div>
+        </li>
+        <li *ngIf="loading" class="list-group-item ">
+          <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton height="2rem"></p-skeleton>
+        </li>
+        <li *ngIf="!loading && !listPrestataires.length" class="list-group-item">
+            <p class="text-center mb-0">
+              Pas de prestataires disponibles
+            </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</p-dialog>
+<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>

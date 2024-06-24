@@ -1,0 +1,201 @@
+<p-dialog #dialog header="Ajouter un prestataire" [(visible)]="show" [modal]="true" (onHide)="cancel()"
+  [draggable]="false" [style]="{width: '636px'}">
+  <div class="create-client-content clien-area">
+    <form *ngIf="!showSuccess" [formGroup]="addClientForm">
+      <div class="form-area">
+        <div class="form-area">
+          <div class="">
+            <div class="input-required-group">
+              <div *ngIf="imageUrl" class="form-style-1">
+                <div class="gallerie">
+                  <div class="gallerie__item">
+                    <img class="img-thumbnail" src="{{imageUrl}}" alt="image">
+                    <i class="pi pi-times" (click)="removeThumbnail()"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-style-1 file-input">
+                <input #fileInput type="file" class="input-file image" #imageInput accept="image/*" id="img-category"
+                  (change)="uploadImage($event)" />
+                <label for="img-category">
+                  <span *ngIf="!f['image']?.value">Image *</span>
+                  <span *ngIf="f['image']?.value">{{f['image'].value.name}}</span>
+                </label>
+                <span class="error" *ngIf=" attemptSubmission && f['image'].hasError('required')">
+                  image obligatoire
+                </span>
+              </div>
+              <div *ngIf="fileUrl" class="form-style-1">
+                <div class="gallerie">
+                  <div class="gallerie__item">
+                    <img src="assets/img/documents.png" class="img-thumbnail">
+                    <i class="pi pi-times" (click)="removeFile()"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-style-1 file-input">
+                <input #fileInput2 type="file" class="input-file image" id="img-category-2"
+                  (change)="uploadFile($event)" />
+                <label for="img-category-2">
+                  <span *ngIf="!f['file']?.value">Document </span>
+                  <span *ngIf="f['file']?.value">{{f['file'].value.name}}</span>
+                </label>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="first_name" placeholder="{{'COMMON.NAME' | translate}} *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && addClientForm.controls['first_name'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.NAME' | translate }}
+                </span>
+                <span class="error"
+                  *ngIf="attemptSubmission && addClientForm?.get('first_name')?.dirty && addClientForm.controls['first_name'].hasError('pattern')">
+                  {{ 'COMMON_INVALID.NAME_ONLY_LETTERS' | translate }}
+                </span>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="last_name" placeholder="{{'COMMON.LASTNAME' | translate}} *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && addClientForm.controls['last_name'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.LASTNAME' | translate }}
+                </span>
+                <span class="error"
+                  *ngIf=" attemptSubmission && addClientForm?.get('last_name')?.dirty && addClientForm.controls['last_name'].hasError('pattern')">
+                  {{ 'COMMON_INVALID.LASTNAME_ONLY_LETTERS' | translate }}
+                </span>
+              </div>
+              <div class="form-style-1">
+                <input type="text" formControlName="societe" placeholder="Nom de la sociéte *" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && addClientForm.controls['societe'].hasError('required')">
+                  Nom de la sociéte obligatoire
+                </span>
+              </div>
+              <div class="form-style-1">
+                <p-dropdown [options]="genres" formControlName="gender" optionLabel="name" optionValue="value"
+                  [showClear]="true" placeholder="Genre"></p-dropdown>
+                <span class="error" *ngIf=" attemptSubmission && addClientForm.controls['gender'].hasError('required')">
+                  {{'COMMON_REQUIRED.REQUIRED' | translate }}
+                </span>
+              </div>
+              <div class="form-style-1">
+                <ngx-intl-tel-input #phoneInput [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                    ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.France" [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.International" name="phone"
+                  formControlName="phone" [searchCountryPlaceholder]="'Rechercher un pays'">
+                </ngx-intl-tel-input>
+                <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('required')">
+                  Le télephonne est obligatoire
+                </span>
+                <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('validatePhoneNumber')">
+                  Champ invalid
+                </span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="form-style-1">
+            <p-treeSelect [showClear]="true" class="w-full md:w-20rem" containerStyleClass="w-full"
+              formControlName="domaines" [options]="specialites" [metaKeySelection]="false" selectionMode="checkbox"
+              placeholder="Domaines *" [emptyMessage]="'Liste vide'" [filter]="true"
+              (onNodeSelect)="getSelectedValues($event)" (onNodeUnselect)="getSelectedValues($event)"></p-treeSelect>
+            <span class="error" *ngIf=" attemptSubmission && addClientForm.controls['domaines'].hasError('required')">
+              Domaine obligatoire
+            </span>
+          </div>
+          <div class="form-style-1">
+            <p-dropdown [options]="types" formControlName="type_pro" optionLabel="value" optionValue="label"
+              [showClear]="true" placeholder="Type professionnel *"></p-dropdown>
+            <span class="error" *ngIf=" attemptSubmission && addClientForm.controls['type_pro'].hasError('required')">
+              Type professionnel obligatoire
+            </span>
+          </div>
+          <div class="form-style-1">
+            <input type="text" formControlName="experience" placeholder="Expérience *" />
+            <span class="error" *ngIf=" attemptSubmission && addClientForm.controls['experience'].hasError('required')">
+              Experience obligatoire
+            </span>
+          </div>
+          <div class="form-style-1">
+            <input type="text" formControlName="certification" placeholder="Certification *" />
+            <span class="error"
+              *ngIf=" attemptSubmission && addClientForm.controls['certification'].hasError('required')">
+              Certification obligatoire
+            </span>
+          </div>
+          <div class="form-style-1">
+            <textarea formControlName="description" placeholder="Description"></textarea>
+          </div>
+          <hr>
+          <div class="form-style-1">
+            <input type="email" formControlName="email" placeholder="{{'COMMON.EMAIL' | translate}} *"
+              (input)="emailExists=false;emailInalid=false" />
+            <span class="error" *ngIf=" attemptSubmission && addClientForm.controls['email'].hasError('required')">
+              {{ 'COMMON_REQUIRED.EMAIL' | translate }}
+            </span>
+            <span class="error"
+              *ngIf="(attemptSubmission && addClientForm?.get('email')?.dirty && addClientForm.controls['email'].hasError('pattern')) || emailInalid ">
+              {{ 'COMMON_INVALID.EMAIL' | translate }}
+            </span>
+            <span class="error" *ngIf="emailExists">
+              {{ 'COMMON_REQUIRED.EMAIL_ALREADY' | translate }}
+            </span>
+          </div>
+          <div class="grid gtc-3 gcg-3">
+            <div class="grid-blc">
+              <div class="form-style-1 form-style_password-item">
+                <input [type]="showingPassword ? 'text' : 'password'" formControlName="password"
+                  placeholder="{{'COMMON.PASSWORD' | translate}} *" (input)="updateValidation()" />
+                <span class="error"
+                  *ngIf=" attemptSubmission && addClientForm.controls['password'].hasError('required')">
+                  {{ 'COMMON_REQUIRED.PASSWORD' | translate }}
+                </span>
+                <span class="error"
+                  *ngIf="attemptSubmission && addClientForm?.get('password')?.dirty && addClientForm.controls['password'].hasError('minlength')">
+                  {{ 'COMMON_INVALID.PASSWORD' | translate }}
+                </span>
+                <button type="button" class="btn-showhide-password" [ngClass]="showingPassword ? 'hidden' : ''"
+                  (click)="password()"></button>
+              </div>
+            </div>
+            <div class="grid-blc">
+              <div class="form-style-1">
+                <button type="button" (click)="generatePassword()" class="btn btn-primary generatePassword">
+                  {{'COMMON.PASSWORD_GENERATE' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-style-1">
+            <input type="password" formControlName="password_confirmation"
+              placeholder="{{'COMMON.PASSWORD_CONFIRM' | translate}} *" />
+            <span class="error"
+              *ngIf="  attemptSubmission && addClientForm.controls['password_confirmation'].hasError('required')">
+              {{ 'COMMON_REQUIRED.PASSWORD_CONFIRM' | translate }}
+            </span>
+            <span class="error position-error"
+              *ngIf="attemptSubmission && addClientForm.controls['password_confirmation'].hasError('password_mismatch')">
+              {{'COMMON_INVALID.PASSWORD_CONFIRM' | translate }}
+            </span>
+          </div>
+        </div>
+        <div class="required-field">
+          {{'COMMON.REQUIRED' | translate }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="footer_style">
+      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)">
+      </p-button>
+      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{'COMMON.ADD' | translate }}" styleClass="btn btn-primary" (click)="attemptAddClient($event)">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
