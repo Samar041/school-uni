@@ -1,5 +1,11 @@
-<p-dialog #dialog header="{{ 'ADMINS.ADD_ADMIN' | translate }}" [(visible)]="show" (onHide)="cancel()" [modal]="true"
-  [style]="{width: '636px'}">
+<p-dialog
+  #dialog
+  header="{{ 'ADMINS.ADD_ADMIN' | translate }}"
+  [(visible)]="show"
+  (onHide)="cancel()"
+  [modal]="true"
+  [style]="{ width: '636px' }"
+>
   <div class="create-client-content clien-area">
     <form *ngIf="!showSuccess" [formGroup]="addAdminForm">
       <div class="form-area">
@@ -9,142 +15,281 @@
               <div *ngIf="imageUrl" class="form-style-1">
                 <div class="gallerie">
                   <div class="gallerie__item">
-                    <img class="img-thumbnail" src="{{imageUrl}}" alt="image">
+                    <img
+                      class="img-thumbnail"
+                      src="{{ imageUrl }}"
+                      alt="image"
+                    />
                     <i class="pi pi-times" (click)="removeThumbnail()"></i>
                   </div>
                 </div>
               </div>
               <div class="form-style-1 file-input">
-                <input #fileInput type="file" class="input-file image" #imageInput accept="image/*" id="img-category"
-                  (change)="uploadImage($event)" />
+                <input
+                  #fileInput
+                  type="file"
+                  class="input-file image"
+                  #imageInput
+                  accept="image/*"
+                  id="img-category"
+                  (change)="uploadImage($event)"
+                />
                 <label for="img-category">
                   <span *ngIf="!f['image']?.value">Image *</span>
-                  <span *ngIf="f['image']?.value">{{f['image'].value.name}}</span>
+                  <span *ngIf="f['image']?.value">{{
+                    f["image"].value.name
+                  }}</span>
                 </label>
-                <span class="error" *ngIf=" attemptSubmission && f['image'].hasError('required')">
+                <span
+                  class="error"
+                  *ngIf="attemptSubmission && f['image'].hasError('required')"
+                >
                   image obligatoire
                 </span>
               </div>
               <div class="form-style-1">
-                <input type="text" formControlName="first_name" placeholder="{{'COMMON.NAME' | translate}} *" />
-                <span class="error"
-                  *ngIf=" attemptSubmission && addAdminForm.controls['first_name'].hasError('required')">
-                  {{ 'COMMON_REQUIRED.NAME' | translate }}
+                <input
+                  type="text"
+                  formControlName="first_name"
+                  placeholder="{{ 'COMMON.NAME' | translate }} *"
+                />
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm.controls['first_name'].hasError('required')
+                  "
+                >
+                  {{ "COMMON_REQUIRED.NAME" | translate }}
                 </span>
-                <span class="error"
-                  *ngIf="attemptSubmission && addAdminForm?.get('first_name')?.dirty && addAdminForm.controls['first_name'].hasError('pattern')">
-                  {{ 'COMMON_INVALID.NAME_ONLY_LETTERS' | translate }}
-                </span>
-              </div>
-              <div class="form-style-1">
-                <input type="text" formControlName="last_name" placeholder="{{'COMMON.LASTNAME' | translate}} *" />
-                <span class="error"
-                  *ngIf=" attemptSubmission && addAdminForm.controls['last_name'].hasError('required')">
-                  {{ 'COMMON_REQUIRED.LASTNAME' | translate }}
-                </span>
-                <span class="error"
-                  *ngIf=" attemptSubmission && addAdminForm?.get('last_name')?.dirty && addAdminForm.controls['last_name'].hasError('pattern')">
-                  {{ 'COMMON_INVALID.LASTNAME_ONLY_LETTERS' | translate }}
-                </span>
-              </div>
-              <div class="form-style-1">
-                <p-dropdown [options]="roles" formControlName="role" optionLabel="name" optionValue="value"
-                  [showClear]="false" placeholder="Poste *"></p-dropdown>
-                <span class="error" *ngIf=" attemptSubmission && addAdminForm.controls['role'].hasError('required')">
-                  {{'COMMON_REQUIRED.REQUIRED' | translate }}
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm?.get('first_name')?.dirty &&
+                    addAdminForm.controls['first_name'].hasError('pattern')
+                  "
+                >
+                  {{ "COMMON_INVALID.NAME_ONLY_LETTERS" | translate }}
                 </span>
               </div>
               <div class="form-style-1">
-                <p-dropdown [options]="genres" formControlName="gender" optionLabel="name" optionValue="value"
-                  [showClear]="true" placeholder="Genre"></p-dropdown>
-                <span class="error" *ngIf=" attemptSubmission && addAdminForm.controls['gender'].hasError('required')">
-                  {{'COMMON_REQUIRED.REQUIRED' | translate }}
+                <input
+                  type="text"
+                  formControlName="last_name"
+                  placeholder="{{ 'COMMON.LASTNAME' | translate }} *"
+                />
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm.controls['last_name'].hasError('required')
+                  "
+                >
+                  {{ "COMMON_REQUIRED.LASTNAME" | translate }}
+                </span>
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm?.get('last_name')?.dirty &&
+                    addAdminForm.controls['last_name'].hasError('pattern')
+                  "
+                >
+                  {{ "COMMON_INVALID.LASTNAME_ONLY_LETTERS" | translate }}
                 </span>
               </div>
               <div class="form-style-1">
-                <ngx-intl-tel-input #phoneInput [cssClass]="'custom'" [preferredCountries]="preferredCountries"
-                  [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                <p-dropdown
+                  [options]="roles"
+                  formControlName="role"
+                  optionLabel="name"
+                  optionValue="value"
+                  [showClear]="false"
+                  placeholder="Poste *"
+                ></p-dropdown>
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm.controls['role'].hasError('required')
+                  "
+                >
+                  {{ "COMMON_REQUIRED.REQUIRED" | translate }}
+                </span>
+              </div>
+
+              <div class="form-style-1">
+                <ngx-intl-tel-input
+                  #phoneInput
+                  [cssClass]="'custom'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="true"
+                  [searchCountryFlag]="true"
                   [searchCountryField]="[
-                  SearchCountryField.Iso2,
-                  SearchCountryField.Name
-                  ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.France" [phoneValidation]="true"
-                  [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.International" name="phone"
-                  formControlName="phone" [searchCountryPlaceholder]="'Rechercher un pays'">
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.Tunisia"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  [numberFormat]="PhoneNumberFormat.International"
+                  name="phone"
+                  formControlName="phone"
+                  [searchCountryPlaceholder]="'Rechercher un pays'"
+                >
                 </ngx-intl-tel-input>
-                <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('required')">
+                <span
+                  class="error"
+                  *ngIf="attemptSubmission && f['phone'].hasError('required')"
+                >
                   Le télephonne est obligatoire
                 </span>
-                <span class="error" *ngIf="attemptSubmission && f['phone'].hasError('validatePhoneNumber')">
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    f['phone'].hasError('validatePhoneNumber')
+                  "
+                >
                   Champ invalid
                 </span>
               </div>
             </div>
           </div>
           <div class="form-style-1">
-            <input type="email" formControlName="email" placeholder="{{'COMMON.EMAIL' | translate}} *"
-              (input)="emailExists=false;emailInalid=false" />
-            <span class="error" *ngIf=" attemptSubmission && addAdminForm.controls['email'].hasError('required')">
-              {{ 'COMMON_REQUIRED.EMAIL' | translate }}
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="{{ 'COMMON.EMAIL' | translate }} *"
+              (input)="emailExists = false; emailInalid = false"
+            />
+            <span
+              class="error"
+              *ngIf="
+                attemptSubmission &&
+                addAdminForm.controls['email'].hasError('required')
+              "
+            >
+              {{ "COMMON_REQUIRED.EMAIL" | translate }}
             </span>
-            <span class="error"
-              *ngIf="(attemptSubmission && addAdminForm?.get('email')?.dirty && addAdminForm.controls['email'].hasError('pattern')) || emailInalid ">
-              {{ 'COMMON_INVALID.EMAIL' | translate }}
+            <span
+              class="error"
+              *ngIf="
+                (attemptSubmission &&
+                  addAdminForm?.get('email')?.dirty &&
+                  addAdminForm.controls['email'].hasError('pattern')) ||
+                emailInalid
+              "
+            >
+              {{ "COMMON_INVALID.EMAIL" | translate }}
             </span>
             <span class="error" *ngIf="emailExists">
-              {{ 'COMMON_REQUIRED.EMAIL_ALREADY' | translate }}
+              {{ "COMMON_REQUIRED.EMAIL_ALREADY" | translate }}
             </span>
           </div>
           <div class="grid gtc-3 gcg-3">
             <div class="grid-blc">
               <div class="form-style-1 form-style_password-item">
-                <input [type]="showingPassword ? 'text' : 'password'" formControlName="password"
-                  placeholder="{{'COMMON.PASSWORD' | translate}} *" (input)="updateValidation()" />
-                <span class="error"
-                  *ngIf=" attemptSubmission && addAdminForm.controls['password'].hasError('required')">
-                  {{ 'COMMON_REQUIRED.PASSWORD' | translate }}
+                <input
+                  [type]="showingPassword ? 'text' : 'password'"
+                  formControlName="password"
+                  placeholder="{{ 'COMMON.PASSWORD' | translate }} *"
+                  (input)="updateValidation()"
+                />
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm.controls['password'].hasError('required')
+                  "
+                >
+                  {{ "COMMON_REQUIRED.PASSWORD" | translate }}
                 </span>
-                <span class="error"
-                  *ngIf="attemptSubmission && addAdminForm?.get('password')?.dirty && addAdminForm.controls['password'].hasError('minlength')">
-                  {{ 'COMMON_INVALID.PASSWORD' | translate }}
+                <span
+                  class="error"
+                  *ngIf="
+                    attemptSubmission &&
+                    addAdminForm?.get('password')?.dirty &&
+                    addAdminForm.controls['password'].hasError('minlength')
+                  "
+                >
+                  {{ "COMMON_INVALID.PASSWORD" | translate }}
                 </span>
-                <button type="button" class="btn-showhide-password" [ngClass]="showingPassword ? 'hidden' : ''"
-                  (click)="password()"></button>
+                <button
+                  type="button"
+                  class="btn-showhide-password"
+                  [ngClass]="showingPassword ? 'hidden' : ''"
+                  (click)="password()"
+                ></button>
               </div>
             </div>
             <div class="grid-blc">
               <div class="form-style-1">
-                <button type="button" (click)="generatePassword()" class="btn btn-primary generatePassword">
-                  {{'COMMON.PASSWORD_GENERATE' | translate}}
+                <button
+                  type="button"
+                  (click)="generatePassword()"
+                  class="btn btn-primary generatePassword"
+                >
+                  {{ "COMMON.PASSWORD_GENERATE" | translate }}
                 </button>
               </div>
             </div>
           </div>
           <div class="form-style-1">
-            <input type="password" formControlName="password_confirmation"
-              placeholder="{{'COMMON.PASSWORD_CONFIRM' | translate}} *" />
-            <span class="error"
-              *ngIf="  attemptSubmission && addAdminForm.controls['password_confirmation'].hasError('required')">
-              {{ 'COMMON_REQUIRED.PASSWORD_CONFIRM' | translate }}
+            <input
+              type="password"
+              formControlName="password_confirmation"
+              placeholder="{{ 'COMMON.PASSWORD_CONFIRM' | translate }} *"
+            />
+            <span
+              class="error"
+              *ngIf="
+                attemptSubmission &&
+                addAdminForm.controls['password_confirmation'].hasError(
+                  'required'
+                )
+              "
+            >
+              {{ "COMMON_REQUIRED.PASSWORD_CONFIRM" | translate }}
             </span>
-            <span class="error position-error"
-              *ngIf="attemptSubmission && addAdminForm.controls['password_confirmation'].hasError('password_mismatch')">
-              {{'COMMON_INVALID.PASSWORD_CONFIRM' | translate }}
+            <span
+              class="error position-error"
+              *ngIf="
+                attemptSubmission &&
+                addAdminForm.controls['password_confirmation'].hasError(
+                  'password_mismatch'
+                )
+              "
+            >
+              {{ "COMMON_INVALID.PASSWORD_CONFIRM" | translate }}
             </span>
           </div>
         </div>
         <div class="required-field">
-          {{'COMMON.REQUIRED' | translate }}
+          {{ "COMMON.REQUIRED" | translate }}
         </div>
       </div>
     </form>
   </div>
   <ng-template pTemplate="footer">
     <div class="footer_style">
-      <p-button label="{{'COMMON.CANCEL' | translate }}" styleClass="p-button-text btn btn-cancel"
-        (click)="dialog.close($event)">
+      <p-button
+        label="{{ 'COMMON.CANCEL' | translate }}"
+        styleClass="p-button-text btn btn-cancel"
+        (click)="dialog.close($event)"
+      >
       </p-button>
-      <p-button *ngIf="!showSuccess" [disabled]="loading" [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
-        label="{{'COMMON.ADD' | translate }}" styleClass="btn btn-primary" (click)="attemptAddAdmin($event)">
+      <p-button
+        *ngIf="!showSuccess"
+        [disabled]="loading"
+        [icon]="loading ? 'pi pi-spin pi-spinner' : ''"
+        label="{{ 'COMMON.ADD' | translate }}"
+        styleClass="btn btn-primary"
+        (click)="createUser()"
+      >
       </p-button>
     </div>
   </ng-template>

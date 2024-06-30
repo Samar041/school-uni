@@ -19,8 +19,9 @@ import {
   PhoneNumberFormat,
   SearchCountryField,
 } from 'ngx-intl-tel-input';
-import { UserService } from '../../_services/users.service';
+import { User, UserRole, UserService } from '../../_services/users.service';
 import { objectToFormData } from './../../shared/utils/utils';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-admin',
@@ -42,32 +43,20 @@ export class AddAdminComponent {
   emailInalid: boolean = false;
   showSuccess: boolean = false;
   loading: boolean = false;
-  genres: any[] = [
-    {
-      name: 'Femme',
-      value: 'femme',
-    },
-    {
-      name: 'Homme',
-      value: 'homme',
-    },
-  ];
+  // UserRole.Admin
+
   roles: any[] = [
     {
-      name: 'Administrateur',
-      value: 'admin',
+      name: UserRole.Admin,
+      value: UserRole.Admin,
     },
     {
-      name: 'Opérateur',
-      value: 'operateur',
+      name: UserRole.Prof,
+      value: UserRole.Prof,
     },
     {
-      name: 'Dispatcheur',
-      value: 'dispatcheur',
-    },
-    {
-      name: 'Responsable marketing',
-      value: 'commerciale',
+      name: UserRole.Student,
+      value: UserRole.Student,
     },
   ];
   separateDialCode = false;
@@ -92,7 +81,6 @@ export class AddAdminComponent {
       last_name: ['', Validators.required],
       first_name: ['', Validators.required],
       image: ['', Validators.required],
-      gender: ['', Validators.required],
       phone: ['', Validators.required],
       statut_pro: ['PENDING', Validators.required],
       type_pro: ['EL', Validators.required],
@@ -154,18 +142,16 @@ export class AddAdminComponent {
   get f() {
     return this.addAdminForm.controls;
   }
-  uploadImage(event: any) {
+  uploadImage(event: any, fileRoot: string = '') {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.addAdminForm.patchValue({
         image: fileList[0],
       });
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (_event) => {
-        this.imageUrl = reader.result;
-      };
+      this.userService.uploadImage(fileList[0], fileRoot).then((res) => {
+        this.imageUrl = res;
+      });
     }
     event.currentTarget.value = '';
   }
@@ -173,51 +159,81 @@ export class AddAdminComponent {
     this.imageUrl = '';
     this.f['image'].setValue('');
   }
-  attemptAddAdmin(event: any) {
-    this.attemptSubmission = true;
-    if (this.addAdminForm.valid) {
-      let form = this.addAdminForm.value;
-      if (form.phone.e164Number) {
-        form.phone = form.phone.e164Number;
-      }
-      form.role = [form.role];
-      form.description = '';
-      form.experience = '';
-      form.certification = '';
-      form.prix = '';
-      const formData = objectToFormData(form);
-      this.loading = true;
-      // this.userService.storeUser(formData).subscribe((res: any) => {
-      //   this.show = false;
-      //   Swal.fire({
-      //     text: this.translate.instant('ADMINS.ADD_ADMIN'),
-      //     icon: 'success',
-      //     showCancelButton: false,
-      //     customClass: {
-      //       confirmButton: 'btn-primary',
-      //     }
-      //   }).then(() => {
-      //     this.addAdminForm = this.generateForm();
-      //     this.showSuccess = false;
-      //     this.loading = false
-      //     this.success.emit();
-      //     this.attemptSubmission = false;
-      //   })
-      // },
-      //   (res: any) => {
-      //     this.loading = false
-      //     if (res.status === 422) {
-      //       if (res.error.message == "The email has already been taken.") {
-      //         this.emailExists = true
-      //       }
-      //       else if (res.error.message == "The email field must be a valid email address.") {
-      //         this.emailInalid = true
-      //       }
-      //     }
-      //   }
-      // )
-    }
+  // attemptAddAdmin(event: any) {
+  //   this.attemptSubmission = true;
+  //   if (this.addAdminForm.valid) {
+  //     let form = this.addAdminForm.value;
+  //     if (form.phone.e164Number) {
+  //       form.phone = form.phone.e164Number;
+  //     };
+  //     const formData = objectToFormData(form);
+  //     this.loading = true;
+  //     this.userService.createUser(formData)
+  //     this.userService.storeUser(formData).subscribe((res: any) => {
+  //       this.show = false;
+  //       Swal.fire({
+  //         text: this.translate.instant('ADMINS.ADD_ADMIN'),
+  //         icon: 'success',
+  //         showCancelButton: false,
+  //         customClass: {
+  //           confirmButton: 'btn-primary',
+  //         }
+  //       }).then(() => {
+  //         this.addAdminForm = this.generateForm();
+  //         this.showSuccess = false;
+  //         this.loading = false
+  //         this.success.emit();
+  //         this.attemptSubmission = false;
+  //       })
+  //     },
+  //       (res: any) => {
+  //         this.loading = false
+  //         if (res.status === 422) {
+  //           if (res.error.message == "The email has already been taken.") {
+  //             this.emailExists = true
+  //           }
+  //           else if (res.error.message == "The email field must be a valid email address.") {
+  //             this.emailInalid = true
+  //           }
+  //         }
+  //       }
+  //     )
+  //   }
+  // }
+  createUser() {
+    let data = {
+      password: this.f['password'].value,
+      image: this.imageUrl,
+      first_name: this.f['first_name'].value,
+      last_name: this.f['last_name'].value,
+      phone: this.f['phone'].value,
+      email: this.f['email'].value,
+      role: this.f['role'].value,
+    };
+    this.userService.createUser(data).then((res: any) => {
+      this.show = false;
+    });
+    // console.log('data === ',data);
+    // return new Observable<void>((observer) => {
+    //   this.auth
+    //     .createUserWithEmailAndPassword(user.email, user.password as string)
+    //     .then((cred) => {
+    //       const userRef = this.firestore
+    //         .collection('users')
+    //         .doc(cred.user?.uid);
+    //       user.password = undefined; // Remove password from user object before saving
+    //       userRef
+    //         .set(user)
+    //         .then(() => {
+    //           observer.next();
+    //           observer.complete();
+    //         })
+    //         .catch((err) => observer.error(err));
+    //     })
+    //     .catch((err) => observer.error(err));
+    // });
   }
+
   updateValidation() {
     this.f['password_confirmation'].updateValueAndValidity();
   }

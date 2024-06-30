@@ -16,7 +16,7 @@ import {
   PhoneNumberFormat,
   SearchCountryField,
 } from 'ngx-intl-tel-input';
-import { UserService } from '../../_services/users.service';
+import { UserRole, UserService } from '../../_services/users.service';
 import {
   getFileNameFromPath,
   objectToFormData,
@@ -60,21 +60,17 @@ export class UpdateAdminComponent {
   imageName: any;
   roles: any[] = [
     {
-      name: 'Administrateur',
-      value: 'admin',
+      name: UserRole.Admin,
+      value: UserRole.Admin,
     },
     {
-      name: 'Opérateur',
-      value: 'operateur',
+      name: UserRole.Prof,
+      value: UserRole.Prof,
     },
     {
-      name: 'Dispatcheur',
-      value: 'dispatcheur',
-    },
-    {
-      name: 'Responsable marketing',
-      value: 'commerciale',
-    },
+      name: UserRole.Student,
+      value: UserRole.Student,
+    }
   ];
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -95,7 +91,7 @@ export class UpdateAdminComponent {
       phone: this.admin.phone,
       email: this.admin.email,
       image: '',
-      role: this.admin.roles[0],
+      role: this.admin.role,
     });
     this.imageName = getFileNameFromPath(this.admin.image);
     this.imageUrl = this.admin.image;

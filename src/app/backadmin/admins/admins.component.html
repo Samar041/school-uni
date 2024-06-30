@@ -175,7 +175,7 @@
               </td>
               <td>{{ admin.phone | phoneNumber }}</td>
               <td *ngIf="!deleted">
-                {{ admin.roles ? (admin.roles[0] | DataToName : roles) : "" }}
+                {{ admin.roles ? (admin.roles | DataToName : roles) : "" }}
               </td>
               <td *ngIf="!deleted">
                 {{ admin.areas ? (admin.areas | ToString) : "" }}
@@ -205,17 +205,7 @@
                 </ng-container>
                 <ng-template #actionsSection>
                   <button
-                    *ngIf="admin.roles[0] != 'superadmin'"
-                    type="button"
-                    pTooltip="Affecter Région"
-                    tooltipPosition="left"
-                    pButton
-                    class="btn-icon btn-icon--outlin-primary"
-                    icon="pi pi-map-marker"
-                    (click)="displayAddRegion(admin)"
-                  ></button>
-                  <button
-                    *ngIf="admin.roles[0] != 'superadmin'"
+                    *ngIf="admin.roles != 'superadmin'"
                     type="button"
                     pTooltip="{{ 'ADMINS.EDIT_ADMIN' | translate }}"
                     tooltipPosition="left"
@@ -225,7 +215,7 @@
                     (click)="displayUpdateAdmin(admin)"
                   ></button>
                   <button
-                    *ngIf="admin.roles[0] != 'superadmin'"
+                    *ngIf="admin.roles != 'superadmin'"
                     type="button"
                     pTooltip="{{ 'ADMINS.DELETE_ADMIN' | translate }}"
                     tooltipPosition="left"
@@ -235,7 +225,7 @@
                     (click)="toggleDeleteAdmin(admin)"
                   ></button>
                   <button
-                    *ngIf="admin.roles[0] != 'superadmin'"
+                    *ngIf="admin.roles != 'superadmin'"
                     type="button"
                     pTooltip="{{ 'COMMON.EDIT_PASSWORD' | translate }}"
                     tooltipPosition="left"
@@ -372,11 +362,4 @@
     [admin]="adminToUpdatePassword"
     (close)="showUpdatePassword = false"
   ></app-update-password>
-  <app-assign-region
-    [list]="list"
-    [show]="displayRegionModal"
-    [admin]="adminToAddRegion"
-    (close)="displayRegionModal = false"
-    (success)="refreshList()"
-  ></app-assign-region>
 </div>

@@ -17,7 +17,10 @@ import { AppComponent } from './app.component';
 import { AppStoreModule } from './store/app.store.module';
 
 import { environment } from '../environments/environment';
-
+import { provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {StorageModule,getStorage,provideStorage } from '@angular/fire/storage';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -39,10 +42,13 @@ import { environment } from '../environments/environment';
         deps: [HttpClient],
       },
     }),
-    AppStoreModule,
+    AppStoreModule,    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

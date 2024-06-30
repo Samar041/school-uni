@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subject, debounceTime } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { UserService } from '../_services/users.service';
+import { UserRole, UserService } from '../_services/users.service';
 @Component({
   selector: 'app-admins',
   templateUrl: './admins.component.html',
@@ -118,9 +118,6 @@ export class AdminsComponent implements OnInit {
   order = 'asc';
   private searchTerm$ = new Subject<any>();
   deleted: boolean = false;
-  displayRegionModal: boolean = false;
-  adminToAddRegion: any;
-  // areas$!: Observable<Area[]>;
   loaded = false;
   list: any;
   constructor(
@@ -171,6 +168,13 @@ export class AdminsComponent implements OnInit {
     };
     this.loading = true;
     this.deleted = false;
+
+    this.userService.getUsersByRole(UserRole.Admin).subscribe((value: any) => {
+      console.log('users == ', value);
+      this.admins = value;
+      this.total = value.length;
+      this.loading = false;
+    });
     // this.userService.getUsersList(payload).subscribe(
     //   (res: any) => {
     //     this.admins = res.body.data;
@@ -359,9 +363,5 @@ export class AdminsComponent implements OnInit {
     } else {
       this.getAdminList();
     }
-  }
-  displayAddRegion(admin: any) {
-    this.adminToAddRegion = admin;
-    this.displayRegionModal = true;
   }
 }
