@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../_services/users.service';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, debounceTime } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { Store, select } from '@ngrx/store';
-import { Area } from 'src/app/models/area.model';
-import { Observable } from 'rxjs';
-import * as areaActions from 'src/app/store/actions/area.actions';
-import { selectAreas, selectAreasLoading } from 'src/app/store/reducers/area.reducer';
+import { UserService } from '../_services/users.service';
 @Component({
   selector: 'app-admins',
   templateUrl: './admins.component.html',
@@ -31,94 +27,147 @@ export class AdminsComponent implements OnInit {
   filter: string = '';
   loading: boolean = false;
   allStatus: any = [
-    { id: 1, name: this.translate.instant('STATUS.ACTIVE'), value: 'ACTIVE', color: "#17c2c2" },
-    { id: 2, name: this.translate.instant('STATUS.PENDING'), value: 'PENDING', color: "#ffb74c" },
-    { id: 3, name: this.translate.instant('STATUS.DISABLED'), value: 'INACTIVE', color: "#3d5b82" },
-    { id: 4, name: this.translate.instant('STATUS.BLOCKED'), value: 'BLOCKED', color: "#fe5050" },
-    { id: 4, name: this.translate.instant('STATUS.DELETED'), value: 'DELETED', color: "#db1345" },
+    {
+      id: 1,
+      name: this.translate.instant('STATUS.ACTIVE'),
+      value: 'ACTIVE',
+      color: '#17c2c2',
+    },
+    {
+      id: 2,
+      name: this.translate.instant('STATUS.PENDING'),
+      value: 'PENDING',
+      color: '#ffb74c',
+    },
+    {
+      id: 3,
+      name: this.translate.instant('STATUS.DISABLED'),
+      value: 'INACTIVE',
+      color: '#3d5b82',
+    },
+    {
+      id: 4,
+      name: this.translate.instant('STATUS.BLOCKED'),
+      value: 'BLOCKED',
+      color: '#fe5050',
+    },
+    {
+      id: 4,
+      name: this.translate.instant('STATUS.DELETED'),
+      value: 'DELETED',
+      color: '#db1345',
+    },
   ];
   status: any = [
-    { id: 1, name: this.translate.instant('STATUS.ACTIVE'), value: 'ACTIVE', color: "#17c2c2" },
-    { id: 2, name: this.translate.instant('STATUS.PENDING'), value: 'PENDING', color: "#ffb74c" },
-    { id: 3, name: this.translate.instant('STATUS.DISABLED'), value: 'INACTIVE', color: "#3d5b82" },
-    { id: 4, name: this.translate.instant('STATUS.BLOCKED'), value: 'BLOCKED', color: "#fe5050" },
+    {
+      id: 1,
+      name: this.translate.instant('STATUS.ACTIVE'),
+      value: 'ACTIVE',
+      color: '#17c2c2',
+    },
+    {
+      id: 2,
+      name: this.translate.instant('STATUS.PENDING'),
+      value: 'PENDING',
+      color: '#ffb74c',
+    },
+    {
+      id: 3,
+      name: this.translate.instant('STATUS.DISABLED'),
+      value: 'INACTIVE',
+      color: '#3d5b82',
+    },
+    {
+      id: 4,
+      name: this.translate.instant('STATUS.BLOCKED'),
+      value: 'BLOCKED',
+      color: '#fe5050',
+    },
   ];
   adminToUpdatePassword: any;
   filterForm = {
-    statut_pro: "",
+    statut_pro: '',
     phone: null,
-    last_name: "",
-    first_name: "",
-    area: ""
-  }
+    last_name: '',
+    first_name: '',
+    // area: '',
+  };
   roles: any[] = [
     {
       name: 'Administrateur',
-      value: 'admin'
+      value: 'admin',
     },
     {
       name: 'Super Admin',
-      value: 'superadmin'
+      value: 'superadmin',
     },
     {
       name: 'Opérateur',
-      value: 'operateur'
+      value: 'operateur',
     },
     {
       name: 'Dispatcheur',
-      value: 'dispatcheur'
+      value: 'dispatcheur',
     },
     {
       name: 'Responsable marketing',
-      value: 'commerciale'
-    }
-  ]
+      value: 'commerciale',
+    },
+  ];
   order_by = 'id';
   order = 'asc';
   private searchTerm$ = new Subject<any>();
   deleted: boolean = false;
   displayRegionModal: boolean = false;
   adminToAddRegion: any;
-  areas$!: Observable<Area[]>;
+  // areas$!: Observable<Area[]>;
   loaded = false;
-  list: any
+  list: any;
   constructor(
     private userService: UserService,
     private routerService: Router,
     private translate: TranslateService,
     private store: Store
   ) {
-    this.areas$ = this.store.pipe(select(selectAreas));
+    // this.areas$ = this.store.pipe(select(selectAreas));
   }
   ngOnInit() {
-    this.searchTerm$.pipe(
-      debounceTime(300),
-      distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
-    ).subscribe((searchTerm: any) => {
-      this.performSearch(searchTerm)
-    });
-    this.areas$.subscribe((areas: any) => {
-      if (!this.loaded && areas?.length == 0) {
-        this.loaded = true;
-        this.store.dispatch(areaActions.loadAreas());
-      }
-      this.list = areas.data;
-    });
+    this.searchTerm$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
+      )
+      .subscribe((searchTerm: any) => {
+        this.performSearch(searchTerm);
+      });
+    // this.areas$.subscribe((areas: any) => {
+    //   if (!this.loaded && areas?.length == 0) {
+    //     this.loaded = true;
+    //     this.store.dispatch(areaActions.loadAreas());
+    //   }
+    //   this.list = areas.data;
+    // });
   }
   getAdminList() {
     let payload = {
-      statut_pro: this.filterForm.statut_pro ? this.filterForm.statut_pro : "",
+      statut_pro: this.filterForm.statut_pro ? this.filterForm.statut_pro : '',
       phone: this.filterForm.phone ? this.filterForm.phone : '',
       last_name: this.filterForm.last_name,
       first_name: this.filterForm.first_name,
-      area: this.filterForm.area,
+      // area: this.filterForm.area,
       paginated: 1,
       page: this.page,
       page_size: this.per_page,
       filter: this.filter,
-      'roles[]': ['admin', 'superadmin', 'operateur', 'dispatcheur', 'commerciale'],
+      'roles[]': [
+        'admin',
+        'superadmin',
+        'operateur',
+        'dispatcheur',
+        'commerciale',
+      ],
       orderBy: this.order_by,
-      orderDirection: this.order
+      orderDirection: this.order,
     };
     this.loading = true;
     this.deleted = false;
@@ -140,18 +189,17 @@ export class AdminsComponent implements OnInit {
   performSearch(terms: any) {
     this.page = 1;
     if (this.filterForm.statut_pro == 'DELETED') {
-      this.getDeletedAdminList()
-    }
-    else {
+      this.getDeletedAdminList();
+    } else {
       this.getAdminList();
     }
   }
   resetFilter() {
-    this.filterForm.first_name = "";
-    this.filterForm.last_name = "";
+    this.filterForm.first_name = '';
+    this.filterForm.last_name = '';
     this.filterForm.phone = null;
-    this.filterForm.statut_pro = "";
-    this.filterForm.area = "";
+    this.filterForm.statut_pro = '';
+    // this.filterForm.area = '';
     this.filterChange();
   }
   restaurer(id: any) {
@@ -159,13 +207,13 @@ export class AdminsComponent implements OnInit {
       text: 'Êtes-vous sûr(e) de vouloir restauser',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Confirmer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         // this.userService.restaurer(id).subscribe((res: any) => {
@@ -179,25 +227,37 @@ export class AdminsComponent implements OnInit {
         //   })
         // })
       }
-    })
+    });
   }
   get emptyFilter() {
-    return !this.filterForm.first_name && !this.filterForm.last_name && !this.filterForm.phone
-      && !this.filterForm.statut_pro && !this.filterForm.area
+    return (
+      !this.filterForm.first_name &&
+      !this.filterForm.last_name &&
+      !this.filterForm.phone &&
+      !this.filterForm.statut_pro
+      // &&
+      // !this.filterForm.area
+    );
   }
   getDeletedAdminList() {
     let payload = {
       phone: this.filterForm.phone ? this.filterForm.phone : '',
       last_name: this.filterForm.last_name,
       first_name: this.filterForm.first_name,
-      area: this.filterForm.area,
+      // area: this.filterForm.area,
       paginated: 1,
       page: this.page,
       page_size: this.per_page,
       filter: this.filter,
-      'roles[]': ['admin', 'superadmin', 'operateur', 'dispatcheur', 'commerciale'],
+      'roles[]': [
+        'admin',
+        'superadmin',
+        'operateur',
+        'dispatcheur',
+        'commerciale',
+      ],
       orderBy: this.order_by,
-      orderDirection: this.order
+      orderDirection: this.order,
     };
     this.loading = true;
     this.deleted = true;
@@ -218,7 +278,7 @@ export class AdminsComponent implements OnInit {
     this.order_by = $event.sortField ? $event.sortField : 'id';
     this.order = $event.sortOrder == 1 ? 'asc' : 'desc';
     this.per_page = $event.rows;
-    this.refreshList()
+    this.refreshList();
   }
   displayAddAdmin() {
     this.showingAddAdmin = !this.showingAddAdmin;
@@ -244,8 +304,7 @@ export class AdminsComponent implements OnInit {
       //     }
       //   })
       // });
-    }
-    else {
+    } else {
       // this.userService.deleteUser(this.adminToDelete.id).subscribe((res: any) => {
       //   this.getAdminList();
       //   Swal.fire({
@@ -264,18 +323,18 @@ export class AdminsComponent implements OnInit {
       text: this.translate.instant('COMMON.CONFIRM_DELETE'),
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.deleteAdmin()
+        this.deleteAdmin();
       }
-    })
+    });
   }
   toggleUpdatePassword(admin: any) {
     this.showUpdatePassword = !this.showUpdatePassword;
@@ -296,14 +355,13 @@ export class AdminsComponent implements OnInit {
   }
   refreshList() {
     if (this.deleted) {
-      this.getDeletedAdminList()
-    }
-    else {
-      this.getAdminList()
+      this.getDeletedAdminList();
+    } else {
+      this.getAdminList();
     }
   }
   displayAddRegion(admin: any) {
     this.adminToAddRegion = admin;
-    this.displayRegionModal = true
+    this.displayRegionModal = true;
   }
 }

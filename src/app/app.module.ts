@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
   declarations: [AppComponent],
   imports: [
     CommonModule,
-    
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

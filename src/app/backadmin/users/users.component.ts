@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subject, debounceTime } from 'rxjs';
+import { Subject, debounceTime } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { Area } from 'src/app/models/area.model';
-import * as areaActions from 'src/app/store/actions/area.actions';
-import { selectAreas } from 'src/app/store/reducers/area.reducer';
 import Swal from 'sweetalert2';
 import { UserService } from '../_services/users.service';
 @Component({
@@ -93,22 +89,21 @@ export class UsersComponent implements OnInit {
     phone: null,
     last_name: '',
     first_name: '',
-    area: '',
+    // area: '',
   };
   order_by = 'id';
   order = 'asc';
   private searchTerm$ = new Subject<any>();
   deleted: boolean = false;
-  areas$!: Observable<Area[]>;
+  // areas$!: Observable<Area[]>;
   loaded = false;
   list: any;
   constructor(
     private userService: UserService,
     private routerService: Router,
-    private translate: TranslateService,
-    private store: Store
+    private translate: TranslateService
   ) {
-    this.areas$ = this.store.pipe(select(selectAreas));
+    // this.areas$ = this.store.pipe(select(selectAreas));
   }
   ngOnInit() {
     this.searchTerm$
@@ -119,13 +114,13 @@ export class UsersComponent implements OnInit {
       .subscribe((searchTerm: any) => {
         this.performSearch(searchTerm);
       });
-    this.areas$.subscribe((areas: any) => {
-      if (!this.loaded && areas?.length == 0) {
-        this.loaded = true;
-        this.store.dispatch(areaActions.loadAreas());
-      }
-      this.list = areas.data;
-    });
+    // this.areas$.subscribe((areas: any) => {
+    //   if (!this.loaded && areas?.length == 0) {
+    //     this.loaded = true;
+    //     this.store.dispatch(areaActions.loadAreas());
+    //   }
+    //   this.list = areas.data;
+    // });
   }
   getClientList() {
     let payload = {
@@ -140,7 +135,7 @@ export class UsersComponent implements OnInit {
       'roles[]': ['client'],
       orderBy: this.order_by,
       orderDirection: this.order,
-      area: this.filterForm.area,
+      // area: this.filterForm.area,
     };
     this.loading = true;
     this.deleted = false;
@@ -172,7 +167,7 @@ export class UsersComponent implements OnInit {
     this.filterForm.last_name = '';
     this.filterForm.phone = null;
     this.filterForm.statut_pro = '';
-    this.filterForm.area = '';
+    // this.filterForm.area = '';
     this.filterChange();
   }
   restaurer(id: any) {
@@ -207,8 +202,9 @@ export class UsersComponent implements OnInit {
       !this.filterForm.first_name &&
       !this.filterForm.last_name &&
       !this.filterForm.phone &&
-      !this.filterForm.statut_pro &&
-      !this.filterForm.area
+      !this.filterForm.statut_pro
+      //  &&
+      // !this.filterForm.area
     );
   }
   getDeletedClientList() {
@@ -223,7 +219,7 @@ export class UsersComponent implements OnInit {
       'roles[]': ['client'],
       orderBy: this.order_by,
       orderDirection: this.order,
-      area: this.filterForm.area,
+      // area: this.filterForm.area,
     };
     this.loading = true;
     this.deleted = true;

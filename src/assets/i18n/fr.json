@@ -178,7 +178,9 @@
     "SIDEBAR": {
         "ADMINS": "Administrateurs",
         "USERS": "Utilisateurs",
-        "CLIENTS": "Clients",
+        "COMPANY": "Professionnels",
+        "ENSGEIGNANT": "enseignant ",
+        "CLIENTS": "Etudiant",
         "SUPPLIERS": "Fournisseurs",
         "ADMINS_LIST": "Liste administrateurs",
         "USERS_LIST": "Liste clients",
@@ -186,7 +188,6 @@
         "QCMS": "QCMS",
         "QCMS_LIST": "Liste QCMS",
         "DASHBOARD": "Tableau de bord",
-        "COMPANY": "Professionnels",
         "PUB_LIST": "Liste des affiches publicitaires",
         "PROMO": "Promotion",
         "PROMO_LIST": "liste des promotions",
