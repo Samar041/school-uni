@@ -21,12 +21,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { ResetComponent } from './auth/reset/reset.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { ViewCompanyComponent } from './companies/view-company/view-company.component';
-import { ConfigurationsComponent } from './configurations/configurations.component';
+// import { ConfigurationsComponent } from './configurations/configurations.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DemandeListComponent } from './demandes/demande-list.component';
 import { MessagerieComponent } from './messagerie/messagerie.component';
 import { PromoListComponent } from './promos/promo-list.component';
-import { RegionsComponent } from './regions/regions.component';
+// import { RegionsComponent } from './regions/regions.component';
 import { SuiviDemandesComponent } from './suivi-demandes/suivi-demandes.component';
 import { UsersComponent } from './users/users.component';
 import { ViewUserComponent } from './users/view-user/view-user.component';
@@ -131,10 +131,10 @@ const routes: Routes = [
           },
         ],
       },
-      {
-        path: 'regions',
-        component: RegionsComponent,
-      },
+      // {
+      //   path: 'regions',
+      //   component: RegionsComponent,
+      // },
       {
         path: 'affiche-publicitaire',
         component: AffichePublicitaireComponent,
@@ -161,10 +161,10 @@ const routes: Routes = [
         path: 'messagerie',
         component: MessagerieComponent,
       },
-      {
-        path: 'configurations',
-        component: ConfigurationsComponent,
-      },
+      // {
+      //   path: 'configurations',
+      //   component: ConfigurationsComponent,
+      // },
     ],
   },
 ];
