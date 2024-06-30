@@ -1,12 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup, UntypedFormBuilder, Validators} from "@angular/forms";
-import {TranslateService} from "@ngx-translate/core";
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
+import { Subject } from "rxjs";
 import Swal from 'sweetalert2';
-import {Location} from '@angular/common';
-import {LazyLoadEvent} from 'primeng/api';
-import {Subject, Subscription} from "rxjs";
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../_services/users.service';
 import { PromosService } from '../_services/promos.services';
 PromosService
 @Component({

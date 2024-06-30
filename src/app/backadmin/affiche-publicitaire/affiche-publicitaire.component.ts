@@ -1,22 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
-import Swal from 'sweetalert2';
-import { Location } from '@angular/common';
-import { LazyLoadEvent } from 'primeng/api';
-import { Observable, Subject, Subscription, debounceTime, distinctUntilChanged } from "rxjs";
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../_services/users.service';
-import { AffichePublicitaireService } from '../_services/affiche-publicitaire.services';
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Area } from 'src/app/models/area.model';
 import * as areaActions from 'src/app/store/actions/area.actions';
-import { selectAreas, selectAreasLoading } from 'src/app/store/reducers/area.reducer';
+import { selectAreas } from 'src/app/store/reducers/area.reducer';
+import Swal from 'sweetalert2';
+import { AffichePublicitaireService } from '../_services/affiche-publicitaire.services';
+import { UserService } from '../_services/users.service';
 
 @Component({
   selector: 'app-affiche-publicitaire',
   templateUrl: './affiche-publicitaire.component.html',
-  styleUrls: ['./affiche-publicitaire.component.scss']
+  styleUrls: ['./affiche-publicitaire.component.scss'],
 })
 export class AffichePublicitaireComponent implements OnInit {
   showingAddPub: boolean = false;
@@ -28,22 +25,26 @@ export class AffichePublicitaireComponent implements OnInit {
   last_page: number = 1;
   filter: string = '';
   loading: boolean = false;
-  allStatus: any = [{ id: 1, name: 'PROGRAM', color: "#17c2c2", label: "Programmée" }, { id: 2, name: 'ENCOURS', color: "#ffb74c", label: "En cours" }, { id: 3, name: 'CLOTURE', color: "#fe5050", label: "Cloturée" }];
+  allStatus: any = [
+    { id: 1, name: 'PROGRAM', color: '#17c2c2', label: 'Programmée' },
+    { id: 2, name: 'ENCOURS', color: '#ffb74c', label: 'En cours' },
+    { id: 3, name: 'CLOTURE', color: '#fe5050', label: 'Cloturée' },
+  ];
   order_by = 'id';
   order = 'asc';
   affichePublicitaire: any = [];
   filterForm = {
-    statut: "",
-    date_debut: "",
-    date_fin: "",
-    first_name: "",
-    area: ""
-  }
+    statut: '',
+    date_debut: '',
+    date_fin: '',
+    first_name: '',
+    area: '',
+  };
   pubId: any;
   private searchTerm$ = new Subject<any>();
   areas$!: Observable<Area[]>;
   loaded = false;
-  list: any
+  list: any;
   constructor(
     private formBuilder: UntypedFormBuilder,
     public translate: TranslateService,
@@ -54,12 +55,14 @@ export class AffichePublicitaireComponent implements OnInit {
     this.areas$ = this.store.pipe(select(selectAreas));
   }
   ngOnInit() {
-    this.searchTerm$.pipe(
-      debounceTime(300),
-      distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
-    ).subscribe((searchTerm: any) => {
-      this.performSearch(searchTerm)
-    });
+    this.searchTerm$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
+      )
+      .subscribe((searchTerm: any) => {
+        this.performSearch(searchTerm);
+      });
     this.areas$.subscribe((areas: any) => {
       if (!this.loaded && areas?.length == 0) {
         this.loaded = true;
@@ -110,14 +113,14 @@ export class AffichePublicitaireComponent implements OnInit {
     this.order_by = $event.sortField ? $event.sortField : 'id';
     this.order = $event.sortOrder == 1 ? 'asc' : 'desc';
     this.per_page = $event.rows;
-    this.AfficheList()
+    this.AfficheList();
   }
   resetFilter() {
-    this.filterForm.date_debut = "";
-    this.filterForm.date_fin = "";
-    this.filterForm.statut = "";
-    this.filterForm.first_name = "";
-    this.filterForm.area = "";
+    this.filterForm.date_debut = '';
+    this.filterForm.date_fin = '';
+    this.filterForm.statut = '';
+    this.filterForm.first_name = '';
+    this.filterForm.area = '';
     this.filterChange();
   }
   filterChange() {
@@ -132,31 +135,37 @@ export class AffichePublicitaireComponent implements OnInit {
       text: this.translate.instant('COMMON.CONFIRM_DELETE'),
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.affichePublicitaireService.deletePubPermanantly(id).subscribe((res: any) => {
-          Swal.fire({
-            text: "Affiche publicitaire supprimée avec succès",
-            icon: 'success',
-            customClass: {
-              confirmButton: 'btn-primary',
-            }
+        this.affichePublicitaireService
+          .deletePubPermanantly(id)
+          .subscribe((res: any) => {
+            Swal.fire({
+              text: 'Affiche publicitaire supprimée avec succès',
+              icon: 'success',
+              customClass: {
+                confirmButton: 'btn-primary',
+              },
+            });
+            this.AfficheList();
           });
-          this.AfficheList();
-
-        });
       }
-    })
+    });
   }
   get emptyFilter() {
-    return !this.filterForm.date_fin && !this.filterForm.first_name && !this.filterForm.date_debut
-      && !this.filterForm.statut && !this.filterForm.area
+    return (
+      !this.filterForm.date_fin &&
+      !this.filterForm.first_name &&
+      !this.filterForm.date_debut &&
+      !this.filterForm.statut &&
+      !this.filterForm.area
+    );
   }
 }

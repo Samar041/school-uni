@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../_services/users.service';
+import { Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject, debounceTime } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import Swal from 'sweetalert2';
-import { DemandeService } from '../_services/demandes.services';
-import { Store, select } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { Area } from 'src/app/models/area.model';
 import * as areaActions from 'src/app/store/actions/area.actions';
-import { selectAreas, selectAreasLoading } from 'src/app/store/reducers/area.reducer';
+import { selectAreas } from 'src/app/store/reducers/area.reducer';
+import Swal from 'sweetalert2';
+import { DemandeService } from '../_services/demandes.services';
+import { UserService } from '../_services/users.service';
 
 @Component({
   selector: 'app-demande-list',
@@ -35,54 +35,54 @@ export class DemandeListComponent implements OnInit {
     {
       value: 'PENDING',
       name: 'En attente',
-      color: "#ffb74c"
+      color: '#ffb74c',
     },
     {
       value: 'ACCEPTED',
-      name: 'Accepté par l\'admin',
-      color: "#2C76BE"
+      name: "Accepté par l'admin",
+      color: '#2C76BE',
     },
     {
       value: 'VALIDATION',
       name: 'Validé par le prestataire',
-      color: "#75C2F6"
+      color: '#75C2F6',
     },
     {
       value: 'INPROGRESS',
       name: 'En cours',
-      color: "#17c2c2"
+      color: '#17c2c2',
     },
     {
       value: 'WAITING',
-      name: 'Transmis à l\'admin',
-      color: "#FD7716"
+      name: "Transmis à l'admin",
+      color: '#FD7716',
     },
     {
       value: 'ONROAD',
       name: 'Analyse de problème',
-      color: "#F2C525"
+      color: '#F2C525',
     },
     {
       value: 'FINISHED',
       name: 'finie',
-      color: "#fe5050"
+      color: '#fe5050',
     },
     {
       name: this.translate.instant('STATUS.DELETED'),
       value: 'DELETED',
-      color: "#db1345"
+      color: '#db1345',
     },
-  ]
+  ];
   DemandeToUpdatePassword: any;
   filterForm = {
-    statut: "",
+    statut: '',
     phone: null,
-    prestataire: "",
-    client: "",
-    date_debut: "",
-    date_fin: "",
-    area: ""
-  }
+    prestataire: '',
+    client: '',
+    date_debut: '',
+    date_fin: '',
+    area: '',
+  };
   order_by = '';
   order = 'asc';
   private searchTerm$ = new Subject<any>();
@@ -92,7 +92,7 @@ export class DemandeListComponent implements OnInit {
   Providers: any = [];
   areas$!: Observable<Area[]>;
   loaded = false;
-  list: any
+  list: any;
   constructor(
     private demandeService: DemandeService,
     private routerService: Router,
@@ -105,12 +105,14 @@ export class DemandeListComponent implements OnInit {
   ngOnInit() {
     this.getProvider();
     this.getClientList();
-    this.searchTerm$.pipe(
-      debounceTime(300),
-      distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
-    ).subscribe((searchTerm: any) => {
-      this.performSearch(searchTerm)
-    });
+    this.searchTerm$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged((x, y) => JSON.stringify(x) !== JSON.stringify(y))
+      )
+      .subscribe((searchTerm: any) => {
+        this.performSearch(searchTerm);
+      });
     this.areas$.subscribe((areas: any) => {
       if (!this.loaded && areas?.length == 0) {
         this.loaded = true;
@@ -129,7 +131,7 @@ export class DemandeListComponent implements OnInit {
       date_debut: this.filterForm.date_debut,
       date_fin: this.filterForm.date_fin,
       client: this.filterForm.client,
-      statut: this.filterForm.statut === null ? "" : this.filterForm.statut,
+      statut: this.filterForm.statut === null ? '' : this.filterForm.statut,
       area: this.filterForm.area,
     };
     this.loading = true;
@@ -151,25 +153,31 @@ export class DemandeListComponent implements OnInit {
     this.searchTerm$.next(this.filterForm);
   }
   resetFilter() {
-    this.filterForm.prestataire = "";
-    this.filterForm.client = "";
-    this.filterForm.statut = "";
-    this.filterForm.date_debut = "";
-    this.filterForm.date_fin = "";
-    this.filterForm.area = "";
-    this.filterChange(null)
+    this.filterForm.prestataire = '';
+    this.filterForm.client = '';
+    this.filterForm.statut = '';
+    this.filterForm.date_debut = '';
+    this.filterForm.date_fin = '';
+    this.filterForm.area = '';
+    this.filterChange(null);
   }
   get emptyFilter() {
-    return !this.filterForm.prestataire && !this.filterForm.client && !this.filterForm.phone
-      && !this.filterForm.statut && !this.filterForm.date_debut && !this.filterForm.date_fin
-      && !this.filterForm.area
+    return (
+      !this.filterForm.prestataire &&
+      !this.filterForm.client &&
+      !this.filterForm.phone &&
+      !this.filterForm.statut &&
+      !this.filterForm.date_debut &&
+      !this.filterForm.date_fin &&
+      !this.filterForm.area
+    );
   }
   lazyLoad($event: any) {
     this.page = $event.first / $event.rows + 1;
     this.order_by = $event.sortField ? $event.sortField : 'id';
     this.order = $event.sortOrder == 1 ? 'asc' : 'desc';
     this.per_page = $event.rows;
-    this.refreshList()
+    this.refreshList();
   }
   displayAddDemande() {
     this.showingAddDemande = true;
@@ -192,59 +200,59 @@ export class DemandeListComponent implements OnInit {
       text: this.translate.instant('COMMON.CONFIRM_DELETE'),
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         this.demandeService.deleteDemande(id).subscribe((res: any) => {
           this.getDemandeList();
           Swal.fire({
-            text: "Demande supprimé avec succès",
+            text: 'Demande supprimé avec succès',
             icon: 'success',
             customClass: {
               confirmButton: 'btn-primary',
-            }
-          })
+            },
+          });
         });
         this.getDemandeList();
       }
-    })
+    });
   }
   trashedDeleteDemande(id: any) {
     Swal.fire({
       text: this.translate.instant('COMMON.CONFIRM_DELETE'),
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         this.demandeService.softDeleteDemande(id).subscribe((res: any) => {
           this.getDemandeList();
           Swal.fire({
-            text: "Demande supprimé avec succès",
+            text: 'Demande supprimé avec succès',
             icon: 'success',
             customClass: {
               confirmButton: 'btn-primary',
-            }
-          })
+            },
+          });
         });
         this.getDemandeList();
       }
-    })
+    });
   }
   refreshList() {
-    this.getDemandeList()
+    this.getDemandeList();
   }
   updateDemandestatus(id: any, event: any) {
     const formData = {
@@ -263,18 +271,14 @@ export class DemandeListComponent implements OnInit {
     let payload = {
       'roles[]': ['client'],
     };
-    this.userService.getUsersList(payload).subscribe(
-      (res: any) => {
-        this.Clients = res.body.data;
-      }
-    );
+    // this.userService.getUsersList(payload).subscribe((res: any) => {
+    //   this.Clients = res.body.data;
+    // });
   }
   getProvider() {
-    this.userService.getProviderList().subscribe(
-      (res: any) => {
-        this.Providers = res.body;
-      }
-    );
+    // this.userService.getProviderList().subscribe((res: any) => {
+    //   this.Providers = res.body;
+    // });
   }
   getDeletedList() {
     let payload = {
@@ -286,8 +290,7 @@ export class DemandeListComponent implements OnInit {
       client: this.filterForm.client,
       date_debut: this.filterForm.date_debut,
       date_fin: this.filterForm.date_fin,
-      statut: this.filterForm.statut === null ? "" : this.filterForm.statut,
-
+      statut: this.filterForm.statut === null ? '' : this.filterForm.statut,
     };
     this.loading = true;
     this.deleted = false;
@@ -307,9 +310,8 @@ export class DemandeListComponent implements OnInit {
   performSearch(terms: any) {
     this.page = 1;
     if (this.filterForm.statut == 'DELETED') {
-      this.getDeletedList()
-    }
-    else {
+      this.getDeletedList();
+    } else {
       this.getDemandeList();
     }
   }
@@ -319,27 +321,27 @@ export class DemandeListComponent implements OnInit {
       text: 'Êtes-vous sûr(e) de vouloir restauser',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Confirmer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler',
       reverseButtons: true,
       customClass: {
         confirmButton: 'btn-primary',
-        cancelButton: 'btn-cancel'
-      }
+        cancelButton: 'btn-cancel',
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         this.demandeService.restaurer(id).subscribe((res: any) => {
           this.getDeletedList();
           Swal.fire({
-            text: "Demande restauré avec succès",
+            text: 'Demande restauré avec succès',
             icon: 'success',
             customClass: {
               confirmButton: 'btn-primary',
-            }
-          })
-        })
+            },
+          });
+        });
       }
-    })
+    });
   }
   closeUpdateWithNoRefresh() {
     this.showingUpdateDemande = !this.showingUpdateDemande;
@@ -347,15 +349,12 @@ export class DemandeListComponent implements OnInit {
   closeAddWithNoRefresh() {
     this.showingAddDemande = !this.showingAddDemande;
   }
-  getTrashedList() {
-
-  }
+  getTrashedList() {}
   refresh() {
     if (this.filterForm.statut == 'DELETED') {
-      this.getDeletedList()
-    }
-    else {
-      this.getDemandeList()
+      this.getDeletedList();
+    } else {
+      this.getDemandeList();
     }
   }
 }

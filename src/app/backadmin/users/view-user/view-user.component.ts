@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../_services/users.service";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from "../../_services/users.service";
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
@@ -47,19 +47,6 @@ export class ViewUserComponent implements OnInit {
       );
   }
   getUserById(id: any) {
-    if (this.deleted == 'true') {
-      this.loading = true;
-      this.userService.getDeletedUserById(id).subscribe((res: any) => {
-        this.User = res.body;
-        this.loading = false;
-      }, (error: any) => { console.error(error); });
-    }
-    else {
-      this.loading = true;
-      this.userService.getUserById(id).subscribe((res: any) => {
-        this.User = res.body;
-        this.loading = false;
-      }, (error: any) => { console.error(error); });
-    }
+ 
   }
 }

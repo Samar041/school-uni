@@ -122,17 +122,17 @@ export class AdminsComponent implements OnInit {
     };
     this.loading = true;
     this.deleted = false;
-    this.userService.getUsersList(payload).subscribe(
-      (res: any) => {
-        this.admins = res.body.data;
-        this.total = res.body?.paginator.total;
-        this.last_page = res.body?.paginator.last_page;
-        this.loading = false;
-      },
-      () => {
-        this.loading = false;
-      }
-    );
+    // this.userService.getUsersList(payload).subscribe(
+    //   (res: any) => {
+    //     this.admins = res.body.data;
+    //     this.total = res.body?.paginator.total;
+    //     this.last_page = res.body?.paginator.last_page;
+    //     this.loading = false;
+    //   },
+    //   () => {
+    //     this.loading = false;
+    //   }
+    // );
   }
   filterChange() {
     this.searchTerm$.next(this.filterForm);
@@ -168,16 +168,16 @@ export class AdminsComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.restaurer(id).subscribe((res: any) => {
-          this.getDeletedAdminList();
-          Swal.fire({
-            text: "Admin restauré avec succès",
-            icon: 'success',
-            customClass: {
-              confirmButton: 'btn-primary',
-            }
-          })
-        })
+        // this.userService.restaurer(id).subscribe((res: any) => {
+        //   this.getDeletedAdminList();
+        //   Swal.fire({
+        //     text: "Admin restauré avec succès",
+        //     icon: 'success',
+        //     customClass: {
+        //       confirmButton: 'btn-primary',
+        //     }
+        //   })
+        // })
       }
     })
   }
@@ -201,17 +201,17 @@ export class AdminsComponent implements OnInit {
     };
     this.loading = true;
     this.deleted = true;
-    this.userService.getDeletedUsersList(payload).subscribe(
-      (res: any) => {
-        this.admins = res.body.data;
-        this.total = res.body?.paginator.total;
-        this.last_page = res.body?.paginator.last_page;
-        this.loading = false;
-      },
-      () => {
-        this.loading = false;
-      }
-    );
+    // this.userService.getDeletedUsersList(payload).subscribe(
+    //   (res: any) => {
+    //     this.admins = res.body.data;
+    //     this.total = res.body?.paginator.total;
+    //     this.last_page = res.body?.paginator.last_page;
+    //     this.loading = false;
+    //   },
+    //   () => {
+    //     this.loading = false;
+    //   }
+    // );
   }
   lazyLoad($event: any) {
     this.page = $event.first / $event.rows + 1;
@@ -234,28 +234,28 @@ export class AdminsComponent implements OnInit {
   }
   deleteAdmin() {
     if (this.deleted) {
-      this.userService.deleteUserPermanantly(this.adminToDelete.id).subscribe((res: any) => {
-        this.getDeletedAdminList();
-        Swal.fire({
-          text: "Admin supprimé avec succès",
-          icon: 'success',
-          customClass: {
-            confirmButton: 'btn-primary',
-          }
-        })
-      });
+      // this.userService.deleteUserPermanantly(this.adminToDelete.id).subscribe((res: any) => {
+      //   this.getDeletedAdminList();
+      //   Swal.fire({
+      //     text: "Admin supprimé avec succès",
+      //     icon: 'success',
+      //     customClass: {
+      //       confirmButton: 'btn-primary',
+      //     }
+      //   })
+      // });
     }
     else {
-      this.userService.deleteUser(this.adminToDelete.id).subscribe((res: any) => {
-        this.getAdminList();
-        Swal.fire({
-          text: "Admin supprimé avec succès",
-          icon: 'success',
-          customClass: {
-            confirmButton: 'btn-primary',
-          }
-        })
-      });
+      // this.userService.deleteUser(this.adminToDelete.id).subscribe((res: any) => {
+      //   this.getAdminList();
+      //   Swal.fire({
+      //     text: "Admin supprimé avec succès",
+      //     icon: 'success',
+      //     customClass: {
+      //       confirmButton: 'btn-primary',
+      //     }
+      //   })
+      // });
     }
   }
   toggleDeleteAdmin(elm: any = false) {
@@ -285,14 +285,14 @@ export class AdminsComponent implements OnInit {
     const formData = {
       status: event.value,
     };
-    this.userService.changeStatus(id, formData).subscribe(
-      (res: any) => {
-        this.getAdminList();
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+    // this.userService.changeStatus(id, formData).subscribe(
+    //   (res: any) => {
+    //     this.getAdminList();
+    //   },
+    //   (error: any) => {
+    //     console.error(error);
+    //   }
+    // );
   }
   refreshList() {
     if (this.deleted) {

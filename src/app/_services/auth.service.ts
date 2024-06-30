@@ -63,58 +63,5 @@ export class AuthService {
     return this.afAuth.authState;
   }
 
-  // private async saveUserData(user: any) {
-  //   if (user) {
-  //     const userRef = doc(this.firestore, `users/${user.uid}`);
-  //     const userData = {
-  //       uid: user.uid,
-  //       email: user.email,
-  //       displayName: user.displayName,
-  //       photoURL: user.photoURL,
-  //       emailVerified: user.emailVerified,
-  //     };
-  //     await setDoc(userRef, userData, { merge: true });
-  //   }
-  // }
-
-  async getToken(user: User | null): Promise<string | undefined> {
-    if (user) {
-      return await user.getIdToken();
-    }
-    return undefined;
-  }
-
-  login(formData: any) {
-    return this.http
-      .post(`${this.authUrl}/login`, formData, { observe: 'response' })
-      .pipe(catchError(this.handleError));
-  }
-  forgetPassword(formData: any) {
-    return this.http
-      .post(`${this.authUrl}/forgot-password`, formData, {
-        observe: 'response',
-      })
-      .pipe(catchError(this.handleError));
-  }
-  resetPassword(formData: any) {
-    return this.http
-      .post(`${this.authUrl}/reset-password`, formData, { observe: 'response' })
-      .pipe(catchError(this.handleError));
-  }
-  getIsAuth() {
-    return !!this.localstorageService.getAdminToken();
-  }
-  logOut() {
-    this.localstorageService.clear();
-    this.isAuthenticated = false;
-    this.authStatusListener.next(false);
-    this.router.navigate(['login']);
-  }
-  private handleError(err: HttpErrorResponse): Observable<never> {
-    return throwError(() => err);
-  }
-  get admin() {
-    const user: string = this.localstorageService.getAdmin() as string;
-    return JSON.parse(user);
-  }
+  
 }

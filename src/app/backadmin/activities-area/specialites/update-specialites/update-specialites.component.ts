@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import Swal from 'sweetalert2';
-import { UserService } from '../../../_services/users.service';
-import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { getFileNameFromPath, objectToFormData } from './../../../shared/utils/utils'
 import { ActivitiesService } from '../../../_services/activities.service';
+import { getFileNameFromPath, objectToFormData } from './../../../shared/utils/utils';
 
 @Component({
   selector: 'app-update-specialites',

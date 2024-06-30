@@ -12,7 +12,7 @@ export class HeaderBackadminComponent {
   statusToggleDropdownList: Boolean = false;
   admin: any;
   constructor(private authService: AuthService,private router: Router, private localstorageService: LocalStorageService) {
-    this.admin = this.authService.admin;
+    // this.admin = this.authService.admin;
   }
   logout() {
     this.localstorageService.clear();

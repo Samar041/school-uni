@@ -28,7 +28,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
           });
         } else {
           if (requestError.status === 401) {
-            this.authService.logOut();
+            // this.authService.logOut();
             this.router.navigate(['/login']);
           }
         }

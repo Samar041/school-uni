@@ -15,7 +15,7 @@ export class LaravelEchoService {
   private dispatcherNewDemandeSubject: Subject<any> = new Subject<any>();
   admin: any;
   constructor(private authService: AuthService) {
-    this.admin = this.authService.admin;
+    // this.admin = this.authService.admin;
     const options: any = {
       ...environment.pusher,
       broadcaster: 'pusher',

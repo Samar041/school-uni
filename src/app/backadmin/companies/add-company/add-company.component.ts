@@ -1,17 +1,33 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  CountryISO,
+  PhoneNumberFormat,
+  SearchCountryField,
+} from 'ngx-intl-tel-input';
 import Swal from 'sweetalert2';
-import { UserService } from '../../_services/users.service';
-import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { objectToFormData } from './../../shared/utils/utils';
 import { ActivitiesService } from '../../_services/activities.service';
-
+import { UserService } from '../../_services/users.service';
+import { objectToFormData } from './../../shared/utils/utils';
 
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
-  styleUrls: ['./add-company.component.scss']
+  styleUrls: ['./add-company.component.scss'],
 })
 export class AddCompanyComponent {
   @ViewChild('dialog', { static: false }) dialog!: any;
@@ -22,7 +38,7 @@ export class AddCompanyComponent {
   addClientForm: UntypedFormGroup = this.generateForm();
   attemptSubmission: boolean = false;
   showingPassword: boolean = false;
-  newPassword = "";
+  newPassword = '';
   passwordLenght = 12;
   oldPasswordInvalid: boolean = false;
   emailExists: boolean = false;
@@ -32,13 +48,13 @@ export class AddCompanyComponent {
   genres: any[] = [
     {
       name: 'Femme',
-      value: 'femme'
+      value: 'femme',
     },
     {
       name: 'Homme',
-      value: 'homme'
-    }
-  ]
+      value: 'homme',
+    },
+  ];
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
@@ -47,16 +63,22 @@ export class AddCompanyComponent {
   imageUrl: any;
   fileUrl: any;
   types = [
-    { 'label': 'EL', 'value': 'Entreprise individuelle(EI)' },
-    { 'label': 'EIRL', 'value': 'Entreprise individuelle à responsabilité limitée(EIRL)' },
-    { 'label': 'EURL', 'value': 'Entreprise unipersonnelle à responsabilité limitée(EURL)' },
-    { 'label': 'SARL', 'value': 'Société à responsabilité limitée(SARL)' },
-    { 'label': 'SAS', 'value': 'Société par actions simplifiée(SAS)' },
-    { 'label': 'SA', 'value': 'Société anonyme(SA)' },
-    { 'label': 'Entreprise publique', 'value': 'Entreprise publique(EP)' },
-    { 'label': 'ESS', 'value': 'Économie sociale et solidaire(ESS)' },
-    { 'label': 'Micro-entreprise', 'value': 'Micro-entreprise' },
-    { 'label': 'Auto-entrepreneur', 'value': 'Auto-entrepreneur' }
+    { label: 'EL', value: 'Entreprise individuelle(EI)' },
+    {
+      label: 'EIRL',
+      value: 'Entreprise individuelle à responsabilité limitée(EIRL)',
+    },
+    {
+      label: 'EURL',
+      value: 'Entreprise unipersonnelle à responsabilité limitée(EURL)',
+    },
+    { label: 'SARL', value: 'Société à responsabilité limitée(SARL)' },
+    { label: 'SAS', value: 'Société par actions simplifiée(SAS)' },
+    { label: 'SA', value: 'Société anonyme(SA)' },
+    { label: 'Entreprise publique', value: 'Entreprise publique(EP)' },
+    { label: 'ESS', value: 'Économie sociale et solidaire(ESS)' },
+    { label: 'Micro-entreprise', value: 'Micro-entreprise' },
+    { label: 'Auto-entrepreneur', value: 'Auto-entrepreneur' },
   ];
   domaines = [];
   constructor(
@@ -64,9 +86,8 @@ export class AddCompanyComponent {
     private userService: UserService,
     public translate: TranslateService,
     private activitiesService: ActivitiesService
-  ) { }
-  ngOnInit() {
-  }
+  ) {}
+  ngOnInit() {}
   ngAfterViewChecked(): void {
     const input = document.getElementsByClassName('custom');
     if (input.length) {
@@ -90,9 +111,18 @@ export class AddCompanyComponent {
       certification: ['', Validators.required],
       description: [''],
       file: [''],
-      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [this.confirmPassword(), Validators.required]],
+      password_confirmation: [
+        '',
+        [this.confirmPassword(), Validators.required],
+      ],
     });
   }
 
@@ -100,10 +130,10 @@ export class AddCompanyComponent {
     this.addClientForm = this.generateForm();
     this.showSuccess = false;
     this.attemptSubmission = false;
-    this.loading = false
+    this.loading = false;
     this.emailExists = false;
-    this.imageUrl = "";
-    this.fileUrl = "";
+    this.imageUrl = '';
+    this.fileUrl = '';
     this.close.emit();
   }
   generatePassword() {
@@ -116,40 +146,40 @@ export class AddCompanyComponent {
     if (this.newPassword) {
       this.addClientForm.patchValue({
         password: this.newPassword,
-        password_confirmation: this.newPassword
-      })
+        password_confirmation: this.newPassword,
+      });
     }
   }
   confirmPassword(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      var password_confirm = control.value
+      var password_confirm = control.value;
       try {
-        var password = this.addClientForm?.get('password')?.value
+        var password = this.addClientForm?.get('password')?.value;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-      if (password === password_confirm) return null
-      return { password_mismatch: true }
-    }
+      if (password === password_confirm) return null;
+      return { password_mismatch: true };
+    };
   }
   password() {
     this.showingPassword = !this.showingPassword;
   }
   get f() {
-    return this.addClientForm.controls
+    return this.addClientForm.controls;
   }
   uploadImage(event: any) {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.addClientForm.patchValue({
-        image: fileList[0]
-      })
+        image: fileList[0],
+      });
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.imageUrl = reader.result;
-      }
+      };
     }
     event.currentTarget.value = '';
   }
@@ -158,74 +188,82 @@ export class AddCompanyComponent {
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.addClientForm.patchValue({
-        file: fileList[0]
-      })
+        file: fileList[0],
+      });
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.fileUrl = reader.result;
-      }
+      };
     }
     event.currentTarget.value = '';
   }
   removeThumbnail() {
-    this.imageUrl = "";
-    this.f['image'].setValue("");
+    this.imageUrl = '';
+    this.f['image'].setValue('');
   }
   removeFile() {
-    this.fileUrl = "";
-    this.f['file'].setValue("");
+    this.fileUrl = '';
+    this.f['file'].setValue('');
   }
   attemptAddClient(event: any) {
     this.attemptSubmission = true;
     if (this.addClientForm.valid) {
       let form = this.addClientForm.value;
       if (form.phone.e164Number) {
-        form.phone = form.phone.e164Number
+        form.phone = form.phone.e164Number;
       }
-      form.role = ["prestataire"];
-      form.prix = "";
+      form.role = ['prestataire'];
+      form.prix = '';
       delete form.domaines;
       const formData = objectToFormData(form);
       this.loading = true;
       if (!form.speciality_id?.length) {
-        formData.append('speciality_id', '')
+        formData.append('speciality_id', '');
       }
-      this.userService.storeUser(formData).subscribe((res: any) => {
-        this.show = false;
-        Swal.fire({
-          text: 'Prestataire ajouté avec succès',
-          icon: 'success',
-          showCancelButton: false,
-          customClass: {
-            confirmButton: 'btn-primary',
-          }
-        }).then(() => {
-          this.addClientForm = this.generateForm();
-          this.showSuccess = false;
-          this.loading = false
-          this.success.emit();
-          this.attemptSubmission = false;
-        })
-      },
-        (res: any) => {
-          this.loading = false
-          if (res.status === 422) {
-            if (res.error.message == "The email has already been taken.") {
-              this.emailExists = true
-            }
-            else if (res.error.message == "The email field must be a valid email address.") {
-              this.emailInalid = true
-            }
-          }
-        }
-      )
+      // this.userService.storeUser(formData).subscribe(
+      //   (res: any) => {
+      //     this.show = false;
+      //     Swal.fire({
+      //       text: 'Prestataire ajouté avec succès',
+      //       icon: 'success',
+      //       showCancelButton: false,
+      //       customClass: {
+      //         confirmButton: 'btn-primary',
+      //       },
+      //     }).then(() => {
+      //       this.addClientForm = this.generateForm();
+      //       this.showSuccess = false;
+      //       this.loading = false;
+      //       this.success.emit();
+      //       this.attemptSubmission = false;
+      //     });
+      //   },
+      //   (res: any) => {
+      //     this.loading = false;
+      //     if (res.status === 422) {
+      //       if (res.error.message == 'The email has already been taken.') {
+      //         this.emailExists = true;
+      //       } else if (
+      //         res.error.message ==
+      //         'The email field must be a valid email address.'
+      //       ) {
+      //         this.emailInalid = true;
+      //       }
+      //     }
+      //   }
+      // );
     }
   }
-  getSelectedValues(event: any, treeSelectSelection: any = this.f['domaines'].value) {
+  getSelectedValues(
+    event: any,
+    treeSelectSelection: any = this.f['domaines'].value
+  ) {
     let parents = treeSelectSelection.filter((item: any) => !item.parent);
     parents = parents.map((i: any) => i.data.id);
-    let parents_selectedChildren = treeSelectSelection.filter((item: any) => item.parent)
+    let parents_selectedChildren = treeSelectSelection.filter(
+      (item: any) => item.parent
+    );
     let parent_ids = parents_selectedChildren.map((i: any) => i.parent.data.id);
     parent_ids = [...new Set([...parent_ids, ...parents])];
     let childs = parents_selectedChildren.map((i: any) => i.data.id);
@@ -233,6 +271,6 @@ export class AddCompanyComponent {
     this.f['speciality_id'].setValue(childs);
   }
   updateValidation() {
-    this.f['new_password_confirmation'].updateValueAndValidity()
+    this.f['new_password_confirmation'].updateValueAndValidity();
   }
 }

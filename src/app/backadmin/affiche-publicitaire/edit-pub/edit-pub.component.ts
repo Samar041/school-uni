@@ -1,15 +1,27 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { AffichePublicitaireService } from '../../_services/affiche-publicitaire.services';
 import Swal from 'sweetalert2';
+import { AffichePublicitaireService } from '../../_services/affiche-publicitaire.services';
 import { UserService } from '../../_services/users.service';
-import { getFileNameFromPath, objectToFormData } from './../../shared/utils/utils'
 
 @Component({
   selector: 'app-edit-pub',
   templateUrl: './edit-pub.component.html',
-  styleUrls: ['./edit-pub.component.scss']
+  styleUrls: ['./edit-pub.component.scss'],
 })
 export class EditPubComponent implements OnInit {
   @ViewChild('dialog', { static: false }) dialog!: any;
@@ -33,12 +45,21 @@ export class EditPubComponent implements OnInit {
   dateCompare: boolean = false;
   dateMax: boolean = false;
   isLoader: boolean = false;
-  hideTitleModal = this.translate.instant("NOTIFICATION.ADD_PUB_TITLE");
+  hideTitleModal = this.translate.instant('NOTIFICATION.ADD_PUB_TITLE');
   hideForm = false;
   errorMessage = null;
-  statusList: any = [{ id: 1, name: 'PROGRAM' }, { id: 2, name: 'ENCOURS' }, , { id: 3, name: 'CLOTURE' }]
-  usersList: any = [{ id: 1, name: 'user1' }, { id: 2, name: 'user2' }, { id: 3, name: 'user3' }]
-  dateMessage = "";
+  statusList: any = [
+    { id: 1, name: 'PROGRAM' },
+    { id: 2, name: 'ENCOURS' },
+    ,
+    { id: 3, name: 'CLOTURE' },
+  ];
+  usersList: any = [
+    { id: 1, name: 'user1' },
+    { id: 2, name: 'user2' },
+    { id: 3, name: 'user3' },
+  ];
+  dateMessage = '';
   Providers: any = [];
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -46,19 +67,17 @@ export class EditPubComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     public affichePublicitaireService: AffichePublicitaireService,
     private userService: UserService
-
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getProviders();
   }
   ngOnChanges() {
     if (this.pubId) {
-      if (this.pubId.type === "image") {
+      if (this.pubId.type === 'image') {
         this.newPathCouverture = this.pubId.file;
-      }
-      else {
-        this.videoSrc = this.pubId.file
+      } else {
+        this.videoSrc = this.pubId.file;
       }
       this.editPubForm.patchValue({
         date_debut: this.pubId.date_debut,
@@ -66,8 +85,10 @@ export class EditPubComponent implements OnInit {
         montant: this.pubId.montant,
         type: this.pubId.type,
         user_id: this.pubId.user_id,
-        areas_id: this.pubId.areas?.length ? this.pubId.areas.map((i: any) => i.id) : ''
-      })
+        areas_id: this.pubId.areas?.length
+          ? this.pubId.areas.map((i: any) => i.id)
+          : '',
+      });
     }
   }
   generateForm() {
@@ -80,7 +101,7 @@ export class EditPubComponent implements OnInit {
       image: [''],
       video: [''],
       cover: [''],
-      areas_id: ['']
+      areas_id: [''],
     });
   }
   cancel() {
@@ -92,64 +113,80 @@ export class EditPubComponent implements OnInit {
     if (this.editPubForm.valid) {
       this.isLoader = true;
       const formData = new FormData();
-      formData.append('date_debut', this.editPubForm.controls['date_debut'].value + "T00:00");
-      formData.append('date_fin', this.editPubForm.controls['date_fin'].value + "T23:59");
+      formData.append(
+        'date_debut',
+        this.editPubForm.controls['date_debut'].value + 'T00:00'
+      );
+      formData.append(
+        'date_fin',
+        this.editPubForm.controls['date_fin'].value + 'T23:59'
+      );
       if (this.editPubForm.controls['user_id'].value)
         formData.append('user_id', this.editPubForm.controls['user_id'].value);
       if (this.editPubForm.controls['montant'].value == (null || undefined)) {
         formData.append('montant', '');
-      }
-      else {
+      } else {
         formData.append('montant', this.editPubForm.controls['montant'].value);
       }
       if (this.files.length !== 0) {
         if (this.editPubForm.controls['type'].value == 'image') {
           formData.append('file', this.editPubForm.controls['image'].value);
-        }
-        else {
+        } else {
           formData.append('file', this.editPubForm.controls['video'].value);
         }
       }
       formData.append('type', this.editPubForm.controls['type'].value);
-      if (this.editPubForm.controls['date_debut'].value > this.editPubForm.controls['date_fin'].value) {
+      if (
+        this.editPubForm.controls['date_debut'].value >
+        this.editPubForm.controls['date_fin'].value
+      ) {
         this.dateCompare = true;
       }
       if (this.editPubForm.controls['areas_id'].value.length) {
-        for (let i = 0; i < this.editPubForm.controls['areas_id'].value.length; i++) {
+        for (
+          let i = 0;
+          i < this.editPubForm.controls['areas_id'].value.length;
+          i++
+        ) {
           const arrayKey = `areas_id[${i}]`;
-          formData.append(arrayKey, this.editPubForm.controls['areas_id'].value[i]);
+          formData.append(
+            arrayKey,
+            this.editPubForm.controls['areas_id'].value[i]
+          );
         }
       }
       if (this.dateMax == false) {
-        this.affichePublicitaireService.updatePosters(formData, this.pubId.id).subscribe((res: any) => {
-          if (res.status == 200) {
-            this.isLoader = false;
-            this.success.emit();
-            this.hideForm = !this.hideForm;
-            this.hideTitleModal = "";
-            this.submitted = false;
-            this.editPubForm.reset();
-            this.generateForm();
-            this.isLoader = false;
-            this.cancel();
-            Swal.fire({
-              text: "Publicité modifiée avec succès !",
-              icon: 'success',
-              showCancelButton: false,
-              customClass: {
-                confirmButton: 'btn-primary',
+        this.affichePublicitaireService
+          .updatePosters(formData, this.pubId.id)
+          .subscribe(
+            (res: any) => {
+              if (res.status == 200) {
+                this.isLoader = false;
+                this.success.emit();
+                this.hideForm = !this.hideForm;
+                this.hideTitleModal = '';
+                this.submitted = false;
+                this.editPubForm.reset();
+                this.generateForm();
+                this.isLoader = false;
+                this.cancel();
+                Swal.fire({
+                  text: 'Publicité modifiée avec succès !',
+                  icon: 'success',
+                  showCancelButton: false,
+                  customClass: {
+                    confirmButton: 'btn-primary',
+                  },
+                }).then(() => {});
               }
-            }).then(() => { })
-          }
-        },
-          (error: any) => {
-            this.errorMessage = error.error.message
-          })
+            },
+            (error: any) => {
+              this.errorMessage = error.error.message;
+            }
+          );
       }
-    }
-    else {
+    } else {
       this.submitted = true;
-
     }
   }
 
@@ -158,7 +195,7 @@ export class EditPubComponent implements OnInit {
     if (selectedFile) {
       if (selectedFile.type.startsWith('image/')) {
         this.editPubForm.patchValue({
-          cover: selectedFile
+          cover: selectedFile,
         });
         this.coverName = selectedFile.name;
         const reader = new FileReader();
@@ -171,8 +208,8 @@ export class EditPubComponent implements OnInit {
   }
   removeCover() {
     this.editPubForm.patchValue({
-      cover: ''
-    })
+      cover: '',
+    });
     this.coverName = '';
     this.coverSrc = '';
   }
@@ -181,9 +218,7 @@ export class EditPubComponent implements OnInit {
     if (this.editPubForm.controls['type'].value == 'image') {
       this.editPubForm.controls['image'].setValidators([Validators.required]);
       this.editPubForm.controls['video'].clearValidators();
-
-    }
-    else {
+    } else {
       this.editPubForm.controls['video'].setValidators([Validators.required]);
       this.editPubForm.controls['image'].clearValidators();
     }
@@ -195,7 +230,7 @@ export class EditPubComponent implements OnInit {
     if (selectedFile) {
       if (selectedFile.type.startsWith('video/')) {
         this.editPubForm.patchValue({
-          video: selectedFile
+          video: selectedFile,
         });
         this.videoName = selectedFile.name;
         const reader = new FileReader();
@@ -210,21 +245,21 @@ export class EditPubComponent implements OnInit {
 
   removeVideo() {
     this.editPubForm.patchValue({
-      video: ''
-    })
+      video: '',
+    });
     this.videoName = '';
     this.videoSrc = '';
   }
   get f() {
-    return this.editPubForm.controls
+    return this.editPubForm.controls;
   }
   processFile(event: any) {
     if (event.target.files[0]?.type.startsWith('image/')) {
       this.files = event.target.files[0];
       this.path = event.target.files[0].name;
       this.editPubForm.patchValue({
-        image: this.files
-      })
+        image: this.files,
+      });
       /**
        * Format the size to a human readable string
        *
@@ -237,13 +272,13 @@ export class EditPubComponent implements OnInit {
         this.path = event.target.result;
         this.pathCouv = event.target.result;
         this.newPathCouverture = event.target.result as string;
-      }
+      };
       reader.readAsDataURL(this.files);
     }
   }
   numberOnly(event: any) {
-    var charCode = (event.which) ? event.which : event.keyCode;
-    if ((charCode < 46 || charCode > 57)) {
+    var charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 46 || charCode > 57) {
       event.preventDefault();
       return false;
     } else {
@@ -255,8 +290,8 @@ export class EditPubComponent implements OnInit {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;
       if (value) {
-        const date_debut = this.editPubForm?.get('date_debut')?.value
-        const date_fin = this.editPubForm?.get('date_fin')?.value
+        const date_debut = this.editPubForm?.get('date_debut')?.value;
+        const date_fin = this.editPubForm?.get('date_fin')?.value;
         const startDate = new Date(date_debut);
         const endDate = new Date(date_fin);
         const maxYear = 2050;
@@ -264,16 +299,16 @@ export class EditPubComponent implements OnInit {
         const currentYearEndDate = new Date(date_fin).getFullYear();
         if (currentYearStartDate > maxYear || currentYearEndDate > maxYear) {
           this.dateMax = true;
-          this.dateMessage = "La date de début et la date de fin ne doivent pas dépasser 2050"
-          return { 'yearRange': true };
-        }
-        else if (startDate.valueOf() > endDate.valueOf()) {
+          this.dateMessage =
+            'La date de début et la date de fin ne doivent pas dépasser 2050';
+          return { yearRange: true };
+        } else if (startDate.valueOf() > endDate.valueOf()) {
           this.dateMax = true;
-          this.dateMessage = "La date de début doit être supérieur à la date de fin";
-          return { 'yearRange': true };
-        }
-        else {
-          this.dateMessage = "";
+          this.dateMessage =
+            'La date de début doit être supérieur à la date de fin';
+          return { yearRange: true };
+        } else {
+          this.dateMessage = '';
           this.dateMax = false;
         }
       }
@@ -282,13 +317,12 @@ export class EditPubComponent implements OnInit {
   }
 
   getProviders() {
-    this.userService.getProviderList().subscribe(
-      (res: any) => {
-        this.Providers = res.body;
-      }
-    );
+    // this.userService.getProviderList().subscribe(
+    //   (res: any) => {
+    //     this.Providers = res.body;
+    //   }
+    // );
   }
-
 
   getCurrentDate(): string {
     const currentDate = new Date();

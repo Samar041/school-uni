@@ -1,14 +1,31 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  CountryISO,
+  PhoneNumberFormat,
+  SearchCountryField,
+} from 'ngx-intl-tel-input';
 import Swal from 'sweetalert2';
 import { UserService } from '../../_services/users.service';
-import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { getFileNameFromPath, objectToFormData } from './../../shared/utils/utils'
+import {
+  getFileNameFromPath,
+  objectToFormData,
+} from './../../shared/utils/utils';
 @Component({
   selector: 'app-edit-company',
   templateUrl: './edit-company.component.html',
-  styleUrls: ['./edit-company.component.scss']
+  styleUrls: ['./edit-company.component.scss'],
 })
 export class EditCompanyComponent {
   @ViewChild('dialog', { static: false }) dialog!: any;
@@ -26,24 +43,30 @@ export class EditCompanyComponent {
   genres: any[] = [
     {
       name: 'Femme',
-      value: 'femme'
+      value: 'femme',
     },
     {
       name: 'Homme',
-      value: 'homme'
-    }
-  ]
+      value: 'homme',
+    },
+  ];
   types = [
-    { 'label': 'EL', 'value': 'Entreprise individuelle' },
-    { 'label': 'EIRL', 'value': 'Entreprise individuelle à responsabilité limitée' },
-    { 'label': 'EURL', 'value': 'Entreprise unipersonnelle à responsabilité limitée' },
-    { 'label': 'SARL', 'value': 'Société à responsabilité limitée' },
-    { 'label': 'SAS', 'value': 'Société par actions simplifiée' },
-    { 'label': 'SA', 'value': 'Société anonyme' },
-    { 'label': 'Entreprise publique', 'value': 'Entreprise publique' },
-    { 'label': 'ESS', 'value': 'Économie sociale et solidaire' },
-    { 'label': 'Micro-entreprise', 'value': 'Micro-entreprise' },
-    { 'label': 'Auto-entrepreneur', 'value': 'Auto-entrepreneur' }
+    { label: 'EL', value: 'Entreprise individuelle' },
+    {
+      label: 'EIRL',
+      value: 'Entreprise individuelle à responsabilité limitée',
+    },
+    {
+      label: 'EURL',
+      value: 'Entreprise unipersonnelle à responsabilité limitée',
+    },
+    { label: 'SARL', value: 'Société à responsabilité limitée' },
+    { label: 'SAS', value: 'Société par actions simplifiée' },
+    { label: 'SA', value: 'Société anonyme' },
+    { label: 'Entreprise publique', value: 'Entreprise publique' },
+    { label: 'ESS', value: 'Économie sociale et solidaire' },
+    { label: 'Micro-entreprise', value: 'Micro-entreprise' },
+    { label: 'Auto-entrepreneur', value: 'Auto-entrepreneur' },
   ];
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
@@ -54,12 +77,12 @@ export class EditCompanyComponent {
   imageUrl: any;
   imageName: any;
   defaultSelection: any;
-  fileUrl: any = "";
+  fileUrl: any = '';
   constructor(
     private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     public translate: TranslateService
-  ) { }
+  ) {}
   ngAfterViewChecked(): void {
     const input = document.getElementsByClassName('custom');
     if (input.length) {
@@ -67,22 +90,24 @@ export class EditCompanyComponent {
     }
   }
   setUser() {
-    this.imageName = getFileNameFromPath(this.entreprise.image)
+    this.imageName = getFileNameFromPath(this.entreprise.image);
     this.imageUrl = this.entreprise.image;
     this.fileUrl = this.entreprise.file;
     this.defaultSelection = [];
     this.specialites.map((item: any) => {
       if (this.entreprise.domaines.find((i: any) => i.id === item.data.id)) {
-        this.defaultSelection.push(item)
+        this.defaultSelection.push(item);
       }
       if (item.children.length) {
         item.children.map((c: any) => {
-          if (this.entreprise.specialities.find((i: any) => i.id === c.data.id)) {
-            this.defaultSelection.push(c)
+          if (
+            this.entreprise.specialities.find((i: any) => i.id === c.data.id)
+          ) {
+            this.defaultSelection.push(c);
           }
-        })
+        });
       }
-    })
+    });
     this.updateProviderForm.setValue({
       last_name: this.entreprise.last_name,
       first_name: this.entreprise.first_name,
@@ -117,45 +142,51 @@ export class EditCompanyComponent {
       experience: ['', Validators.required],
       certification: ['', Validators.required],
       description: [''],
-      email: [this.entreprise.email, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      email: [
+        this.entreprise.email,
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
     });
   }
   cancel() {
     this.showSuccess = false;
     this.emailExists = false;
     this.loading = false;
-    this.imageUrl = "";
+    this.imageUrl = '';
     this.close.emit();
   }
   get f() {
-    return this.updateProviderForm.controls
+    return this.updateProviderForm.controls;
   }
   uploadImage(event: any) {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.updateProviderForm.patchValue({
-        image: fileList[0]
-      })
-      this.imageName = "";
+        image: fileList[0],
+      });
+      this.imageName = '';
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.imageUrl = reader.result;
-      }
+      };
     }
     event.currentTarget.value = '';
   }
   removeThumbnail() {
-    this.imageUrl = "";
-    this.f['image'].setValue("");
+    this.imageUrl = '';
+    this.f['image'].setValue('');
   }
   attemptUpdateProvider(event: any) {
     this.attemptSubmission = true;
     if (this.updateProviderForm.valid && this.imageUrl) {
       let form = this.updateProviderForm.value;
       if (form.phone.e164Number) {
-        form.phone = form.phone.e164Number
+        form.phone = form.phone.e164Number;
       }
       if (!form.image) {
         delete form.image;
@@ -164,45 +195,55 @@ export class EditCompanyComponent {
         delete form.file;
       }
       if (!this.fileUrl) {
-        form.delete_file = 1
+        form.delete_file = 1;
       }
       delete form.domaines;
       form['role[0]'] = 'prestataire';
       this.loading = true;
       const formData = objectToFormData(form);
       if (!form.speciality_id?.length) {
-        formData.append('speciality_id', '')
+        formData.append('speciality_id', '');
       }
-      this.userService.updateUser(formData, this.entreprise.id).subscribe((res: any) => {
-        this.show = false;
-        Swal.fire({
-          text: 'Prestataire modifié avec succès',
-          icon: 'success',
-          showCancelButton: false,
-          customClass: {
-            confirmButton: 'btn-primary',
-          }
-        }).then(() => {
-          this.updateProviderForm = this.generateForm();
-          this.showSuccess = false;
-          this.loading = false;
-          this.success.emit();
-        })
-      },
-        (res: any) => {
-          this.loading = false;
-          if (res.status === 422) {
-            if (res.error.errors.email) { this.emailExists = true }
-            if (res.error.errors.phone) { this.phoneExists = true }
-          }
-        }
-      )
+      // this.userService.updateUser(formData, this.entreprise.id).subscribe(
+      //   (res: any) => {
+      //     this.show = false;
+      //     Swal.fire({
+      //       text: 'Prestataire modifié avec succès',
+      //       icon: 'success',
+      //       showCancelButton: false,
+      //       customClass: {
+      //         confirmButton: 'btn-primary',
+      //       },
+      //     }).then(() => {
+      //       this.updateProviderForm = this.generateForm();
+      //       this.showSuccess = false;
+      //       this.loading = false;
+      //       this.success.emit();
+      //     });
+      //   },
+      //   (res: any) => {
+      //     this.loading = false;
+      //     if (res.status === 422) {
+      //       if (res.error.errors.email) {
+      //         this.emailExists = true;
+      //       }
+      //       if (res.error.errors.phone) {
+      //         this.phoneExists = true;
+      //       }
+      //     }
+      //   }
+      // );
     }
   }
-  getSelectedValues(event: any, treeSelectSelection: any = this.f['domaines'].value) {
+  getSelectedValues(
+    event: any,
+    treeSelectSelection: any = this.f['domaines'].value
+  ) {
     let parents = treeSelectSelection.filter((item: any) => !item.parent);
     parents = parents.map((i: any) => i.data.id);
-    let parents_selectedChildren = treeSelectSelection.filter((item: any) => item.parent)
+    let parents_selectedChildren = treeSelectSelection.filter(
+      (item: any) => item.parent
+    );
     let parent_ids = parents_selectedChildren.map((i: any) => i.parent.data.id);
     parent_ids = [...new Set([...parent_ids, ...parents])];
     let childs = parents_selectedChildren.map((i: any) => i.data.id);
@@ -214,18 +255,18 @@ export class EditCompanyComponent {
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.updateProviderForm.patchValue({
-        file: fileList[0]
-      })
+        file: fileList[0],
+      });
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.fileUrl = reader.result;
-      }
+      };
     }
     event.currentTarget.value = '';
   }
   removeFile() {
-    this.fileUrl = "";
-    this.f['file'].setValue("");
+    this.fileUrl = '';
+    this.f['file'].setValue('');
   }
 }

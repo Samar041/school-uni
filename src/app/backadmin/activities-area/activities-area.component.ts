@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from '../_services/users.service';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, debounceTime } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { ActivitiesService } from '../_services/activities.service';
 

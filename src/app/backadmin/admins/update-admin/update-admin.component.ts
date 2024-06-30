@@ -1,16 +1,31 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { TranslateService } from "@ngx-translate/core";
-import Swal from 'sweetalert2';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  CountryISO,
+  PhoneNumberFormat,
+  SearchCountryField,
+} from 'ngx-intl-tel-input';
 import { UserService } from '../../_services/users.service';
-import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { getFileNameFromPath, objectToFormData } from './../../shared/utils/utils'
-
+import {
+  getFileNameFromPath,
+  objectToFormData,
+} from './../../shared/utils/utils';
 
 @Component({
   selector: 'app-update-admin',
   templateUrl: './update-admin.component.html',
-  styleUrls: ['./update-admin.component.scss']
+  styleUrls: ['./update-admin.component.scss'],
 })
 export class UpdateAdminComponent {
   @ViewChild('dialog', { static: false }) dialog!: any;
@@ -18,7 +33,7 @@ export class UpdateAdminComponent {
   @Input() admin: any = false;
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Output() success: EventEmitter<any> = new EventEmitter();
-  
+
   updateAdminForm: UntypedFormGroup = this.generateForm();
   attemptSubmission: boolean = false;
   emailExists: boolean = false;
@@ -28,13 +43,13 @@ export class UpdateAdminComponent {
   genres: any[] = [
     {
       name: 'Femme',
-      value: 'femme'
+      value: 'femme',
     },
     {
       name: 'Homme',
-      value: 'homme'
-    }
-  ]
+      value: 'homme',
+    },
+  ];
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
@@ -46,26 +61,26 @@ export class UpdateAdminComponent {
   roles: any[] = [
     {
       name: 'Administrateur',
-      value: 'admin'
+      value: 'admin',
     },
     {
       name: 'Opérateur',
-      value: 'operateur'
+      value: 'operateur',
     },
     {
       name: 'Dispatcheur',
-      value: 'dispatcheur'
+      value: 'dispatcheur',
     },
     {
       name: 'Responsable marketing',
-      value: 'commerciale'
-    }
-  ]
+      value: 'commerciale',
+    },
+  ];
   constructor(
     private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     public translate: TranslateService
-  ) { }
+  ) {}
   ngAfterViewChecked(): void {
     const input = document.getElementsByClassName('custom');
     if (input.length) {
@@ -80,10 +95,10 @@ export class UpdateAdminComponent {
       phone: this.admin.phone,
       email: this.admin.email,
       image: '',
-      role: this.admin.roles[0]
+      role: this.admin.roles[0],
     });
-    this.imageName = getFileNameFromPath(this.admin.image)
-    this.imageUrl = this.admin.image
+    this.imageName = getFileNameFromPath(this.admin.image);
+    this.imageUrl = this.admin.image;
   }
   generateForm() {
     return this.formBuilder.group({
@@ -93,46 +108,52 @@ export class UpdateAdminComponent {
       phone: [this.admin.gender, Validators.required],
       image: [''],
       role: ['', Validators.required],
-      email: [this.admin.email, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      email: [
+        this.admin.email,
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ],
+      ],
     });
   }
   cancel() {
     this.showSuccess = false;
     this.emailExists = false;
     this.loading = false;
-    this.imageUrl = "";
+    this.imageUrl = '';
     this.attemptSubmission = false;
     this.close.emit();
   }
   get f() {
-    return this.updateAdminForm.controls
+    return this.updateAdminForm.controls;
   }
   uploadImage(event: any) {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.updateAdminForm.patchValue({
-        image: fileList[0]
-      })
-      this.imageName = "";
+        image: fileList[0],
+      });
+      this.imageName = '';
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (_event) => {
         this.imageUrl = reader.result;
-      }
+      };
     }
     event.currentTarget.value = '';
   }
   removeThumbnail() {
-    this.imageUrl = "";
-    this.f['image'].setValue("");
+    this.imageUrl = '';
+    this.f['image'].setValue('');
   }
   attemptUpdateAdmin(event: any) {
     this.attemptSubmission = true;
     if (this.updateAdminForm.valid && this.imageUrl) {
       let form = this.updateAdminForm.value;
       if (form.phone.e164Number) {
-        form.phone = form.phone.e164Number
+        form.phone = form.phone.e164Number;
       }
       if (!form.image) {
         delete form.image;
@@ -140,30 +161,30 @@ export class UpdateAdminComponent {
       form.role = [form.role];
       this.loading = true;
       const formData = objectToFormData(form);
-      this.userService.updateUser(formData, this.admin.id).subscribe((res: any) => {
-        this.show = false;
-        Swal.fire({
-          text: this.translate.instant('ADMINS.EDIT_ADMIN'),
-          icon: 'success',
-          showCancelButton: false,
-          customClass: {
-            confirmButton: 'btn-primary',
-          }
-        }).then(() => {
-          this.updateAdminForm = this.generateForm();
-          this.showSuccess = false;
-          this.loading = false;
-          this.success.emit();
-        })
-      },
-        (res: any) => {
-          this.loading = false;
-          if (res.status === 422) {
-            if (res.error.errors.email) { this.emailExists = true }
-            if (res.error.errors.phone) { this.phoneExists = true }
-          }
-        }
-      )
+      // this.userService.updateUser(formData, this.admin.id).subscribe((res: any) => {
+      //   this.show = false;
+      //   Swal.fire({
+      //     text: this.translate.instant('ADMINS.EDIT_ADMIN'),
+      //     icon: 'success',
+      //     showCancelButton: false,
+      //     customClass: {
+      //       confirmButton: 'btn-primary',
+      //     }
+      //   }).then(() => {
+      //     this.updateAdminForm = this.generateForm();
+      //     this.showSuccess = false;
+      //     this.loading = false;
+      //     this.success.emit();
+      //   })
+      // },
+      //   (res: any) => {
+      //     this.loading = false;
+      //     if (res.status === 422) {
+      //       if (res.error.errors.email) { this.emailExists = true }
+      //       if (res.error.errors.phone) { this.phoneExists = true }
+      //     }
+      //   }
+      // )
     }
   }
 }

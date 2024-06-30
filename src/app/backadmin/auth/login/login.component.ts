@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../_services/auth.service';
-import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/_services/localstorage.service';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../../../_services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
