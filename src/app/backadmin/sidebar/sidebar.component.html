@@ -27,29 +27,12 @@
           <span class="nav-link-txt">Affiches publicitaires</span>
           <span class="hover-list users">Affiches publicitaires</span>
         </a>
-        <!-- <a class="nav-link" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{exact:true}"
-          routerLink="/regions" (click)="closeFilters()">
-          <app-icons [icon]="'maps'"></app-icons>
-          <span class="nav-link-txt">Régions</span>
-          <span class="hover-list users">Régions</span>
-        </a> -->
-        <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/promos"
-          [routerLinkActiveOptions]="{exact:true}" (click)="closeFilters()">
-          <app-icons [icon]="'promo'"></app-icons>
-          <span class="nav-link-txt">Promotions</span>
-          <span class="hover-list users">Promotions</span>
-        </a>
         <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/messagerie"
           [routerLinkActiveOptions]="{exact:true}" (click)="closeFilters()">
           <app-icons [icon]="'request'"></app-icons>
           <span class="nav-link-txt">Messagerie</span>
           <span class="hover-list recherche">Messagerie</span>
         </a>
-        <!-- <a class="nav-link" routerLinkActive="nav-link-active" routerLink="/configurations"
-          [routerLinkActiveOptions]="{exact: true}" (click)="closeFilters()">
-          <i class="pi pi-cog" style="font-size: 18px"></i>
-          <span class="nav-link-txt">Paramètres</span>
-        </a> -->
       </nav>
     </div>
     <div class="sidebar-area_bottom open-sidebar" (click)="clickEvent()">
@@ -103,24 +86,6 @@
     </div>
   </div>
 
-  <!--promo et affiche publicitaire-->
-  <div class="sidebar-filter" *ngIf="isFilterActive() === 'pub'" [ngClass]="isFilterActive() === 'pub' ? 'active' : ''">
-    <div class="sidebar-filter-style gestion-des-modeles-filter">
-      <nav>
-        <h3 class="sidebar-filter_title">Publicité</h3>
-        <ul class="nav-list filtres-nav-list">
-          <li>
-            <a class="icon admin-icon" routerLinkActive="nav-link-active"
-              routerLink="/affiche-publicitaire">{{'SIDEBAR.PUB' | translate }}</a>
-          </li>
-          <li>
-            <a class="icon client-icon" routerLinkActive="nav-link-active"
-              routerLink="/annonces">{{'SIDEBAR.ANNOUNCE_SIDEBAR' | translate }}</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
 </div>
 <div class="overlay" [ngClass]="overlayStatus ? 'active' : ''" (click)="overlayStatusFct()">
   <a class="overlay-close"></a>
