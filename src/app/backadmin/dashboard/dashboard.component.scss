@@ -6,6 +6,7 @@
   .best-costumers-list-item {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     position: relative;
     .btn-option {
       background-image: url('../../../assets/img/icon/option.png');

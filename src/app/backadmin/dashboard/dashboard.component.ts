@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../_services/auth.service';
 
 import { ChartDataset } from 'chart.js';
+import { UserRole } from '../_services/users.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,20 +15,14 @@ import { ChartDataset } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
   public lineChartData: ChartDataset[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [300, 500, 900, 101, 506, 895, 340], label: 'Series B' },
-    { data: [65, 519, 800, 111, 786, 305, 40], label: 'Series C' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'DSI' },
+    { data: [30, 50, 90, 11, 56, 89, 34], label: 'RSI' },
+    { data: [65, 59, 80, 11, 86, 35, 40], label: 'CFM' },
   ];
   public lineChartLabels = [
-    '2018-01-29 10:00:00',
-    '2018-01-29 10:01:00',
-    ' 2018-01-29 10:02:00',
-    ' 2018-01-29 10:03:00',
-    ' 2018-01-29 10:04:00',
-    ' 2018-01-29 10:05:00',
-    '2018-01-29 10:06:00',
-    '2018-01-29 10:07:00',
-    '2018-01-29 10:08:00',
+    '2021-01-29',
+    '2022-01-29',
+    '2023-01-29',
   ];
   public lineChartOptions: any = {
     responsive: true,
@@ -139,8 +134,43 @@ export class DashboardComponent implements OnInit {
   ];
   indexInfo: any;
   listClients: any;
-  listProducts: any;
-  arrayClients: any;
+
+  listClasses: any = [
+    {
+      name: 'DSI',
+      etu_num: 50,
+    },
+    {
+      name: 'RSI',
+      etu_num: 20,
+    },
+    {
+      name: 'CFM',
+      etu_num: 50,
+    },
+  ];
+  arrayClients: any = [
+    {
+      name: 'Mili Ahmed',
+      moy: 16.92,
+      class: 'DSI3',
+    },
+    {
+      name: 'Aouadi Samar',
+      moy: 14.89,
+      class: 'DSI3',
+    },
+    {
+      name: 'Riahi Mohsen',
+      moy: 10.09,
+      class: 'DSI3',
+    },
+  ];
+  roles = {
+    Student: 'student',
+    Prof: 'prof',
+    Admin: 'admin',
+  };
   constructor(
     private fb: UntypedFormBuilder,
     private router: Router,
